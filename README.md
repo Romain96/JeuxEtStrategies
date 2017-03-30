@@ -17,7 +17,7 @@ présentera l'historique global à la fin et éventuellement des statistiques.
 
 ## Outils
 
-le projet sera réalisé en Java et en utilisant le RMI
+Le projet sera réalisé en Java et en utilisant l'API Remote Method Invocation (RMI)
 
 
 ## Auteurs

@@ -1,0 +1,47 @@
+================================================================================
+		OBJECTIFS DU PROJET "JEUX ET STRATEGIES"
+================================================================================
+
+### Objectifs courants [2017-03-30]
+
+- implémenter la classe abtraite Agent
+- implémenter la classe concrète AgentCoop
+- implémenter la classe concrète AgentIndiv
+- implémenter la classe concrète Rssource
+- implémenter la classe Coordinateur
+- implémenter la classe concrète Producteur
+- implémenter la class concrète Coordinateur
+- établir la communication RMI entre les agents et le coordinateur
+- établir la communication RMI entre les agents et les producteurs
+- établir la communication RMI entre les agents et les autres agents
+- tester le cycle simplifié 1
+- tester le cycle simplifié 2
+- tester le cycle simplifié 3
+- tester le cycle simplifié 4
+- implémenter la sauvegarde des actions réalisées
+- implémenter l'interface graphique de présentation des résultats
+- créér un script de lancement du jeu avec initialisation de tous les protagonistes
+- tester le cycle complet
+- corriger les bugs éventuels
+
+* cycle simplifié 1 *
+
+- situation : un coordinateur, un unique producteur d'une unique ressource et N agents (coop/indiv)
+- le coordinateur effectue un unique tour de jeu en appelant tous les N agents 
+suivant l'ordre de leur id croissant et appelle leur méthode demarrerTour()
+- chaque agent effectue une tentative d'acquisition de ressources à l'unique producteur
+
+* cycle simplifié 2 * 
+
+- situation : un coordinateur, un unique producteur d'une unique ressource et N agents (coop/indiv)
+- le coordinateur effectue autant de tours de jeu que nécessaire  en appelant tous les N agents
+jusqu'à ce qu'au moins un des agents atteigne le but escompté.
+- chaque agent effectue une tentative d'acquisition de ressources à l'unique producteur
+
+* cycle simplifié 3 *
+
+- idem que le cycle 2 mais avec plusieurs producteurs
+
+* cycle simplifié 4 *
+
+- idem que le cycle 3 mais avec plusieurs ressources
