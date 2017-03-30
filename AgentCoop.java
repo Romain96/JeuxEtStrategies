@@ -4,6 +4,27 @@ public class AgentCoop extends Agent
 	//				attributs
 	//----------------------------------------------------------------------
 	
+	// hérités de Agent
+	
+	//----------------------------------------------------------------------
+	//				Constructeur
+	//----------------------------------------------------------------------
+	
+	// initialise un agent coopératif avec un id et un numéro de port pour
+	// permettre d'agir comme serveur pour les autres agents et pour le coordinateur
+	// et initialise ses objectifs de ressources avec le tableau passé en argument
+	public AgentCoop(int id, int port, Ressource objectifs[])
+	{
+		this.id = id;
+		this.port = port;
+		this.objectifs = objectifs;	// initialisation des objectifs
+		this.ressources = objectifs;	// idem il suffit simplement de mettre les quantités à 0
+		for (int i = 0; i < objectifs.length(); i++)
+		{
+			objectifs[i].setNb(0);	// aucune ressource d'aucun type au départ
+		}
+	}
+	
 	//----------------------------------------------------------------------
 	//				getter
 	//----------------------------------------------------------------------

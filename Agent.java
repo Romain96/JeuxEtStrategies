@@ -6,7 +6,9 @@ public abstract class Agent
 	
 	private int idAgent;			// identifiant unique de l'agent 
 	private Ressource ressources[];		// tableau des différentes ressources et leurs quantités possédées
+	private Ressource objectifs[];		// associe à chaque ressource le nombre à obtenir pour terminer
 	private int tailleTab;			// taille du tableau de ressources
+	private int port;			// numéro de port pour servir de serveur
 	
 	//----------------------------------------------------------------------
 	//				getters
@@ -17,13 +19,13 @@ public abstract class Agent
 		return this.idAgent;
 	}
 	
-	public getTailleTab()
+	public int getTailleTab()
 	{
 		return this.tailleTab;
 	}
 	
 	// retourne la quantité de ressouces de la ressource passée en paramètre
-	public getNbRessource(String type)
+	public int getNbRessource(String type)
 	{
 		for (int i = 0; i < tailleTab; i++)
 		{
@@ -33,6 +35,25 @@ public abstract class Agent
 			}
 		}
 		return -1;	// une quantité négative représente une ressource non existante 
+	}
+	
+	// retourne l'objectif à atteindre pour la ressource passée en paramètre
+	public int getObjectif(String type)
+	{
+		for (int i = 0; i < tailleTab; i++)
+		{
+			if (objectifs[i].getType() == type)
+			{
+				return objectifs[i].getNb();
+			}
+		}
+		return -1;	// une quantité négative représente une ressource non existante 
+	}
+	
+	// retourne le numéro de port associé à cet agent
+	public int getPort()
+	{
+		return port;
 	}
 	
 	//----------------------------------------------------------------------
@@ -61,6 +82,26 @@ public abstract class Agent
 				trouve = true;	// stop
 			}
 		}
+	}
+	
+	// positionne l'objectif de ressources pour le type passé en paramètre
+	public void setObjectif(String type, int nb)
+	{
+		boolean trouve = false;
+		for (int i = 0; i < tailleTab && !trouve; i++)
+		{
+			if (objectifs[i].getType == type)
+			{
+				objectifs[i].setNb(nb);
+				trouve = true;	// stop
+			}
+		}
+	}
+	
+	// positionne le numéro de port utilisé par cet agent
+	public void setPort(int port)
+	{
+		this.port = port;
 	}
 	
 	//----------------------------------------------------------------------
