@@ -1,15 +1,27 @@
 # JEUX ET STRATEGIES 
 
-## Description:
+## Description
 
-Un coordinateur coordine des joueurs humains ou pas qui doivent se procurer des resources.
-Les joueurs peuvent prendre des ressources aux producteurs de ressources ou aux autres joueurs.
-Les joueurs non Humain on une personalité soit cooperative soit individualiste en tout cas dans un premier temps. Plusieurs autres types de personnalités pourront être ammenées à être développées.
+Des agents se voient fixer un objectif de ressource(s) à atteindre.
+Un ou plusieurs producteurs produit périodiquement un ou plusieurs types de ressources.
+Les agents jouent au tour par tour et sont coordonnés par un coordinateur.
+Durant son tour, un agent peut effectuer l'une des actions suivantes :
+* tenter d'acquérir des ressources (le nombre demandé variant avec la peronnalité de l'agent)
+* tenter de voler des ressources à un autre agent
+* se metter dans un état de surveillance pendant le tour de jeu
+* passer son tour (lorque celui-ci a été puni par le coordinateur en cas de vol répertorié)
+
+Il est possible pour un humain de contrôler un joueur.
+Toutes les transactions et actions seront sauvegardées et une interface
+présentera l'historique global à la fin et éventuellement des statistiques.
+
+## Outils
+
+le projet sera réalisé en Java et en utilisant le RMI
 
 
+## Auteurs
 
-
-## Auteurs:
 * BALZAN Juan
 * PERRIN Romain
 
