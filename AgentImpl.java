@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
 
@@ -5,7 +6,9 @@ public class AgentImpl
   extends UnicastRemoteObject
   implements Agent
 {  
-	    //----------------------------------------------------------------------
+
+{
+	//----------------------------------------------------------------------
 	//				attributs
 	//----------------------------------------------------------------------
 	
@@ -20,7 +23,7 @@ public class AgentImpl
 	private Ressource objectifs[];		// associe à chaque ressource le nombre à obtenir pour terminer
 	*/
 	
-	
+
 	//----------------------------------------------------------------------
 	//				getters
 	//----------------------------------------------------------------------
@@ -36,6 +39,7 @@ public class AgentImpl
 	}
 	
 	/* pour apres
+
 	// retourne la quantité de ressouces de la ressource passée en paramètre
 	public int getNbRessource(String type)
 	{
@@ -52,6 +56,7 @@ public class AgentImpl
 	// retourne l'objectif à atteindre pour la ressource passée en paramètre
 	public int getObjectif(String type)
 	{
+
 		
 	}
 	*/ 
@@ -137,6 +142,8 @@ public class AgentImpl
 	{
 		System.out.println("Agent " + this.idAgent + " : je tente de voler " + nb + " exemplaires de la ressource " + type + " à l'agent " + idAgent);
 	}
+
   
   
 }
+
