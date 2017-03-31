@@ -6,19 +6,17 @@ public class Coordinateur
 	
 	int agents[][];		// liste associant les id des agents avec leur port respectif
 	int nbAgents;		// taille du tableau agents (NxN)
-	Ressource ressources[];	// liste des ressources possédées
-	int tailleTab;		// nombre de ressources différentes (taille du tableau ressources)
+	Ressource ressources;	// liste des ressources possédées
 	
 	//----------------------------------------------------------------------
 	//				cosntructeur
 	//----------------------------------------------------------------------
 	
-	public Coordinateur(int nbAgents, Ressource ressouces[])
+	public Coordinateur(int nbAgents, Ressource ressources)
 	{
 		this.agents = new int[nbAgents][nbAgents];	// les agents s'identifiront au coordinateur à l'initialisation
 		this.nbAgents = nbAgents;
 		this.ressources = ressources;
-		this.tailleTab = ressources.length();
 	}
 	
 	//----------------------------------------------------------------------
@@ -31,23 +29,11 @@ public class Coordinateur
 		return nbAgents;
 	}
 	
-	// retourne le nombre de ressources
-	public int getNbRessources()
-	{
-		return tailleTab;
-	}
 	
 	// retourne le nombre courant de la ressouce type ou -1 si non trouvée
-	public int getQuantiteRessource(String type)
+	public int getQuantiteRessource()
 	{
-		for (int i = 0; i < tailleTab; i++)
-		{
-			if (ressources[i].getType() == type)
-			{
-				return ressources[i].getNb();
-			}
-		}
-		return -1;	// non trouvé
+		return ressources.getNb();
 	}
 	
 	//----------------------------------------------------------------------
@@ -60,22 +46,10 @@ public class Coordinateur
 		this.nbAgents = nbAgents;
 	}
 	
-	// positionne le nombre de ressources
-	public void setNbResources(int nbRessources)
-	{
-		this.tailleTab = nbRessources;
-	}
-	
 	// positionne le nombre de ressources de la ressource type
-	public void setQuantiteRessource(String type, int nb)
+	public void setQuantiteRessource(int nb)
 	{
-		for (int i = 0; i < tailleTab; i++)
-		{
-			if(ressources[i].getType() == type)
-			{
-				ressources[i].setNb(nb);
-			}
-		}
+		ressources.setNb(nb);
 	}
 	
 	//----------------------------------------------------------------------

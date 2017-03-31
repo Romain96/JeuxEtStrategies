@@ -1,28 +1,39 @@
-
 import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
 
-public class AgentImpl 
+public abstract class AgentImpl 
   extends UnicastRemoteObject
-  implements Agent
-{  
-
+  implements Agent  
 {
 	//----------------------------------------------------------------------
 	//				attributs
 	//----------------------------------------------------------------------
 	
 	private int idAgent;			// identifiant unique de l'agent 
-	private int tailleTab;			// taille du tableau de ressources
 	private int port;				// numéro de port pour servir de serveur
-	private Ressource ressources;	// nb de ressource aquises
-	private Ressource objectifs;	// nb de ressource necessaires
+	private String typeRessource;	// type de ressouce acquise
+	private int quantiteRessource;	// quantité de cette ressource acquise
+	private int objectif;			// quantité de ressouce ciblée
 	
 	/*	Pour apres
 	private Ressource ressources[];		// tableau des différentes ressources et leurs quantités possédées
 	private Ressource objectifs[];		// associe à chaque ressource le nombre à obtenir pour terminer
 	*/
 	
+	//----------------------------------------------------------------------
+	//				constructeur
+	//----------------------------------------------------------------------
+	
+	public AgentImpl(int idAgent, String typeRessource, int quantiteRessource, int objectif) throws RemoteException
+	{
+		this.idAgent = idAgent;
+		this.port = calculerNumeroPort(idAgent);
+		this.typeRessource = typeRessource;
+		this.quantiteRessource = quantiteRessource;
+		this.objectif = objectif;
+		// DEBUG
+		System.out.println("Agent init : " + idAgent + " " + port + " " + typeRessource + " " + quantiteRessource + " " + objectif );
+	}
 
 	//----------------------------------------------------------------------
 	//				getters
@@ -31,11 +42,6 @@ public class AgentImpl
 	public int getIdAgent()
 	{
 		return this.idAgent;
-	}
-	
-	public int getTailleTab()
-	{
-		return this.tailleTab;
 	}
 	
 	/* pour apres
@@ -61,14 +67,14 @@ public class AgentImpl
 	}
 	*/ 
 	
-	public int getNbRessource()
+	public int getQuantiteRessource()
 	{
-		return ressources;
+		return quantiteRessource;
 	}
 	
-	public int getObjectif(String type)
+	public int getObjectif()
 	{
-		return objectifs;
+		return objectif;
 	}
 	
 	// retourne le numéro de port associé à cet agent
@@ -86,21 +92,22 @@ public class AgentImpl
 		this.idAgent = idAgent;
 	}
 	
-	public void setTailleTab(int tailleTab)
+	public void setTypeRessource(String typeRessource)
 	{
-		this.tailleTab = tailleTab;
+		this.typeRessource = typeRessource;
 	}
 	
+	
 	// positionne la ressource type avec la quantité nb
-	public void setNbRessource( int nb)
+	public void setQuantiteRessource(int quantite)
 	{
-		ressources.setNb(nb);
+		this.quantiteRessource = quantite;
 	}
 	
 	// positionne l'objectif de ressources pour le type passé en paramètre
 	public void setObjectif( int nb)
 	{
-		objectifs.setNb(nb);
+		this.objectif = nb;
 	}
 	
 	// positionne le numéro de port utilisé par cet agent
@@ -112,6 +119,12 @@ public class AgentImpl
 	//----------------------------------------------------------------------
 	//				methodes
 	//----------------------------------------------------------------------
+	
+	// retourne le numéro de port comme étant 9000 + id du producteur
+	public int calculerNumeroPort(int numero)
+	{
+		return numero + 10000;
+	}
 	
 	// permet de démarrer le tour de l'agent
 	public void demarrerTour()
@@ -138,10 +151,10 @@ public class AgentImpl
 	}
 	
 	// permet à l'agent de tenter de voler un autre agent
-	public void voler(int idAgent, String type, int nb)
-	{
-		System.out.println("Agent " + this.idAgent + " : je tente de voler " + nb + " exemplaires de la ressource " + type + " à l'agent " + idAgent);
-	}
+	//public void voler(int idAgent, String type, int nb) throws RemoteException
+	//{
+	//	System.out.println("Agent " + this.idAgent + " : je tente de voler " + nb + " exemplaires de la ressource " + type + " à l'agent " + idAgent);
+	//}
 
   
   

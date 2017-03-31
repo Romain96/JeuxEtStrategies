@@ -16,7 +16,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	//							Constructeur
 	//==================================================================
 	
-	public ProducteurImpl(int idProcucteur, String typeRessource, int quantiteRessource)
+	public ProducteurImpl(int idProcucteur, String typeRessource, int quantiteRessource) throws RemoteException
 	{
 		this.idProducteur = idProducteur;
 		this.numeroPort = calculerNumeroPort(idProducteur);

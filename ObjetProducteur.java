@@ -12,7 +12,9 @@ public class ObjetProducteur
 		}
 		try
 		{
-			ProducteurImpl objLocal = new ProducteurImpl( args[1], args[2], args[3] ),
+			int idProducteur = Integer.valueOf(args[1]);
+			int quantiteRessource = Integer.valueOf(args[3]);
+			ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource );
 			Naming.rebind( "rmi://localhost:" + args[0] + "/objLocal" ,objLocal) ;
 			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
 		}
