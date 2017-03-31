@@ -22,6 +22,8 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		this.numeroPort = calculerNumeroPort(idProducteur);
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
+		// DEBUG
+		System.out.println("Producteur init : " + idProducteur + " " + numeroPort + " " + typeRessource + " " + quantiteRessource );
 	}
 	
 	//==================================================================
