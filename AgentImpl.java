@@ -1,15 +1,29 @@
-public abstract class Agent
+
+import java.rmi.server.UnicastRemoteObject ;
+import java.rmi.RemoteException ;
+
+public class AgentImpl 
+  extends UnicastRemoteObject
+  implements Agent
+{  
+
 {
 	//----------------------------------------------------------------------
 	//				attributs
 	//----------------------------------------------------------------------
 	
 	private int idAgent;			// identifiant unique de l'agent 
+	private int tailleTab;			// taille du tableau de ressources
+	private int port;				// numéro de port pour servir de serveur
+	private Ressource ressources;	// nb de ressource aquises
+	private Ressource objectifs;	// nb de ressource necessaires
+	
+	/*	Pour apres
 	private Ressource ressources[];		// tableau des différentes ressources et leurs quantités possédées
 	private Ressource objectifs[];		// associe à chaque ressource le nombre à obtenir pour terminer
-	private int tailleTab;			// taille du tableau de ressources
-	private int port;			// numéro de port pour servir de serveur
+	*/
 	
+
 	//----------------------------------------------------------------------
 	//				getters
 	//----------------------------------------------------------------------
@@ -24,6 +38,8 @@ public abstract class Agent
 		return this.tailleTab;
 	}
 	
+	/* pour apres
+
 	// retourne la quantité de ressouces de la ressource passée en paramètre
 	public int getNbRessource(String type)
 	{
@@ -40,14 +56,19 @@ public abstract class Agent
 	// retourne l'objectif à atteindre pour la ressource passée en paramètre
 	public int getObjectif(String type)
 	{
-		for (int i = 0; i < tailleTab; i++)
-		{
-			if (objectifs[i].getType() == type)
-			{
-				return objectifs[i].getNb();
-			}
-		}
-		return -1;	// une quantité négative représente une ressource non existante 
+
+		
+	}
+	*/ 
+	
+	public int getNbRessource()
+	{
+		return ressources;
+	}
+	
+	public int getObjectif(String type)
+	{
+		return objectifs;
 	}
 	
 	// retourne le numéro de port associé à cet agent
@@ -71,31 +92,15 @@ public abstract class Agent
 	}
 	
 	// positionne la ressource type avec la quantité nb
-	public void setNbRessource(String type, int nb)
+	public void setNbRessource( int nb)
 	{
-		boolean trouve = false;
-		for (int i = 0; i < tailleTab && !trouve; i++)
-		{
-			if (ressources[i].getType == type)
-			{
-				ressources[i].setNb(nb);
-				trouve = true;	// stop
-			}
-		}
+		ressources.setNb(nb);
 	}
 	
 	// positionne l'objectif de ressources pour le type passé en paramètre
-	public void setObjectif(String type, int nb)
+	public void setObjectif( int nb)
 	{
-		boolean trouve = false;
-		for (int i = 0; i < tailleTab && !trouve; i++)
-		{
-			if (objectifs[i].getType == type)
-			{
-				objectifs[i].setNb(nb);
-				trouve = true;	// stop
-			}
-		}
+		objectifs.setNb(nb);
 	}
 	
 	// positionne le numéro de port utilisé par cet agent
@@ -137,4 +142,8 @@ public abstract class Agent
 	{
 		System.out.println("Agent " + this.idAgent + " : je tente de voler " + nb + " exemplaires de la ressource " + type + " à l'agent " + idAgent);
 	}
+
+  
+  
 }
+
