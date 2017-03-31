@@ -4,13 +4,16 @@
 
 ### Objectifs courants [2017-03-30]
 
-- implémenter la classe abtraite Agent
-- implémenter la classe concrète AgentCoop
-- implémenter la classe concrète AgentIndiv
-- implémenter la classe concrète Rssource
-- implémenter la classe Coordinateur
-- implémenter la classe concrète Producteur
-- implémenter la class concrète Coordinateur
+- définir l'interface Producteur
+- définir l'interface Agent
+- définir l'interface Coordinateur
+- implémenter la classe abtraite AgentImpl (implémente Agent)
+- implémenter la classe AgentCoop (hérite de AgentImpl)
+- implémenter la classe AgentIndiv (hérite de AgentImpl)
+- implémenter la classe Ressource
+- implémenter la classe CoordinateurImpl
+- implémenter la classe ProducteurImpl
+- implémenter la classe CoordinateurImpl
 - établir la communication RMI entre les agents et le coordinateur
 - établir la communication RMI entre les agents et les producteurs
 - établir la communication RMI entre les agents et les autres agents
