@@ -5,32 +5,17 @@ public class Ressource
 	//----------------------------------------------------------------------
 	
 	private String type;	// type de ressource
-	private int nb;		// nombre de cette ressource
+	private int quantite;	// nombre de cette ressource
 	
 	//----------------------------------------------------------------------
 	//				constructeur
 	//----------------------------------------------------------------------
 	
-	// constructeur par défaut, n'a pas beaucoup de sens
-	public Ressource()
-	{
-		this.type = "defaut";
-		this.nb = 0;
-	}
-	
-	// constructeur sans type de ressource 
-	// (pour les tests avec un seul type de ressources)
-	public Ressource(int nb)
-	{
-		this.type = "defaut";
-		this.nb = nb;
-	}
-	
 	// constructeur standard
-	public Ressource(String type, int nb)
+	public Ressource(String type, int quantite)
 	{
 		this.type = type;
-		this.nb = nb;
+		this.quantite = quantite;
 	}
 	
 	//----------------------------------------------------------------------
@@ -42,9 +27,9 @@ public class Ressource
 		return this.type;
 	}
 	
-	public int getNb()
+	public int getQuantite()
 	{
-		return this.nb;
+		return this.quantite;
 	}
 	
 	//----------------------------------------------------------------------
@@ -56,9 +41,9 @@ public class Ressource
 		this.type = type;
 	}
 	
-	public void setNb(int nb)
+	public void setQuantite(int quantite)
 	{
-		this.nb = nb;
+		this.quantite = quantite;
 	}
 	
 	//----------------------------------------------------------------------
