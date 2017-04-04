@@ -15,11 +15,6 @@ public abstract class AgentImpl
 	private int quantiteRessource;	// quantité de cette ressource acquise
 	private int objectif;			// quantité de ressouce ciblée
 	
-	/*	Pour apres
-	private Ressource ressources[];		// tableau des différentes ressources et leurs quantités possédées
-	private Ressource objectifs[];		// associe à chaque ressource le nombre à obtenir pour terminer
-	*/
-	
 	//----------------------------------------------------------------------
 	//				constructeur
 	//----------------------------------------------------------------------
@@ -43,29 +38,6 @@ public abstract class AgentImpl
 	{
 		return this.idAgent;
 	}
-	
-	/* pour apres
-
-	// retourne la quantité de ressouces de la ressource passée en paramètre
-	public int getNbRessource(String type)
-	{
-		for (int i = 0; i < tailleTab; i++)
-		{
-			if (ressources[i].getType() == type)
-			{
-				return ressources[i].getNb();
-			}
-		}
-		return -1;	// une quantité négative représente une ressource non existante 
-	}
-	
-	// retourne l'objectif à atteindre pour la ressource passée en paramètre
-	public int getObjectif(String type)
-	{
-
-		
-	}
-	*/ 
 	
 	public int getQuantiteRessource()
 	{
