@@ -27,7 +27,7 @@ public abstract class AgentImpl
 		this.quantiteRessource = quantiteRessource;
 		this.objectif = objectif;
 		// DEBUG
-		System.out.println("Agent init : " + idAgent + " " + port + " " + typeRessource + " " + quantiteRessource + " " + objectif );
+		System.out.println("Agent init : " + idAgent + " " + port + " " + typeRessource + " " + quantiteRessource + " " + objectif );	
 	}
 
 	//----------------------------------------------------------------------

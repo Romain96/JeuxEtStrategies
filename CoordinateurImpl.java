@@ -75,11 +75,18 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	// appelé par les agents pour s'enregistrer auprès du coordinateur
 	public void identifierAgent(int idAgent, int numeroPort) throws RemoteException
 	{
-		System.out.println("Coordinateur : agent " + idAgent + "de port " + numeroPort + " s'identifie" );
-		agents[nbAgentsEnregistres][0] = idAgent;
-		agents[nbAgentsEnregistres][1] = numeroPort;
-		nbAgentsEnregistres++;
-		System.out.println("Coordinateur : il y a désormais " + nbAgentsEnregistres + "/" + nbAgents + " agents enregistrés" );
+		if (nbAgentsEnregistres < nbAgents )
+		{
+			System.out.println("Coordinateur : agent " + idAgent + " de port " + numeroPort + " s'identifie" );
+			agents[nbAgentsEnregistres][0] = idAgent;
+			agents[nbAgentsEnregistres][1] = numeroPort;
+			nbAgentsEnregistres++;
+			System.out.println("Coordinateur : il y a désormais " + nbAgentsEnregistres + "/" + nbAgents + " agents enregistrés" );
+		}
+		else
+		{
+			System.out.println("Coordinateur : agent " + idAgent + " de port " + numeroPort + " ne peut pas s'identifier : la liste est pleine !" );
+		}
 	}
 	
 	// appelé par les agents pour signaler la fin de leur tour
