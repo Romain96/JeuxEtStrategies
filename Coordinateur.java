@@ -7,5 +7,5 @@ public interface Coordinateur extends Remote
 	public void identifierAgent(int idAgent, int numeroPort) throws RemoteException;
 	
 	// appelé par les agents pour signaler la fin de leur tour
-	public int signalerFinTour() throws RemoteException;
+	public void signalerFinTour(int idAgent, int numeroPort) throws RemoteException;
 }
