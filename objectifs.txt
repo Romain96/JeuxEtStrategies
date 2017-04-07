@@ -2,18 +2,18 @@
 		OBJECTIFS DU PROJET "JEUX ET STRATEGIES"
 ================================================================================
 
-### Objectifs courants [2017-03-30]
+### Objectifs courants [2017-04-07]
 
-- définir l'interface Producteur
-- définir l'interface Agent
-- définir l'interface Coordinateur
-- implémenter la classe abtraite AgentImpl (implémente Agent)
-- implémenter la classe AgentCoop (hérite de AgentImpl)
-- implémenter la classe AgentIndiv (hérite de AgentImpl)
-- implémenter la classe Ressource
-- implémenter la classe CoordinateurImpl
-- implémenter la classe ProducteurImpl
-- implémenter la classe CoordinateurImpl
+x définir l'interface Producteur 							
+x définir l'interface Agent	 
+x définir l'interface Coordinateur
+x implémenter la classe abtraite AgentImpl (implémente Agent)
+x implémenter la classe AgentCoop (hérite de AgentImpl)
+x implémenter la classe AgentIndiv (hérite de AgentImpl)
+x implémenter la classe Ressource
+x implémenter la classe CoordinateurImpl
+x implémenter la classe ProducteurImpl
+x implémenter la classe CoordinateurImpl
 - établir la communication RMI entre les agents et le coordinateur
 - établir la communication RMI entre les agents et les producteurs
 - établir la communication RMI entre les agents et les autres agents
