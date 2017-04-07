@@ -16,7 +16,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	//							Constructeur
 	//==================================================================
 	
-	public ProducteurImpl(int idProcucteur, String typeRessource, int quantiteRessource) throws RemoteException
+	public ProducteurImpl(int idProducteur, String typeRessource, int quantiteRessource) throws RemoteException
 	{
 		this.idProducteur = idProducteur;
 		this.numeroPort = calculerNumeroPort(idProducteur);
@@ -116,6 +116,12 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		{
 			this.quantiteRessource = 100;	// nombre arbitraire
 		}
-			
+	}
+	
+	// appelé par le cordinateur à la fin du jeu pour terminer le producteur
+	public void terminerJeu() throws RemoteException
+	{
+		System.out.println("Producteur " + idProducteur + " se termine" );
+		System.exit(0);
 	}
 }

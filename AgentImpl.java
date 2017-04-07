@@ -128,7 +128,12 @@ public abstract class AgentImpl
 	//	System.out.println("Agent " + this.idAgent + " : je tente de voler " + nb + " exemplaires de la ressource " + type + " à l'agent " + idAgent);
 	//}
 
-  
+	// appelé par le cordinateur à la fin du jeu pour terminer l'agent
+	public void terminerJeu() throws RemoteException
+	{
+		System.out.println("Agent " + idAgent + " se termine");
+		System.exit(0);
+	}
   
 }
 
