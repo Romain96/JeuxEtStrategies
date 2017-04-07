@@ -2,7 +2,7 @@
 		OBJECTIFS DU PROJET "JEUX ET STRATEGIES"
 ================================================================================
 
-### Objectifs courants [2017-04-07]
+### Objectifs courants [2017-04-07] 
 
 x définir l'interface Producteur 							
 x définir l'interface Agent	 
