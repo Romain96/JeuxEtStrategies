@@ -16,7 +16,7 @@ public class ObjetCoordinateur
 			int nbProducteurs = Integer.parseInt(args[2]);
 			int quantiteRessource = Integer.parseInt(args[4]);
 			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs, new Ressource(args[2], quantiteRessource));
-			Naming.rebind( "rmi://localhost:" + args[0] + "/objLocal" ,objLocal) ;
+			Naming.rebind( "rmi://localhost:" + args[0] + "/coordinateur" ,objLocal) ;
 			System.out.println("Coordinateur pret") ;
 		}
 		catch (RemoteException re) { System.out.println(re) ; }

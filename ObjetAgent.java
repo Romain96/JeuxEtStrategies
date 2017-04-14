@@ -12,7 +12,7 @@ public class ObjetAgent
 		}
 		try
 		{
-			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://" + args[0] + ":" + args[1] + "/objLocal" );
+			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://" + args[0] + ":" + args[1] + "/coordinateur" );
 			
 			int idAgent = Integer.parseInt(args[3]);
 			int quantiteRessource = Integer.parseInt(args[5]);

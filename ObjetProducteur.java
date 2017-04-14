@@ -13,12 +13,13 @@ public class ObjetProducteur
 		}
 		try
 		{
-			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://" + args[0] + ":" + args[1] + "/objLocal" );
+			System.out.println("args : " + args[0] + " " + args[1]+ "  " + args[2] + " " + args[3] + " " + args[4]);
+			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://" + args[0] + ":" + args[1] + "/coordinateur" );
 			
 			int idProducteur = Integer.parseInt(args[2]);
 			int quantiteRessource = Integer.parseInt(args[4]);
 			ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[3], quantiteRessource );
-			Naming.rebind( "rmi://localhost:" + args[0] + "/objLocal" ,objLocal) ;
+			Naming.rebind( "rmi://localhost:" + args[1] + "/producteur" + args[2] ,objLocal) ;
 			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
 			
 			// s'enregistrer auprès du coordinateur (convention : port 9000)
