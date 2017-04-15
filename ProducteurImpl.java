@@ -8,7 +8,6 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	//==================================================================
 	
 	private int idProducteur;		// identifiant unique d'un producteur
-	private int numeroPort;			// numéro de port utilisé par ce producteur
 	private String typeRessource;	// pour l'instant un seule ressource
 	private int quantiteRessource;	// idem
 	
@@ -19,11 +18,10 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	public ProducteurImpl(int idProducteur, String typeRessource, int quantiteRessource) throws RemoteException
 	{
 		this.idProducteur = idProducteur;
-		this.numeroPort = calculerNumeroPort(idProducteur);
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
 		// DEBUG
-		System.out.println("Producteur init : " + idProducteur + " " + numeroPort + " " + typeRessource + " " + quantiteRessource );
+		System.out.println("Producteur init : " + idProducteur  + " " + typeRessource + " " + quantiteRessource );
 	}
 	
 	//==================================================================
@@ -33,11 +31,6 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	public int getIdProducteur()
 	{
 		return this.idProducteur;
-	}
-	
-	public int getNumeroPort()
-	{
-		return this.numeroPort;
 	}
 	
 	public String getTypeRessource()
@@ -59,11 +52,6 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		this.idProducteur = idProducteur;
 	}
 	
-	public void setNumeroPort(int numeroPort)
-	{
-		this.numeroPort = numeroPort;
-	}
-	
 	public void setTypeRessource(String typeRessource)
 	{
 		this.typeRessource = typeRessource;
@@ -77,12 +65,6 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	//==================================================================
 	//							Méthodes
 	//==================================================================
-	
-	// retourne le numéro de port comme étant 9000 + id du producteur
-	public int calculerNumeroPort(int numero)
-	{
-		return numero + 9000;
-	}
 	
 	// méthode appelée par un agent pour récupérer des ressources
 	public int attribuerRessources(int quantiteDemandee) throws RemoteException

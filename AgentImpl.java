@@ -10,8 +10,7 @@ public abstract class AgentImpl
 	//----------------------------------------------------------------------
 	
 	private int idAgent;			// identifiant unique de l'agent 
-	private int port;				// numéro de port pour servir de serveur
-	private String typeRessource;	// type de ressouce acquise
+	private String typeRessource;	// type de ressource acquise
 	private int quantiteRessource;	// quantité de cette ressource acquise
 	private int objectif;			// quantité de ressouce ciblée
 	
@@ -22,12 +21,11 @@ public abstract class AgentImpl
 	public AgentImpl(int idAgent, String typeRessource, int quantiteRessource, int objectif) throws RemoteException
 	{
 		this.idAgent = idAgent;
-		this.port = calculerNumeroPort(idAgent);
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
 		this.objectif = objectif;
 		// DEBUG
-		System.out.println("Agent init : " + idAgent + " " + port + " " + typeRessource + " " + quantiteRessource + " " + objectif );	
+		System.out.println("Agent init : " + idAgent + " " + typeRessource + " " + quantiteRessource + " " + objectif );	
 	}
 
 	//----------------------------------------------------------------------
@@ -47,12 +45,6 @@ public abstract class AgentImpl
 	public int getObjectif()
 	{
 		return objectif;
-	}
-	
-	// retourne le numéro de port associé à cet agent
-	public int getPort()
-	{
-		return port;
 	}
 	
 	//----------------------------------------------------------------------
@@ -82,21 +74,9 @@ public abstract class AgentImpl
 		this.objectif = nb;
 	}
 	
-	// positionne le numéro de port utilisé par cet agent
-	public void setPort(int port)
-	{
-		this.port = port;
-	}
-	
 	//----------------------------------------------------------------------
 	//				methodes
 	//----------------------------------------------------------------------
-	
-	// retourne le numéro de port comme étant 9000 + id du producteur
-	public int calculerNumeroPort(int numero)
-	{
-		return numero + 10000;
-	}
 	
 	// permet de démarrer le tour de l'agent
 	public void demarrerTour()

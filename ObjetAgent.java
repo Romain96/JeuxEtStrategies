@@ -36,7 +36,7 @@ public class ObjetAgent
 			}
 			
 			// s'enregistrer auprès du coordinateur (convention : port 9000)
-			coordinateur.identifierAgent(objLocal.getIdAgent(), objLocal.getPort());
+			coordinateur.identifierAgent(objLocal.getIdAgent());
 			
 			// attendre l'instruction debutTour() ou terminerJeu()
 			

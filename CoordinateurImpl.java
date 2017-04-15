@@ -8,13 +8,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	//----------------------------------------------------------------------
 	
 	// le coordinateur connait tous les agents
-	int agents[][];				// liste associant les id des agents avec leur port respectif
-	int nbAgents;				// taille du tableau agents (N lignes contenant 2 colonnes qui sont l'id et le port)
+	int agents[];				// liste des id des agents
+	int nbAgents;				// taille du tableau des id des agents
 	int nbAgentsEnregistres;	// nombre d'agents s'étant identifiés au coordinateur
 	
 	// le coordinateur connait tous les producteurs
-	int producteurs[][];			// liste associant les id des producteurs avec leur port respectif
-	int nbProducteurs;				// taille du tableau producteurs (N lignes contenant 2 colonnes qui sont l'id et le port)
+	int producteurs[];				// liste des id des producteurs
+	int nbProducteurs;				// taille du tableau producteurs
 	int nbProducteursEnregistres;	// nombre de producteurs s'étant identifiés au coordinateur
 	
 	Ressource ressources;		// liste des ressources possédées
@@ -26,14 +26,14 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public CoordinateurImpl(int nbAgents, int nbProducteurs, Ressource ressources) throws RemoteException
 	{
 		// initialisation du tableau d'agents
-		this.agents = new int[nbAgents][2];	// les agents s'identifiront au coordinateur à l'initialisation
+		this.agents = new int[nbAgents];	// les agents s'identifiront au coordinateur à l'initialisation
 		this.nbAgents = nbAgents;
-		this.nbAgentsEnregistres = 0;	// aucun agent enregistré pour l'instant (le coordinateur est lancé en premier)
+		this.nbAgentsEnregistres = 0;		// aucun agent enregistré pour l'instant (le coordinateur est lancé en premier)
 		
 		// initialisation du tableau des producteurs
-		this.producteurs = new int[nbProducteurs][2];	// les producteurs s'identifiront au coordinateur à l'initialisation
+		this.producteurs = new int[nbProducteurs];	// les producteurs s'identifiront au coordinateur à l'initialisation
 		this.nbProducteurs = nbProducteurs;
-		this.nbProducteursEnregistres = 0;	// aucun producteur enregistré pour l'instant (le coordinateur est lancé en premier)
+		this.nbProducteursEnregistres = 0;			// aucun producteur enregistré pour l'instant (le coordinateur est lancé en premier)
 		
 		// initialisation des ressources
 		this.ressources = ressources;
@@ -113,42 +113,40 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	//----------------------------------------------------------------------
 	
 	// appelé par les agents pour s'enregistrer auprès du coordinateur
-	public void identifierAgent(int idAgent, int numeroPort) throws RemoteException
+	public void identifierAgent(int idAgent) throws RemoteException
 	{
 		if (nbAgentsEnregistres < nbAgents )
 		{
-			System.out.println("Coordinateur : agent " + idAgent + " de port " + numeroPort + " s'identifie" );
-			agents[nbAgentsEnregistres][0] = idAgent;
-			agents[nbAgentsEnregistres][1] = numeroPort;
+			System.out.println("Coordinateur : agent " + idAgent + " s'identifie" );
+			agents[nbAgentsEnregistres] = idAgent;
 			nbAgentsEnregistres++;
 			System.out.println("Coordinateur : il y a désormais " + nbAgentsEnregistres + "/" + nbAgents + " agents enregistrés" );
 		}
 		else
 		{
-			System.out.println("Coordinateur : agent " + idAgent + " de port " + numeroPort + " ne peut pas s'identifier : la liste est pleine !" );
+			System.out.println("Coordinateur : agent " + idAgent + " ne peut pas s'identifier : la liste est pleine !" );
 		}
 	}
 	
 	// appelé par les producteurs pour s'enregistrer auprès du coordinateur
-	public void identifierProducteur(int idProducteur, int numeroPort) throws RemoteException
+	public void identifierProducteur(int idProducteur) throws RemoteException
 	{
 		if (nbProducteursEnregistres < nbProducteurs )
 		{
-			System.out.println("Coordinateur : producteur " + idProducteur + " de port " + numeroPort + " s'identifie" );
-			producteurs[nbProducteursEnregistres][0] = idProducteur;
-			producteurs[nbProducteursEnregistres][1] = numeroPort;
+			System.out.println("Coordinateur : producteur " + idProducteur + " s'identifie" );
+			producteurs[nbProducteursEnregistres] = idProducteur;
 			nbProducteursEnregistres++;
 			System.out.println("Coordinateur : il y a désormais " + nbProducteursEnregistres + "/" + nbProducteurs + " producteurs enregistrés" );
 		}
 		else
 		{
-			System.out.println("Coordinateur : producteur " + idProducteur + " de port " + numeroPort + " ne peut pas s'identifier : la liste est pleine !" );
+			System.out.println("Coordinateur : producteur " + idProducteur + " ne peut pas s'identifier : la liste est pleine !" );
 		}
 	}
 	
 	// appelé par les agents pour signaler la fin de leur tour
-	public void signalerFinTour(int idAgent, int numeroPort) throws RemoteException
+	public void signalerFinTour(int idAgent) throws RemoteException
 	{
-		System.out.println("Coordinateur : agent " + idAgent + "de port " + numeroPort + " signale la fin de son tour" );
+		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
 	}
 }

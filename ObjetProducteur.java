@@ -23,7 +23,7 @@ public class ObjetProducteur
 			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
 			
 			// s'enregistrer auprès du coordinateur (convention : port 9000)
-			coordinateur.identifierProducteur(objLocal.getIdProducteur(), objLocal.getNumeroPort());
+			coordinateur.identifierProducteur(objLocal.getIdProducteur());
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
