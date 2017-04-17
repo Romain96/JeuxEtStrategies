@@ -2,7 +2,7 @@
 		OBJECTIFS DU PROJET "JEUX ET STRATEGIES"
 ================================================================================
 
-### Objectifs courants [2017-04-07] 
+### Objectifs courants [2017-04-17] 
 
 x définir l'interface Producteur 							
 x définir l'interface Agent	 
@@ -14,6 +14,9 @@ x implémenter la classe Ressource
 x implémenter la classe CoordinateurImpl
 x implémenter la classe ProducteurImpl
 x implémenter la classe CoordinateurImpl
+x implémenter la classe ObjetAgent pour l'initialisation des agents
+x implémenter la classe ObjetProducteur pour l'initialisation des producteurs
+x implémenter la classe ObjetCoordinateur pour l'initialisation du coordinateur
 - établir la communication RMI entre les agents et le coordinateur
 - établir la communication RMI entre les agents et les producteurs
 - établir la communication RMI entre les agents et les autres agents
