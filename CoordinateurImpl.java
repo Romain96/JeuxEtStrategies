@@ -1,5 +1,7 @@
 import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
+import java.rmi.* ; 
+import java.net.MalformedURLException ; 
 
 public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateur
 {
@@ -8,12 +10,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	//----------------------------------------------------------------------
 	
 	// le coordinateur connait tous les agents
-	int agents[];				// liste des id des agents
+	Agent agents[];				// liste des agents
 	int nbAgents;				// taille du tableau des id des agents
 	int nbAgentsEnregistres;	// nombre d'agents s'étant identifiés au coordinateur
 	
 	// le coordinateur connait tous les producteurs
-	int producteurs[];				// liste des id des producteurs
+	Producteur producteurs[];		// liste des producteurs
 	int nbProducteurs;				// taille du tableau producteurs
 	int nbProducteursEnregistres;	// nombre de producteurs s'étant identifiés au coordinateur
 	
@@ -26,12 +28,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public CoordinateurImpl(int nbAgents, int nbProducteurs, Ressource ressources) throws RemoteException
 	{
 		// initialisation du tableau d'agents
-		this.agents = new int[nbAgents];	// les agents s'identifiront au coordinateur à l'initialisation
+		this.agents = new Agent[nbAgents];	// les agents s'identifiront au coordinateur à l'initialisation
 		this.nbAgents = nbAgents;
 		this.nbAgentsEnregistres = 0;		// aucun agent enregistré pour l'instant (le coordinateur est lancé en premier)
 		
 		// initialisation du tableau des producteurs
-		this.producteurs = new int[nbProducteurs];	// les producteurs s'identifiront au coordinateur à l'initialisation
+		this.producteurs = new Producteur[nbProducteurs];	// les producteurs s'identifiront au coordinateur à l'initialisation
 		this.nbProducteurs = nbProducteurs;
 		this.nbProducteursEnregistres = 0;			// aucun producteur enregistré pour l'instant (le coordinateur est lancé en premier)
 		
@@ -117,10 +119,18 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		if (nbAgentsEnregistres < nbAgents )
 		{
-			System.out.println("Coordinateur : agent " + idAgent + " s'identifie" );
-			agents[nbAgentsEnregistres] = idAgent;
-			nbAgentsEnregistres++;
-			System.out.println("Coordinateur : il y a désormais " + nbAgentsEnregistres + "/" + nbAgents + " agents enregistrés" );
+			try
+			{
+				System.out.println("Coordinateur : agent " + idAgent + " s'identifie" );
+				// on réccupère l'agent enregistré comme étant l'agent "agent + id de l'agent"
+				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + idAgent );
+				agents[nbAgentsEnregistres] = agent;
+				nbAgentsEnregistres++;
+				System.out.println("Coordinateur : il y a désormais " + nbAgentsEnregistres + "/" + nbAgents + " agents enregistrés" );
+			}
+			catch (NotBoundException re) { System.out.println(re) ; }
+			catch (RemoteException re) { System.out.println(re) ; }
+			catch (MalformedURLException e) { System.out.println(e) ; }	
 		}
 		else
 		{
@@ -133,10 +143,18 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		if (nbProducteursEnregistres < nbProducteurs )
 		{
-			System.out.println("Coordinateur : producteur " + idProducteur + " s'identifie" );
-			producteurs[nbProducteursEnregistres] = idProducteur;
-			nbProducteursEnregistres++;
-			System.out.println("Coordinateur : il y a désormais " + nbProducteursEnregistres + "/" + nbProducteurs + " producteurs enregistrés" );
+			try
+			{
+				System.out.println("Coordinateur : producteur " + idProducteur + " s'identifie" );
+				// on réccupère le producteur enregistré comme étant le producteur "producteur + id du producteur"
+				Producteur agent = (Producteur) Naming.lookup( "rmi://localhost:9000/producteur" + idAgent );
+				producteurs[nbProducteursEnregistres] = idProducteur;
+				nbProducteursEnregistres++;
+				System.out.println("Coordinateur : il y a désormais " + nbProducteursEnregistres + "/" + nbProducteurs + " producteurs enregistrés" );
+			}
+			catch (NotBoundException re) { System.out.println(re) ; }
+			catch (RemoteException re) { System.out.println(re) ; }
+			catch (MalformedURLException e) { System.out.println(e) ; }	
 		}
 		else
 		{
