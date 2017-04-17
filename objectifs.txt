@@ -30,6 +30,11 @@ x implémenter la classe ObjetCoordinateur pour l'initialisation du coordinateur
 - tester le cycle complet
 - corriger les bugs éventuels
 
+NOTES :
+- le coordinateur doit obligatoirement connaître tous les agents et tous les producteurs
+- les agents doivent connaître obligatoirement tous les producteurs et peuvent connaître tous les autres agents
+- les producteurs n'ont pas à connaître qui que ce soit excepté le coordinateur
+
 * cycle simplifié 1 *
 
 - situation : un coordinateur, un unique producteur d'une unique ressource et N agents (coop/indiv)
