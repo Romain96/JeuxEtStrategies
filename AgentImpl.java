@@ -22,6 +22,8 @@ public abstract class AgentImpl
 	private Agent agents[];		// liste des agents sauf soi
 	private int nbAgents;		// nombre des agents dans la liste
 	
+	private Coordinateur coordinateur;
+	
 	//----------------------------------------------------------------------
 	//				constructeur
 	//----------------------------------------------------------------------
@@ -115,6 +117,14 @@ public abstract class AgentImpl
 		this.producteurs = new Producteur[nbProducteurs];
 		this.nbProducteurs = nbProducteurs;
 		
+		try 
+		{
+			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:9000/coordinateur");
+		}
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
+		
 		enregistrerAgents(nbAgents);
 		enregistrerProducteurs(nbProducteurs);
 	}
@@ -185,6 +195,5 @@ public abstract class AgentImpl
 		System.out.println("Agent " + idAgent + " se termine");
 		System.exit(0);
 	}
-  
 }
 
