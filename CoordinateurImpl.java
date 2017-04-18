@@ -132,7 +132,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * vérifie que la quantité de ressource transmise par chaque agent est inférieure au but fixé
 	 * si un agent a terminé alors demande à tous les agents et tous les producteurs de se terminer avec terminerJeu
 	 */
-	 public void demarrerJeu()
+	 public void demarrerJeu() throws RemoteException
 	 {
 		 // positionne la variable jeuEnCours à vrai
 		 jeuEnCours = true;
@@ -164,7 +164,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	}
 	
 	// verifie que l'agent a termine (ie que les ressources signalées soient <= au but visé)
-	public void verifierTerminaisonJeu(String typeRessource, int quantiteRessource)
+	public void verifierTerminaisonJeu(String typeRessource, int quantiteRessource) throws RemoteException
 	{
 		if (typeRessource == this.ressources.getType() && quantiteRessource >= this.ressources.getQuantite())
 		{
