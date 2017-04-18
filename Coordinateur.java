@@ -11,4 +11,7 @@ public interface Coordinateur extends Remote
 	
 	// appelé par les agents pour signaler la fin de leur tour
 	public void signalerFinTour(int idAgent) throws RemoteException;
+	
+	// appelé par les agents pour signaler qu'ils ont atteint leur(s) objectif(s)
+	public void signalerObjectifAtteint(int idAgent) throws RemoteException;
 }

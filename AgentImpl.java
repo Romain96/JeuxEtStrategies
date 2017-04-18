@@ -104,6 +104,11 @@ public abstract class AgentImpl
 	public void demarrerTour() throws RemoteException
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
+		
+		// tentative d'acquisition de ressources (on teste avec 5 le but étant 10 donc 2 passes)
+		int ressourcesAcquises = producteurs[0].attribuerRessources(5);
+		this.ressources.setQuantite(this.ressources.getQuantite() + ressourcesAcquises);
+		
 		coordinateur.signalerFinTour(this.idAgent);
 	}
 	

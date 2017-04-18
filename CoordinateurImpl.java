@@ -164,12 +164,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		}
 	}
 	
-	// verifie que l'agent a termine (ie que les ressources signalées soient <= au but visé)
-	public void verifierTerminaisonJeu(String typeRessource, int quantiteRessource) throws RemoteException
+	// termine le jeu
+	public void terminerJeu() throws RemoteException
 	{
-		if (typeRessource == this.ressources.getType() && quantiteRessource >= this.ressources.getQuantite())
+		System.out.println("Coordinateur : le jeu se termine");
+		try
 		{
-			System.out.println("Coordinateur : agent terminé, jeu termine");
 			for (int i = 0; i < nbAgents; i++)
 			{
 				agents[i].terminerJeu();	// les agents se terminent
@@ -178,7 +178,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			{
 				producteurs[i].terminerJeu();	// les producteurs se terminent
 			}
-			System.exit(0);	// le coordinateur se termine
+		}
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }	
+		
+		System.exit(0);	// le coordinateur se termine
 		}
 	}
 	
@@ -244,5 +249,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		 
 		prochainAgentAJouer = (prochainAgentAJouer + 1)%nbAgents;
 		System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + prochainAgentAJouer);
+	}
+	
+	// appelé par les agents pour signaler qu'ils ont atteint leur(s) objectif(s)
+	public void signalerObjectifAtteint(int idAgent) throws RemoteException
+	{
+		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
+		terminerJeu();
 	}
 }
