@@ -153,7 +153,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	
 	// vérifie si tous les agents et producteurs spécifiés sont enregistrés
 	// et le cas échéant lance le jeu
-	public void verificationLancementJeu()
+	public void verificationLancementJeu() throws RemoteException
 	{
 		if (nbAgentsEnregistres >= nbAgents && nbProducteursEnregistres >= nbProducteurs)
 		{
