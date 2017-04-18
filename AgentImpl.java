@@ -107,9 +107,9 @@ public abstract class AgentImpl
 		
 		// tentative d'acquisition de ressources (on teste avec 5 le but étant 10 donc 2 passes)
 		int ressourcesAcquises = producteurs[0].attribuerRessources(5);
-		this.ressources.setQuantite(this.ressources.getQuantite() + ressourcesAcquises);
+		this.quantiteRessource += ressourcesAcquises;
 		
-		coordinateur.signalerFinTour(this.idAgent);
+		coordinateur.signalerFinTour(this.idAgent, this.quantiteRessource);
 	}
 	
 	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs
