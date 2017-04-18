@@ -169,20 +169,14 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		System.out.println("Coordinateur : le jeu se termine");
 		this.jeuEnCours = false;
-		try
+		for (int i = 0; i < nbAgents; i++)
 		{
-			for (int i = 0; i < nbAgents; i++)
-			{
-				agents[i].terminerJeu();	// les agents se terminent
-			}
-			for (int i = 0; i < nbProducteurs; i++)
-			{
-				producteurs[i].terminerJeu();	// les producteurs se terminent
-			}
+			agents[i].terminerJeu();	// les agents se terminent
 		}
-		catch (NotBoundException re) { System.out.println(re) ; }
-		catch (RemoteException re) { System.out.println(re) ; }
-		catch (MalformedURLException e) { System.out.println(e) ; }	
+		for (int i = 0; i < nbProducteurs; i++)
+		{
+			producteurs[i].terminerJeu();	// les producteurs se terminent
+		}
 		
 		System.exit(0);	// le coordinateur se termine
 	}
