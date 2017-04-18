@@ -184,7 +184,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		catch (MalformedURLException e) { System.out.println(e) ; }	
 		
 		System.exit(0);	// le coordinateur se termine
-		}
 	}
 	
 	// appelé par les agents pour s'enregistrer auprès du coordinateur
