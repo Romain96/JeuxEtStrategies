@@ -57,7 +57,7 @@ public abstract class AgentImpl
 		return objectif;
 	}
 	
-	public getNbProducteurs()
+	public int getNbProducteurs()
 	{
 		return nbProducteurs;
 	}
@@ -89,7 +89,7 @@ public abstract class AgentImpl
 		this.objectif = nb;
 	}
 	
-	public setNbProducteurs(int nbProducteurs)
+	public void setNbProducteurs(int nbProducteurs)
 	{
 		this.nbProducteurs = nbProducteurs;
 	}
@@ -102,6 +102,7 @@ public abstract class AgentImpl
 	public void demarrerTour() throws RemoteException
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
+		
 	}
 	
 	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs
