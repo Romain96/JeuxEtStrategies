@@ -120,7 +120,7 @@ public abstract class AgentImpl
 	}
 	
 	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs
-	public void signalerNbAgentsEtProducteurs(int nbAgents, int nbProucteurs) throws RemoteException
+	public void signalerNbAgentsEtProducteurs(int nbAgents, int nbProducteurs) throws RemoteException; 
 	{
 		System.out.println("Agent " + this.idAgent + " enregistre ses agents(" + nbAgents + ") et producteurs(" + nbProducteurs + ")" );
 		
