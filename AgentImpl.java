@@ -1,5 +1,7 @@
 import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
+import java.rmi.* ; 
+import java.net.MalformedURLException ; 
 
 public abstract class AgentImpl 
   extends UnicastRemoteObject
@@ -14,6 +16,12 @@ public abstract class AgentImpl
 	private int quantiteRessource;	// quantité de cette ressource acquise
 	private int objectif;			// quantité de ressouce ciblée
 	
+	private Producteur producteurs[];	// liste des producteurs
+	private int nbProducteurs;			// nombre de producteurs dans la liste
+	
+	private Agent agents[];		// liste des agents sauf soi
+	private int nbAgents;		// nombre des agents dans la liste
+	
 	//----------------------------------------------------------------------
 	//				constructeur
 	//----------------------------------------------------------------------
@@ -24,6 +32,8 @@ public abstract class AgentImpl
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
 		this.objectif = objectif;
+		this.nbProducteurs = 0;
+		this.nbAgents = 0;
 		// DEBUG
 		System.out.println("Agent init : " + idAgent + " " + typeRessource + " " + quantiteRessource + " " + objectif );	
 	}
@@ -45,6 +55,11 @@ public abstract class AgentImpl
 	public int getObjectif()
 	{
 		return objectif;
+	}
+	
+	public getNbProducteurs()
+	{
+		return nbProducteurs;
 	}
 	
 	//----------------------------------------------------------------------
@@ -74,14 +89,69 @@ public abstract class AgentImpl
 		this.objectif = nb;
 	}
 	
+	public setNbProducteurs(int nbProducteurs)
+	{
+		this.nbProducteurs = nbProducteurs;
+	}
+	
 	//----------------------------------------------------------------------
 	//				methodes
 	//----------------------------------------------------------------------
 	
 	// permet de démarrer le tour de l'agent
-	public void demarrerTour()
+	public void demarrerTour() throws RemoteException
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
+	}
+	
+	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs
+	public void signalerNbAgentsEtProducteurs(int nbAgents, int nbProucteurs) throws RemoteException
+	{
+		System.out.println("Agent " + this.idAgent + " enregistre ses agents/producteurs");
+		
+		this.agents = new Agent[nbAgents - 1];
+		this.nbAgents = nbAgents - 1;
+		this.producteurs = new Producteur[nbProducteurs];
+		this.producteurs = nbProducteurs;
+		
+		enregistrerAgents(nbAgents);
+		enregistrerProducteurs(nbProducteurs);
+	}
+	
+	// permet d'enregistrer tous les agents sauf soi
+	public void enregistrerAgents(int nbAgents)
+	{
+		try 
+		{
+			// agent avant soi 
+			for (int i = 0; i < this.idAgent; i++)
+			{
+				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/coordinateur" + i );
+			}
+			// agents après soi
+			for (int i = idAgent + 1; i < nbAgents; i++)
+			{
+				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + i );
+			}
+		}
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
+	}
+	
+	// permet d'enregistrer tous les producteurs
+	public void enregistrerProducteurs(int nbProducteurs)
+	{
+		try 
+		{
+			for (int i = 0; i < nbProducteurs; i++)
+			{
+				Producteur producteur = (Producteur) Naming.lookup( "rmi://localhost:9000/producteur" + i );
+			}
+		}
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
 	}
 	
 	// permet d'indiquer au coordinateur que l'agent a terminé son tour

@@ -19,6 +19,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	int nbProducteurs;				// taille du tableau producteurs
 	int nbProducteursEnregistres;	// nombre de producteurs s'étant identifiés au coordinateur
 	
+	// indique si le jeu a démarré ou non
+	boolean jeuEnCours;
+	
+	// indique l'indice du prochain agent à faire démarer (dans l'ordre d'enregistrement pas d'indice des agents)
+	int prochainAgentAJouer;
+	
 	Ressource ressources;		// liste des ressources possédées
 	
 	//----------------------------------------------------------------------
@@ -39,6 +45,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		
 		// initialisation des ressources
 		this.ressources = ressources;
+		
+		// le jeu n'a pas encore commencé (les agents/producteurs doivent d'abord s'inscrirent)
+		jeuEnCours = false;
+		
+		// il n'y a pas d'agent à faire jouer pour l'instant donc le prochain sera le 1er enregistré
+		prochainAgentAJouer = 0;
 	}
 	
 	//----------------------------------------------------------------------
@@ -114,6 +126,61 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	//				methodes
 	//----------------------------------------------------------------------
 	
+	/* boucle principale du coordinateur
+	 * appelle chaque agent à tour de rôle avec la méthode demarrerTour 
+	 * attend la fin de tour de chaque agent avant de lancer le suivant avec signalerFinTour
+	 * vérifie que la quantité de ressource transmise par chaque agent est inférieure au but fixé
+	 * si un agent a terminé alors demande à tous les agents et tous les producteurs de se terminer avec terminerJeu
+	 */
+	 public void demarrerJeu()
+	 {
+		 // positionne la variable jeuEnCours à vrai
+		 jeuEnCours = true;
+		 
+		 // tramsmet à tous les agents la liste des producteurs (en réalité seulement le nombre de producteurs)
+		 for (int i = 0; i < nbAgents; i++)
+		 {
+			 agents[i].signalerNbAgentsEtProducteurs(nbAgents, nbProducteurs);
+		 }		
+		  
+		 // lance le 1er agent
+		 agents[prochainAgentAJouer].demarrerTour();
+		 System.out.println("Coordinateur : lancement de l'agent d'indice " + prochainAgentAJouer);
+		 
+		 prochainAgentAJouer = (prochainAgentAJouer + 1)%nbAgents;
+		 System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + prochainAgentAJouer);	 
+	 }
+	
+	// vérifie si tous les agents et producteurs spécifiés sont enregistrés
+	// et le cas échéant lance le jeu
+	public void verificationLancementJeu()
+	{
+		if (nbAgentsEnregistres >= nbAgents && nbProducteursEnregistres >= nbProducteurs)
+		{
+			// DEBUG
+			System.out.println("Coordinateur : prêt à lancer le jeu avec " + nbAgents + " agents et " + nbProducteurs + " producteurs");
+			demarrerJeu();
+		}
+	}
+	
+	// verifie que l'agent a termine (ie que les ressources signalées soient <= au but visé)
+	public void verifierTerminaisonJeu(String typeRessource, int quantiteRessource)
+	{
+		if (typeRessource == this.ressources.getType() && quantiteRessource >= this.ressources.getQuantiteRessource())
+		{
+			System.out.println("Coordinateur : agent terminé, jeu termine");
+			for (int i = 0; i < nbAgents; i++)
+			{
+				agents[i].terminerJeu();	// les agents se terminent
+			}
+			for (int i = 0; i < nbProducteurs; i++)
+			{
+				producteurs[i].terminerJeu();	// les producteurs se terminent
+			}
+			System.exit(0);	// le coordinateur se termine
+		}
+	}
+	
 	// appelé par les agents pour s'enregistrer auprès du coordinateur
 	public void identifierAgent(int idAgent) throws RemoteException
 	{
@@ -127,6 +194,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 				agents[nbAgentsEnregistres] = agent;
 				nbAgentsEnregistres++;
 				System.out.println("Coordinateur : il y a désormais " + nbAgentsEnregistres + "/" + nbAgents + " agents enregistrés" );
+				verificationLancementJeu();
 			}
 			catch (NotBoundException re) { System.out.println(re) ; }
 			catch (RemoteException re) { System.out.println(re) ; }
@@ -151,6 +219,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 				producteurs[nbProducteursEnregistres] = producteur;
 				nbProducteursEnregistres++;
 				System.out.println("Coordinateur : il y a désormais " + nbProducteursEnregistres + "/" + nbProducteurs + " producteurs enregistrés" );
+				verificationLancementJeu();
 			}
 			catch (NotBoundException re) { System.out.println(re) ; }
 			catch (RemoteException re) { System.out.println(re) ; }
@@ -166,5 +235,11 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public void signalerFinTour(int idAgent) throws RemoteException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
+		
+		agents[prochainAgentAJouer].demarrerTour();
+		System.out.println("Coordinateur : lancement de l'agent d'indice " + prochainAgentAJouer);
+		 
+		prochainAgentAJouer = (prochainAgentAJouer + 1)%nbAgents;
+		System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + prochainAgentAJouer);
 	}
 }

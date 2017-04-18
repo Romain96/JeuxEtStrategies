@@ -38,13 +38,6 @@ public class ObjetAgent
 			// s'enregistrer auprès du coordinateur (convention : port 9000)
 			Naming.rebind( "rmi://localhost:" + args[1] + "/agent" + args[3] ,objLocal) ;
 			coordinateur.identifierAgent(objLocal.getIdAgent());
-			
-			// attendre l'instruction debutTour() ou terminerJeu()
-			
-			// traitement du tour
-			
-			// envoyer la fin du tour au coordinateur()
-
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
