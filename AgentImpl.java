@@ -109,7 +109,14 @@ public abstract class AgentImpl
 		int ressourcesAcquises = producteurs[0].attribuerRessources(5);
 		this.quantiteRessource += ressourcesAcquises;
 		
-		coordinateur.signalerFinTour(this.idAgent, this.quantiteRessource);
+		if (this.quantiteRessource >= this.objectif )
+		{
+			coordinateur.signalerObjectifAtteint(this.idAgent);
+		}
+		else
+		{
+			coordinateur.signalerFinTour(this.idAgent);
+		}
 	}
 	
 	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs

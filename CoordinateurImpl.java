@@ -168,6 +168,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public void terminerJeu() throws RemoteException
 	{
 		System.out.println("Coordinateur : le jeu se termine");
+		this.jeuEnCours = false;
 		try
 		{
 			for (int i = 0; i < nbAgents; i++)
