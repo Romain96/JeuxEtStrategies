@@ -107,15 +107,17 @@ public abstract class AgentImpl
 		
 		// tentative d'acquisition de ressources (on teste avec 5 le but étant 10 donc 2 passes)
 		int ressourcesAcquises = producteurs[0].attribuerRessources(5);
-		System.out.println("Agent " + idAgent + " : j'acquiers " + ressoucesAcquises + " exemplaires de la ressource " + typeRessource);
+		System.out.println("Agent " + idAgent + " : j'acquiers " + ressourcesAcquises + " exemplaires de la ressource " + typeRessource);
 		this.quantiteRessource += ressourcesAcquises;
 		
 		if (this.quantiteRessource >= this.objectif )
 		{
+			System.out.println("Agent " + idAgent + " : je possède " + ressources + " exemplaires de la ressource " + typeRessource + "/" + objectif);
 			coordinateur.signalerObjectifAtteint(this.idAgent);
 		}
 		else
 		{
+			System.out.println("Agent " + idAgent + " : je possède " + ressources + " exemplaires de la ressource " + typeRessource + "/" + objectif);
 			coordinateur.signalerFinTour(this.idAgent);
 		}
 	}
