@@ -152,7 +152,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		if (this.nbAgentsEnregistres >= this.nbAgents && this.nbProducteursEnregistres >= this.nbProducteurs)
 		{
 			// DEBUG
-			System.out.println("Coordinateur : prêt à lancer le jeu avec " + this.nbAgents + " agents et " + this.nbProducteurs + " producteurs");
+			System.out.println("Coordinateur : prêt à lancer le jeu avec " + this.nbAgentsEnregistres + " agents et " + this.nbProducteursEnregistres + " producteurs");
 			
 			// tramsmet à tous les agents la liste des producteurs (en réalité seulement le nombre d'agents/producteurs)
 			for (int i = 0; i < nbAgentsEnregistres; i++)
