@@ -120,6 +120,7 @@ public abstract class AgentImpl
 		try 
 		{
 			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:9000/coordinateur");
+			this.coordinateur = coordinateur;
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
