@@ -137,7 +137,7 @@ public abstract class AgentImpl
 			// agent avant soi 
 			for (int i = 0; i < this.idAgent; i++)
 			{
-				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/coordinateur" + i );
+				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + i );
 			}
 			// agents après soi
 			for (int i = idAgent + 1; i < nbAgents; i++)
