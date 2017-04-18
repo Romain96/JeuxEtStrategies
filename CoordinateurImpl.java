@@ -135,13 +135,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 public void demarrerJeu() throws RemoteException
 	 {
 		 // positionne la variable jeuEnCours à vrai
-		 jeuEnCours = true;
-		 
-		 // tramsmet à tous les agents la liste des producteurs (en réalité seulement le nombre de producteurs)
-		 for (int i = 0; i < nbAgents; i++)
-		 {
-			 agents[i].signalerNbAgentsEtProducteurs(nbAgents, nbProducteurs);
-		 }		
+		 jeuEnCours = true;	
 		  
 		 // lance le 1er agent
 		 agents[prochainAgentAJouer].demarrerTour();
@@ -159,6 +153,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			// DEBUG
 			System.out.println("Coordinateur : prêt à lancer le jeu avec " + this.nbAgents + " agents et " + this.nbProducteurs + " producteurs");
+			
+			// tramsmet à tous les agents la liste des producteurs (en réalité seulement le nombre d'agents/producteurs)
+			for (int i = 0; i < nbAgentsEnregistres; i++)
+			{
+				agents[i].signalerNbAgentsEtProducteurs(nbAgentsEnregistres, nbProducteursEnregistres);
+			}	
+			
 			demarrerJeu();
 		}
 	}
