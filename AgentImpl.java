@@ -113,7 +113,7 @@ public abstract class AgentImpl
 		this.agents = new Agent[nbAgents - 1];
 		this.nbAgents = nbAgents - 1;
 		this.producteurs = new Producteur[nbProducteurs];
-		this.producteurs = nbProducteurs;
+		this.nbProducteurs = nbProducteurs;
 		
 		enregistrerAgents(nbAgents);
 		enregistrerProducteurs(nbProducteurs);

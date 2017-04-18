@@ -166,7 +166,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	// verifie que l'agent a termine (ie que les ressources signalées soient <= au but visé)
 	public void verifierTerminaisonJeu(String typeRessource, int quantiteRessource)
 	{
-		if (typeRessource == this.ressources.getType() && quantiteRessource >= this.ressources.getQuantiteRessource())
+		if (typeRessource == this.ressources.getType() && quantiteRessource >= this.ressources.getQuantite())
 		{
 			System.out.println("Coordinateur : agent terminé, jeu termine");
 			for (int i = 0; i < nbAgents; i++)
