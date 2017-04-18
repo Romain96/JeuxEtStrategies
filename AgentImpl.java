@@ -107,6 +107,7 @@ public abstract class AgentImpl
 		
 		// tentative d'acquisition de ressources (on teste avec 5 le but étant 10 donc 2 passes)
 		int ressourcesAcquises = producteurs[0].attribuerRessources(5);
+		System.out.println("Agent " + idAgent + " : j'acquiers " + ressoucesAcquises + " exemplaires de la ressource " + typeRessource);
 		this.quantiteRessource += ressourcesAcquises;
 		
 		if (this.quantiteRessource >= this.objectif )
@@ -179,18 +180,6 @@ public abstract class AgentImpl
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
 		catch (MalformedURLException e) { System.out.println(e) ; }
-	}
-	
-	// permet d'indiquer au coordinateur que l'agent a terminé son tour
-	public void finirTour()
-	{
-		System.out.println("Agent " + idAgent + " : j'ai terminé mon tour");
-	}
-	
-	// permet à l'agent d'acquérir les ressources demandées
-	public void acquerirRessources(String type, int nb)
-	{
-		System.out.println("Agent " + idAgent + " : j'acquiers " + nb + " exemplaires de la ressource " + type);
 	}
 	
 	// permet à l'agent de surveiller ses biens
