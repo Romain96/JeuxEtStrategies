@@ -122,7 +122,7 @@ public abstract class AgentImpl
 	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs
 	public void signalerNbAgentsEtProducteurs(int nbAgents, int nbProucteurs) throws RemoteException
 	{
-		System.out.println("Agent " + this.idAgent + " enregistre ses agents/producteurs");
+		System.out.println("Agent " + this.idAgent + " enregistre ses agents(" + nbAgents + ") et producteurs(" + nbProducteurs + ")" );
 		
 		this.agents = new Agent[nbAgents - 1];
 		this.nbAgents = nbAgents - 1;
@@ -151,11 +151,13 @@ public abstract class AgentImpl
 			for (int i = 0; i < this.idAgent; i++)
 			{
 				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + i );
+				agents[i] = agent;
 			}
 			// agents après soi
 			for (int i = idAgent + 1; i < nbAgents; i++)
 			{
 				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + i );
+				agents[i] = agent;
 			}
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
@@ -171,6 +173,7 @@ public abstract class AgentImpl
 			for (int i = 0; i < nbProducteurs; i++)
 			{
 				Producteur producteur = (Producteur) Naming.lookup( "rmi://localhost:9000/producteur" + i );
+				producteurs[i] = producteur;
 			}
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
