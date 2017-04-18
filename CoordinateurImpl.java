@@ -153,12 +153,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	
 	// vérifie si tous les agents et producteurs spécifiés sont enregistrés
 	// et le cas échéant lance le jeu
-	public void verificationLancementJeu() throws RemoteException
+	public void verificationLancementJeu()
 	{
-		if (nbAgentsEnregistres >= nbAgents && nbProducteursEnregistres >= nbProducteurs)
+		if (this.nbAgentsEnregistres >= this.nbAgents && this.nbProducteursEnregistres >= this.nbProducteurs)
 		{
 			// DEBUG
-			System.out.println("Coordinateur : prêt à lancer le jeu avec " + nbAgents + " agents et " + nbProducteurs + " producteurs");
+			System.out.println("Coordinateur : prêt à lancer le jeu avec " + this.nbAgents + " agents et " + this.nbProducteurs + " producteurs");
 			demarrerJeu();
 		}
 	}
@@ -194,11 +194,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 				agents[nbAgentsEnregistres] = agent;
 				nbAgentsEnregistres++;
 				System.out.println("Coordinateur : il y a désormais " + nbAgentsEnregistres + "/" + nbAgents + " agents enregistrés" );
-				verificationLancementJeu();
 			}
 			catch (NotBoundException re) { System.out.println(re) ; }
 			catch (RemoteException re) { System.out.println(re) ; }
 			catch (MalformedURLException e) { System.out.println(e) ; }	
+			
+			verificationLancementJeu();
 		}
 		else
 		{
@@ -219,11 +220,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 				producteurs[nbProducteursEnregistres] = producteur;
 				nbProducteursEnregistres++;
 				System.out.println("Coordinateur : il y a désormais " + nbProducteursEnregistres + "/" + nbProducteurs + " producteurs enregistrés" );
-				verificationLancementJeu();
 			}
 			catch (NotBoundException re) { System.out.println(re) ; }
 			catch (RemoteException re) { System.out.println(re) ; }
 			catch (MalformedURLException e) { System.out.println(e) ; }	
+			
+			verificationLancementJeu();
 		}
 		else
 		{
