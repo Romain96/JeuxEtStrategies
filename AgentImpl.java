@@ -112,12 +112,12 @@ public abstract class AgentImpl
 		
 		if (this.quantiteRessource >= this.objectif )
 		{
-			System.out.println("Agent " + idAgent + " : je possède " + ressources + " exemplaires de la ressource " + typeRessource + "/" + objectif);
+			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
 			coordinateur.signalerObjectifAtteint(this.idAgent);
 		}
 		else
 		{
-			System.out.println("Agent " + idAgent + " : je possède " + ressources + " exemplaires de la ressource " + typeRessource + "/" + objectif);
+			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
 			coordinateur.signalerFinTour(this.idAgent);
 		}
 	}
