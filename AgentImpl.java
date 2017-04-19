@@ -162,7 +162,7 @@ public abstract class AgentImpl
 			{
 				System.out.println("Agent " + this.idAgent + " : enregistre l'agent (après) " + i);
 				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + i );
-				this.agents[i] = agent;
+				this.agents[i-1] = agent;
 			}
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
