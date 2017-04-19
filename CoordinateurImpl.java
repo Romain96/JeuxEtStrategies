@@ -241,7 +241,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
 		this.agents[this.prochainAgentAJouer].demarrerTour();
 		 
-		tis.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
+		this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
 		System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + this.prochainAgentAJouer);
 	}
 	
