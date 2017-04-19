@@ -135,14 +135,14 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 public void demarrerJeu() throws RemoteException
 	 {
 		 // positionne la variable jeuEnCours à vrai
-		 jeuEnCours = true;	
+		 this.jeuEnCours = true;	
 		  
 		 // lance le 1er agent
-		 agents[prochainAgentAJouer].demarrerTour();
-		 System.out.println("Coordinateur : lancement de l'agent d'indice " + prochainAgentAJouer);
+		 this.agents[this.prochainAgentAJouer].demarrerTour();
+		 System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
 		 
-		 prochainAgentAJouer = (prochainAgentAJouer + 1)%nbAgents;
-		 System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + prochainAgentAJouer);	 
+		 this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
+		 System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + this.prochainAgentAJouer);	 
 	 }
 	
 	// vérifie si tous les agents et producteurs spécifiés sont enregistrés
@@ -157,7 +157,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			// tramsmet à tous les agents la liste des producteurs (en réalité seulement le nombre d'agents/producteurs)
 			for (int i = 0; i < nbAgentsEnregistres; i++)
 			{
-				agents[i].signalerNbAgentsEtProducteurs(nbAgentsEnregistres, nbProducteursEnregistres);
+				this.agents[i].signalerNbAgentsEtProducteurs(this.nbAgentsEnregistres, this.nbProducteursEnregistres);
 			}	
 			
 			demarrerJeu();
@@ -171,11 +171,11 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		this.jeuEnCours = false;
 		for (int i = 0; i < nbAgents; i++)
 		{
-			agents[i].terminerJeu();	// les agents se terminent
+			this.agents[i].terminerJeu();	// les agents se terminent
 		}
 		for (int i = 0; i < nbProducteurs; i++)
 		{
-			producteurs[i].terminerJeu();	// les producteurs se terminent
+			this.producteurs[i].terminerJeu();	// les producteurs se terminent
 		}
 		
 		System.exit(0);	// le coordinateur se termine
@@ -238,11 +238,11 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
 		
-		agents[prochainAgentAJouer].demarrerTour();
-		System.out.println("Coordinateur : lancement de l'agent d'indice " + prochainAgentAJouer);
+		System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
+		this.agents[this.prochainAgentAJouer].demarrerTour();
 		 
-		prochainAgentAJouer = (prochainAgentAJouer + 1)%nbAgents;
-		System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + prochainAgentAJouer);
+		tis.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
+		System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + this.prochainAgentAJouer);
 	}
 	
 	// appelé par les agents pour signaler qu'ils ont atteint leur(s) objectif(s)
