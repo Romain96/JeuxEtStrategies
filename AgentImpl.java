@@ -153,14 +153,16 @@ public abstract class AgentImpl
 			// agent avant soi 
 			for (int i = 0; i < this.idAgent; i++)
 			{
+				System.out.println("Agent " + this.idAgent + " : enregistre l'agent (avant) " + i);
 				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + i );
-				agents[i] = agent;
+				this.agents[i] = agent;
 			}
 			// agents après soi
-			for (int i = idAgent + 1; i < nbAgents; i++)
+			for (int i = this.idAgent + 1; i < nbAgents; i++)
 			{
+				System.out.println("Agent " + this.idAgent + " : enregistre l'agent (après) " + i);
 				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + i );
-				agents[i] = agent;
+				this.agents[i] = agent;
 			}
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
