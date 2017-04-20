@@ -15,6 +15,7 @@ public abstract class AgentImpl
 	private String typeRessource;	// type de ressource acquise
 	private int quantiteRessource;	// quantité de cette ressource acquise
 	private int objectif;			// quantité de ressouce ciblée
+	private bool enSurveillance;	// indique si l'agent est actuellement en surveillance
 	
 	private Producteur producteurs[];	// liste des producteurs
 	private int nbProducteurs;			// nombre de producteurs dans la liste
@@ -36,6 +37,7 @@ public abstract class AgentImpl
 		this.objectif = objectif;
 		this.nbProducteurs = 0;
 		this.nbAgents = 0;
+		this.enSurveillance = false;	// pas au début
 		// DEBUG
 		System.out.println("Agent init : " + idAgent + " " + typeRessource + " " + quantiteRessource + " " + objectif );	
 	}
@@ -62,6 +64,11 @@ public abstract class AgentImpl
 	public int getNbProducteurs()
 	{
 		return nbProducteurs;
+	}
+	
+	public bool getEnSurveillance()
+	{
+		return this.enSurveillance;
 	}
 	
 	//----------------------------------------------------------------------
@@ -94,6 +101,11 @@ public abstract class AgentImpl
 	public void setNbProducteurs(int nbProducteurs)
 	{
 		this.nbProducteurs = nbProducteurs;
+	}
+	
+	public void setEnSurveillance(bool enSurveillance)
+	{
+		this.enSurveillance = enSurveillance;
 	}
 	
 	//----------------------------------------------------------------------
@@ -195,13 +207,35 @@ public abstract class AgentImpl
 	public void surveillance()
 	{
 		System.out.println("Agent " + idAgent + " : je me place en mode NSA");
+		setEnSurveillance(true);
 	}
 	
 	// permet à l'agent de tenter de voler un autre agent
-	//public void voler(int idAgent, String type, int nb) throws RemoteException
-	//{
-	//	System.out.println("Agent " + this.idAgent + " : je tente de voler " + nb + " exemplaires de la ressource " + type + " à l'agent " + idAgent);
-	//}
+	public int voler(int idAgent, String type, int nb) throws RemoteException
+	{
+		System.out.println("Agent " + this.idAgent + " : tentative de vol de " + nb + " exemplaires de la ressource " + type + " (voleur : agent " + idAgent + ")");
+		if (getEnSurveillance())
+		{
+			System.out.println("Agent " + this.idAgent + " : je suis en mode NSA ! J'ai tout vu !");
+			// il faudra garder en mémoire l'id de l'agent voleur
+		}
+		else
+		{
+			System.out.println("Agent " + this.idAgent + " : Je n'ai rien vu !");
+			if (this.quantiteRessource >= nb)
+			{
+				int quantiteVolee = this.quantiteRessource - nb;
+				this.quantiteRessource -= nb;
+				return quantiteVolee;
+			}
+			else
+			{
+				int quantiteVolee = this.quantiteRessource;
+				this.quantiteRessource = 0;
+				return quantiteVolee;
+			}
+		}
+	}
 
 	// appelé par le cordinateur à la fin du jeu pour terminer l'agent
 	public void terminerJeu() throws RemoteException
