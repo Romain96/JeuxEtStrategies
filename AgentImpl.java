@@ -122,6 +122,20 @@ public abstract class AgentImpl
 		}
 	}
 	
+	// permet d'identifier le cordinateur
+	public void enregistrerCoordinateur(String machineServeur, int numeroPort)
+	{
+		try 
+		{
+			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://" + machineServeur + ":" + numeroPort + "/coordinateur");
+			System.out.println("Agent " + this.idAgent + " : enregistre le coordinateur : rmi://" + machineServeur + ":" + numeroPort + "/coordinateur" );
+			this.coordinateur = coordinateur;
+		}
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
+	}
+	
 	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs
 	public void signalerNbAgentsEtProducteurs(int nbAgents, int nbProducteurs) throws RemoteException
 	{
@@ -131,15 +145,6 @@ public abstract class AgentImpl
 		this.nbAgents = nbAgents - 1;
 		this.producteurs = new Producteur[nbProducteurs];
 		this.nbProducteurs = nbProducteurs;
-		
-		try 
-		{
-			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:9000/coordinateur");
-			this.coordinateur = coordinateur;
-		}
-		catch (NotBoundException re) { System.out.println(re) ; }
-		catch (RemoteException re) { System.out.println(re) ; }
-		catch (MalformedURLException e) { System.out.println(e) ; }
 		
 		enregistrerAgents(nbAgents);
 		enregistrerProducteurs(nbProducteurs);

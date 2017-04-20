@@ -34,6 +34,8 @@ public class ObjetAgent
 				objLocal = new AgentCoop(idAgent, args[4], quantiteRessource, objectif);
 				
 			}
+			// enregistrement du coordinateur pour l'agent
+			objLocal.enregistrerCoordinateur(arg[0], args[1]);
 			
 			// s'enregistrer auprès du coordinateur (convention : port 9000)
 			Naming.rebind( "rmi://localhost:" + args[1] + "/agent" + args[3] ,objLocal) ;
