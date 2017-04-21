@@ -20,12 +20,12 @@ public class ObjetAgent
 			AgentImpl objLocal;
 			
 			// créer et initialiser l'agent selon la personnalité 
-			if (args[2] == "indiv")
+			if (args[2].equals("indiv"))
 			{
 				System.out.println("Je suis indiv : " + args[2]);
 				objLocal = new AgentIndiv(idAgent, args[4], quantiteRessource, objectif);
 			}
-			else if (args[2] == "coop")
+			else if (args[2].equals("coop"))
 			{
 				System.out.println("Je suis coop : " + args[2]);
 				objLocal = new AgentCoop(idAgent, args[4], quantiteRessource, objectif);
