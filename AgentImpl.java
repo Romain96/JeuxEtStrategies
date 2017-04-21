@@ -15,7 +15,7 @@ public abstract class AgentImpl
 	private String typeRessource;	// type de ressource acquise
 	private int quantiteRessource;	// quantité de cette ressource acquise
 	private int objectif;			// quantité de ressouce ciblée
-	private bool enSurveillance;	// indique si l'agent est actuellement en surveillance
+	private boolean enSurveillance;	// indique si l'agent est actuellement en surveillance
 	
 	private Producteur producteurs[];	// liste des producteurs
 	private int nbProducteurs;			// nombre de producteurs dans la liste
@@ -66,7 +66,7 @@ public abstract class AgentImpl
 		return nbProducteurs;
 	}
 	
-	public bool getEnSurveillance()
+	public boolean getEnSurveillance()
 	{
 		return this.enSurveillance;
 	}
@@ -103,7 +103,7 @@ public abstract class AgentImpl
 		this.nbProducteurs = nbProducteurs;
 	}
 	
-	public void setEnSurveillance(bool enSurveillance)
+	public void setEnSurveillance(boolean enSurveillance)
 	{
 		this.enSurveillance = enSurveillance;
 	}

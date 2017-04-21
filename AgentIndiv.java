@@ -45,9 +45,4 @@ public class AgentIndiv extends AgentImpl
 	// surveillance n'a pas besoin d'être rédéfinie
 	
 	// permet à l'agent de tenter de voler un autre agent
-	public void voler(int idAgent, String type, int nb)
-	{
-		System.out.println("Agent " + getIdAgent() + " : je tente de voler " + nb + " exemplaires de la ressource " + type + " à l'agent " + idAgent);
-		System.out.println("Je suis égoïste et avare aussi");
-	}
 }
