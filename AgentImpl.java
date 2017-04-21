@@ -89,9 +89,9 @@ public abstract class AgentImpl
 		{
 			return agents[0];	// le premier
 		}
-		else if (pos >= nbAgentsEnregistres)
+		else if (pos >= nbAgents)
 		{
-			return agents[nbAgentsEnregistres-1];	// le dernier
+			return agents[nbAgents-1];	// le dernier
 		}
 		else 
 		{
@@ -106,9 +106,9 @@ public abstract class AgentImpl
 		{
 			return producteurs[0];	// le premier
 		}
-		else if (pos >= nbProducteursEnregistres)
+		else if (pos >= nbProducteurs)
 		{
-			return producteurs[nbProducteursEnregistres-1];	// le dernier
+			return producteurs[nbProducteurs-1];	// le dernier
 		}
 		else 
 		{

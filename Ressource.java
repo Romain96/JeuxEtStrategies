@@ -4,46 +4,46 @@ public class Ressource
 	//				attributs
 	//----------------------------------------------------------------------
 	
-	private String type;	// type de ressource
-	private int quantite;	// nombre de cette ressource
+	private String typeRessource;	// type de ressource
+	private int quantiteRessource;	// nombre de cette ressource
 	
 	//----------------------------------------------------------------------
 	//				constructeur
 	//----------------------------------------------------------------------
 	
 	// constructeur standard
-	public Ressource(String type, int quantite)
+	public Ressource(String typeRessource, int quantiteRessource)
 	{
-		this.type = type;
-		this.quantite = quantite;
+		this.typeRessource = typeRessource;
+		this.quantiteRessource = quantiteRessource;
 	}
 	
 	//----------------------------------------------------------------------
 	//				getters
 	//----------------------------------------------------------------------
 	
-	public String getType()
+	public String getTypeRessource()
 	{
-		return this.type;
+		return this.typeRessource;
 	}
 	
-	public int getQuantite()
+	public int getQuantiteRessource()
 	{
-		return this.quantite;
+		return this.quantiteRessource;
 	}
 	
 	//----------------------------------------------------------------------
 	//				setters
 	//----------------------------------------------------------------------
 	
-	public void setType(String type)
+	public void setTypeRessoure(String typeRessource)
 	{
-		this.type = type;
+		this.typeRessource = typeRessource;
 	}
 	
-	public void setQuantite(int quantite)
+	public void setQuantiteRessource(int quantiteRessource)
 	{
-		this.quantite = quantite;
+		this.quantiteRessource = quantiteRessource;
 	}
 	
 	//----------------------------------------------------------------------
