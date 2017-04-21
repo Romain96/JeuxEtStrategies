@@ -324,7 +324,7 @@ public abstract class AgentImpl
 			System.out.println("Agent " + this.idAgent + " : Je n'ai rien vu !");
 			if (this.quantiteRessource >= nb)
 			{
-				int quantiteVolee = this.quantiteRessource - nb;
+				int quantiteVolee = nb;
 				this.quantiteRessource -= nb;
 				return quantiteVolee;
 			}
