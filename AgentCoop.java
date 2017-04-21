@@ -58,25 +58,32 @@ public class AgentCoop extends AgentImpl
 	 */
 	 public void choixAction()
 	 {
-		 /*
-		  * Un agent coopératif aura tendance à tenter d'acquérir des ressources
-		  * et à défaut de pouvoir acquérir des ressources, se mettra en mode surveillance (pas de vol)
-		  */
-		  
-		// tentative d'acquisition de ressources (on teste avec 5)
-		int ressourcesAcquises = getProducteurAtPos(0).attribuerRessources(5);
-		System.out.println("Agent " + getIdAgent() + " : j'acquiers " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource());
-		setQuantiteRessource(getQuantiteRessource() + ressourcesAcquises);
+		/*
+		 * Un agent coopératif aura tendance à tenter d'acquérir des ressources
+		 * et à défaut de pouvoir acquérir des ressources, se mettra en mode surveillance (pas de vol)
+		 */
 		
-		if (getQuantiteRessource() >= getObjectif() )
+		try
 		{
-			System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
-			getCoordinateur().signalerObjectifAtteint(getIdAgent());
+		  
+			// tentative d'acquisition de ressources (on teste avec 5)
+			int ressourcesAcquises = getProducteurAtPos(0).attribuerRessources(5);
+			System.out.println("Agent " + getIdAgent() + " : j'acquiers " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource());
+			setQuantiteRessource(getQuantiteRessource() + ressourcesAcquises);
+			
+			if (getQuantiteRessource() >= getObjectif() )
+			{
+				System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
+				getCoordinateur().signalerObjectifAtteint(getIdAgent());
+			}
+			else
+			{
+				System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
+				getCoordinateur().signalerFinTour(getObjectif());
+			}
 		}
-		else
-		{
-			System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
-			getCoordinateur().signalerFinTour(getObjectif());
-		}
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
 	 }
 }

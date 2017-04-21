@@ -57,25 +57,31 @@ public class AgentIndiv extends AgentImpl
 	 */
 	 public void choixAction()
 	 {
-		 /*
-		  * Un agent individualiste aura tendance à tenter d'acquérir des ressources systématiquement
-		  * et à défaut de pouvoir acquérir des ressources, il tentera de les voler 
-		  */
+		/*
+		 * Un agent individualiste aura tendance à tenter d'acquérir des ressources systématiquement
+		 * et à défaut de pouvoir acquérir des ressources, il tentera de les voler 
+		 */
 		  
-		// tentative de vol (on teste avec 2)
-		int ressourcesVolees = getProducteurAtPos(0).voler(getIdAgent(), getTypeRessource(), 2);
-		System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + getTypeRessource());
-		setQuantiteRessource(getQuantiteRessource() + ressourcesVolees);
-		
-		if (getQuantiteRessource() >= getObjectif() )
+		try 
 		{
-			System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
-			getCoordinateur().signalerObjectifAtteint(getIdAgent());
+			// tentative de vol (on teste avec 2)
+			int ressourcesVolees = getAgentAtPos(0).voler(getIdAgent(), getTypeRessource(), 2);
+			System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + getTypeRessource());
+			setQuantiteRessource(getQuantiteRessource() + ressourcesVolees);
+			  
+			if (getQuantiteRessource() >= getObjectif() )
+			{
+				System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
+				getCoordinateur().signalerObjectifAtteint(getIdAgent());
+			}
+			else
+			{
+				System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
+				getCoordinateur().signalerFinTour(getIdAgent());
+			}
 		}
-		else
-		{
-			System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
-			getCoordinateur().signalerFinTour(getIdAgent());
-		}
-	 }
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
+	}
 }
