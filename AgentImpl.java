@@ -218,6 +218,7 @@ public abstract class AgentImpl
 		{
 			System.out.println("Agent " + this.idAgent + " : je suis en mode NSA ! J'ai tout vu !");
 			// il faudra garder en mémoire l'id de l'agent voleur
+			return 0;
 		}
 		else
 		{
