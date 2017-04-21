@@ -29,7 +29,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	//				cosntructeur
 	//----------------------------------------------------------------------
 	
-	public CoordinateurImpl(int nbAgents, int nbProducteurs, Ressource ressources) throws RemoteException
+	public CoordinateurImpl(int nbAgents, int nbProducteurs) throws RemoteException
 	{
 		// initialisation du tableau d'agents
 		this.agents = new Agent[nbAgents];	// les agents s'identifiront au coordinateur à l'initialisation
