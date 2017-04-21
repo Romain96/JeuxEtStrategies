@@ -32,17 +32,50 @@ public class AgentIndiv extends AgentImpl
 	//				méthodes
 	//----------------------------------------------------------------------
 	
-	// demarrerTour n'a pas besoin d'être redéfinie	
-	// idem pour finir tour
-	
-	// permet à l'agent d'acquérir les ressources demandées
-	public void acquerirRessources(String type, int nb)
-	{
-		System.out.println("Agent " + getIdAgent() + " : j'acquiers " + nb + " exemplaires de la ressource " + type);
-		System.out.println("Je suis égoïste et avare aussi");
-	}
-	
-	// surveillance n'a pas besoin d'être rédéfinie
-	
-	// permet à l'agent de tenter de voler un autre agent
+	/*
+	 * Les fonctions suivantes n'ont pas besoin d'être redéfinies : 
+	 * - demarrerTour
+	 * - enregistrerCoordinateur
+	 * - signalerNbAgentsEtProducteurs
+	 * - enregistrerAgents
+	 * - enregistrerProducteurs
+	 * - surveillance
+	 * - voler
+	 * - terminerJeu
+	 * 
+	 * Les fonctions suivantes doivent être redéfinies :
+	 * - choixAction
+	 */
+	 
+	 
+	 /*
+	 * Fonction 	: choixAction
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: choisi l'action à effectuer pour ce tour suivant la personnalité individualiste
+	 * les actions possibles sont : acquérirRessources, voler, surveillance et reporterVol
+	 */
+	 public void choixAction()
+	 {
+		 /*
+		  * Un agent individualiste aura tendance à tenter d'acquérir des ressources systématiquement
+		  * et à défaut de pouvoir acquérir des ressources, il tentera de les voler 
+		  */
+		  
+		// tentative de vol (on teste avec 2)
+		int ressourcesVolees = producteurs[0].voler(this.idAgent, this.typeRessource, 2);
+		System.out.println("Agent " + this.idAgent + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + typeRessource);
+		this.quantiteRessource += ressourcesVolees;
+		
+		if (this.quantiteRessource >= this.objectif )
+		{
+			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
+			coordinateur.signalerObjectifAtteint(this.idAgent);
+		}
+		else
+		{
+			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
+			coordinateur.signalerFinTour(this.idAgent);
+		}
+	 }
 }

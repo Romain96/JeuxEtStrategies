@@ -32,17 +32,51 @@ public class AgentCoop extends AgentImpl
 	//				méthodes
 	//----------------------------------------------------------------------
 	
-	// demarrerTour n'a pas besoin d'être redéfinie	
-	// idem pour finir tour
-	
-	// permet à l'agent d'acquérir les ressources demandées
-	public void acquerirRessources(String type, int nb)
-	{
-		System.out.println("Agent " + getIdAgent() + " : j'acquiers " + nb + " exemplaires de la ressource " + type);
-		System.out.println("Je suis coopératif et altruiste aussi");
-	}
-	
-	// surveillance n'a pas besoin d'être rédéfinie
-	
-	// permet à l'agent de tenter de voler un autre agent
+	/*
+	 * Les fonctions suivantes n'ont pas besoin d'être redéfinies : 
+	 * - demarrerTour
+	 * - enregistrerCoordinateur
+	 * - signalerNbAgentsEtProducteurs
+	 * - enregistrerAgents
+	 * - enregistrerProducteurs
+	 * - surveillance
+	 * - voler
+	 * - terminerJeu
+	 * 
+	 * Les fonctions suivantes doivent être redéfinies :
+	 * - choixAction
+	 */
+	 
+	 
+	 /*
+	 * Fonction 	: choixAction
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: choisi l'action à effectuer pour ce tour suivant la personnalité coopératif
+	 * les actions possibles sont : acquérirRessources, voler, surveillance et reporterVol
+	 * doit terminer en appelant soit signalerFinTour soit signalerObjectifAtteint
+	 */
+	 public void choixAction()
+	 {
+		 /*
+		  * Un agent coopératif aura tendance à tenter d'acquérir des ressources
+		  * et à défaut de pouvoir acquérir des ressources, se mettra en mode surveillance (pas de vol)
+		  */
+		  
+		// tentative d'acquisition de ressources (on teste avec 5)
+		int ressourcesAcquises = producteurs[0].attribuerRessources(5);
+		System.out.println("Agent " + this.idAgent + " : j'acquiers " + ressourcesAcquises + " exemplaires de la ressource " + typeRessource);
+		this.quantiteRessource += ressourcesAcquises;
+		
+		if (this.quantiteRessource >= this.objectif )
+		{
+			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
+			coordinateur.signalerObjectifAtteint(this.idAgent);
+		}
+		else
+		{
+			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
+			coordinateur.signalerFinTour(this.idAgent);
+		}
+	 }
 }

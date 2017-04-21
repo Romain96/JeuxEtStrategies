@@ -131,23 +131,20 @@ public abstract class AgentImpl
 	public void demarrerTour() throws RemoteException
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
-		
-		// tentative d'acquisition de ressources (on teste avec 5 le but étant 10 donc 2 passes)
-		int ressourcesAcquises = producteurs[0].attribuerRessources(5);
-		System.out.println("Agent " + idAgent + " : j'acquiers " + ressourcesAcquises + " exemplaires de la ressource " + typeRessource);
-		this.quantiteRessource += ressourcesAcquises;
-		
-		if (this.quantiteRessource >= this.objectif )
-		{
-			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
-			coordinateur.signalerObjectifAtteint(this.idAgent);
-		}
-		else
-		{
-			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
-			coordinateur.signalerFinTour(this.idAgent);
-		}
+		choixAction();
 	}
+	
+	/*
+	 * Fonction 	: choixAction
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: choisi l'action à effectuer selon la personnalité de l'agent
+	 */
+	 public void choixAction()
+	 {
+		 System.out.println("Agent " + this.idAgent + " : je fais mon choix");
+		 // doit être redéfinie pour chaque personnalité d'agent
+	 }
 	
 	/*
 	 * Fonction 	: enregistrerCoordinateur
