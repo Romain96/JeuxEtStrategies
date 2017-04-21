@@ -76,6 +76,46 @@ public abstract class AgentImpl
 		return this.enSurveillance;
 	}
 	
+	// retourne le coordinateur
+	public Coordinateur getCoordinateur()
+	{
+		return this.coordinateur;
+	}
+	
+	// retourne le ième agent du tableau d'agent
+	public Agent getAgentAtPos(int pos)
+	{
+		if (pos < 0)
+		{
+			return agents[0];	// le premier
+		}
+		else if (pos >= nbAgentsEnregistres)
+		{
+			return agents[nbAgentsEnregistres-1];	// le dernier
+		}
+		else 
+		{
+			return agents[pos];
+		}
+	}
+	
+	// retourne le ième producteur du tableau de producteur
+	public Producteur getProducteurAtPos(int pos)
+	{
+		if (pos < 0)
+		{
+			return producteurs[0];	// le premier
+		}
+		else if (pos >= nbProducteursEnregistres)
+		{
+			return producteurs[nbProducteursEnregistres-1];	// le dernier
+		}
+		else 
+		{
+			return producteurs[pos];
+		}
+	}
+	
 	//----------------------------------------------------------------------
 	//				setters
 	//----------------------------------------------------------------------
@@ -114,6 +154,12 @@ public abstract class AgentImpl
 	public void setEnSurveillance(boolean enSurveillance)
 	{
 		this.enSurveillance = enSurveillance;
+	}
+	
+	// positionne le coordinateur
+	public void setCoordinateur(Coordinateur coordinateur)
+	{
+		this.coordinateur = coordinateur;
 	}
 	
 	//----------------------------------------------------------------------

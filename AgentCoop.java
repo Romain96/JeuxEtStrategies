@@ -64,19 +64,19 @@ public class AgentCoop extends AgentImpl
 		  */
 		  
 		// tentative d'acquisition de ressources (on teste avec 5)
-		int ressourcesAcquises = producteurs[0].attribuerRessources(5);
-		System.out.println("Agent " + this.idAgent + " : j'acquiers " + ressourcesAcquises + " exemplaires de la ressource " + typeRessource);
-		this.quantiteRessource += ressourcesAcquises;
+		int ressourcesAcquises = getProducteurAtPos(0).attribuerRessources(5);
+		System.out.println("Agent " + getIdAgent() + " : j'acquiers " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource());
+		setQuantiteRessource(getQuantiteRessource() + ressourcesAcquises);
 		
-		if (this.quantiteRessource >= this.objectif )
+		if (getQuantiteRessource() >= getObjectif() )
 		{
-			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
-			coordinateur.signalerObjectifAtteint(this.idAgent);
+			System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
+			getCoordinateur().signalerObjectifAtteint(getIdAgent());
 		}
 		else
 		{
-			System.out.println("Agent " + idAgent + " : je possède " + quantiteRessource + " exemplaires de la ressource " + typeRessource + "/" + objectif);
-			coordinateur.signalerFinTour(this.idAgent);
+			System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
+			getCoordinateur().signalerFinTour(getObjectif());
 		}
 	 }
 }
