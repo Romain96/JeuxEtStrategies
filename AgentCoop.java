@@ -85,8 +85,6 @@ public class AgentCoop extends AgentImpl
 				getCoordinateur().signalerFinTour(getObjectif());
 			}
 		}
-		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
-		catch (MalformedURLException e) { System.out.println(e) ; }
 	 }
 }

@@ -83,8 +83,6 @@ public class AgentIndiv extends AgentImpl
 				getCoordinateur().signalerFinTour(getIdAgent());
 			}
 		}
-		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
-		catch (MalformedURLException e) { System.out.println(e) ; }
 	}
 }
