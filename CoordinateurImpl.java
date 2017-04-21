@@ -41,9 +41,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		this.nbProducteurs = nbProducteurs;
 		this.nbProducteursEnregistres = 0;			// aucun producteur enregistré pour l'instant (le coordinateur est lancé en premier)
 		
-		// initialisation des ressources
-		this.ressources = ressources;
-		
 		// le jeu n'a pas encore commencé (les agents/producteurs doivent d'abord s'inscrirent)
 		jeuEnCours = false;
 		
