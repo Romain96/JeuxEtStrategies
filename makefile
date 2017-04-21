@@ -27,7 +27,7 @@ reg:
 # <port rmiregistry> <nbAgents> <nbProducteurs> <typeRessource> <quantiteRessource>
 # arguments utilisés : 9000 2 1 gold 100
 coord:
-	java ObjetCoordinateur 9000 2 1 gold 100
+	java ObjetCoordinateur 9000 2 1
 
 # lance un producteur
 # format des arguments de ObjetProducteur :

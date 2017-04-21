@@ -46,26 +46,31 @@ public abstract class AgentImpl
 	//				getters
 	//----------------------------------------------------------------------
 	
+	// Retourne l'id de l'agent
 	public int getIdAgent()
 	{
 		return this.idAgent;
 	}
 	
+	// retourne la quantite de ressource de l'agent
 	public int getQuantiteRessource()
 	{
 		return quantiteRessource;
 	}
 	
+	// Retourne l'objectif de ressource actuel
 	public int getObjectif()
 	{
 		return objectif;
 	}
 	
+	// retourne le nombre de prducteurs connus de cet agent
 	public int getNbProducteurs()
 	{
 		return nbProducteurs;
 	}
 	
+	// retourne vrai si l'agent est en surveillance, faux sinon
 	public boolean getEnSurveillance()
 	{
 		return this.enSurveillance;
@@ -75,34 +80,37 @@ public abstract class AgentImpl
 	//				setters
 	//----------------------------------------------------------------------
 	
+	// positionne l'id de l'agent
 	public void setIdAgent(int idAgent)
 	{
 		this.idAgent = idAgent;
 	}
 	
+	// positionne le type de ressource
 	public void setTypeRessource(String typeRessource)
 	{
 		this.typeRessource = typeRessource;
 	}
 	
-	
-	// positionne la ressource type avec la quantité nb
+	// positionne la quantité de ressource possédée
 	public void setQuantiteRessource(int quantite)
 	{
 		this.quantiteRessource = quantite;
 	}
 	
-	// positionne l'objectif de ressources pour le type passé en paramètre
-	public void setObjectif( int nb)
+	// positionne l'objectif de ressources
+	public void setObjectif(int nb)
 	{
 		this.objectif = nb;
 	}
 	
+	// positionne le nombre de producteurs connus de cet agent
 	public void setNbProducteurs(int nbProducteurs)
 	{
 		this.nbProducteurs = nbProducteurs;
 	}
 	
+	// positionne le mode surveillance
 	public void setEnSurveillance(boolean enSurveillance)
 	{
 		this.enSurveillance = enSurveillance;
@@ -112,7 +120,14 @@ public abstract class AgentImpl
 	//				methodes
 	//----------------------------------------------------------------------
 	
-	// permet de démarrer le tour de l'agent
+	/*
+	 * Fonction 	: demarrerTour
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: appelée par le coordinateur pour commencer le tour
+	 * de l'agent, appelle la fonction choixAction qui est différente selon
+	 * la personnalité de l'agent
+	 */
 	public void demarrerTour() throws RemoteException
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
@@ -134,7 +149,12 @@ public abstract class AgentImpl
 		}
 	}
 	
-	// permet d'identifier le cordinateur
+	/*
+	 * Fonction 	: enregistrerCoordinateur
+	 * Argument(s)	: le nom de la machine du serveur et le port utilisé
+	 * Résultat(s)	: /
+	 * Commentaires	: enregistre le coordinateur dans la variable coordinateur
+	 */
 	public void enregistrerCoordinateur(String machineServeur, int numeroPort)
 	{
 		try 
@@ -148,7 +168,14 @@ public abstract class AgentImpl
 		catch (MalformedURLException e) { System.out.println(e) ; }
 	}
 	
-	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs
+	/*
+	 * Fonction 	: signalerNbAgentsEtProducteurs
+	 * Argument(s)	: le nombre d'agents et le nombre de producteurs
+	 * Résultat(s)	: /
+	 * Commentaires	: initialise les tableaux d'agents et de producteurs
+	 * ainsi que leurs tailles et appelle les fonctions enregistrerAgents
+	 * et enregistrerProducteurs
+	 */
 	public void signalerNbAgentsEtProducteurs(int nbAgents, int nbProducteurs) throws RemoteException
 	{
 		System.out.println("Agent " + this.idAgent + " enregistre ses agents(" + nbAgents + ") et producteurs(" + nbProducteurs + ")" );
@@ -162,7 +189,13 @@ public abstract class AgentImpl
 		enregistrerProducteurs(nbProducteurs);
 	}
 	
-	// permet d'enregistrer tous les agents sauf soi
+	/*
+	 * Fonction 	: enregistrerAgents
+	 * Argument(s)	: le nombre d'agents
+	 * Résultat(s)	: /
+	 * Commentaires	: enregistre dans le tableau agents tous les agents
+	 * d'id 0 à nbAgent sauf soi
+	 */
 	public void enregistrerAgents(int nbAgents)
 	{
 		try 
@@ -187,7 +220,13 @@ public abstract class AgentImpl
 		catch (MalformedURLException e) { System.out.println(e) ; }
 	}
 	
-	// permet d'enregistrer tous les producteurs
+	/*
+	 * Fonction 	: enregistrerProducteur
+	 * Argument(s)	: le nombre de producteurs
+	 * Résultat(s)	: /
+	 * Commentaires	: enregistre dans le tableau producteurs
+	 * tous les producteurs d'id 0 à idProducteur
+	 */
 	public void enregistrerProducteurs(int nbProducteurs)
 	{
 		try 
@@ -203,14 +242,25 @@ public abstract class AgentImpl
 		catch (MalformedURLException e) { System.out.println(e) ; }
 	}
 	
-	// permet à l'agent de surveiller ses biens
+	/*
+	 * Fonction 	: surveillance
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: positionne la variable enSurveillance
+	 * et permet à l'agent de protéger ses biens pour le tour à venir
+	 */
 	public void surveillance()
 	{
 		System.out.println("Agent " + idAgent + " : je me place en mode NSA");
 		setEnSurveillance(true);
 	}
 	
-	// permet à l'agent de tenter de voler un autre agent
+	/*
+	 * Fonction 	: voler
+	 * Argument(s)	: l'id de l'agent (voleur), le type de ressource à voler et la quantité à voler
+	 * Résultat(s)	: le nombre de cette ressource volée (>= 0)
+	 * Commentaires	: /
+	 */
 	public int voler(int idAgent, String type, int nb) throws RemoteException
 	{
 		System.out.println("Agent " + this.idAgent + " : tentative de vol de " + nb + " exemplaires de la ressource " + type + " (voleur : agent " + idAgent + ")");
@@ -238,7 +288,12 @@ public abstract class AgentImpl
 		}
 	}
 
-	// appelé par le cordinateur à la fin du jeu pour terminer l'agent
+	/*
+	 * Fonction 	: terminerJeu 
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: appelé a^par le coordinateur pour terminer l'agent
+	 */
 	public void terminerJeu() throws RemoteException
 	{
 		System.out.println("Agent " + idAgent + " se termine");

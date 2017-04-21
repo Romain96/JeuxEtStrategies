@@ -5,17 +5,16 @@ public class ObjetCoordinateur
 {
 	public static void main(String [] args)
 	{
-		if (args.length != 5)
+		if (args.length != 3)
 		{
-			System.out.println("Usage : java ObjectProducteur <port rmiregistry> <nbAgents> <nbProducteurs> <typeRessource> <quantiteRessource>") ;
+			System.out.println("Usage : java ObjectProducteur <port rmiregistry> <nbAgents> <nbProducteurs>") ;
 			System.exit(0) ;
 		}
 		try
 		{
 			int nbAgents = Integer.parseInt(args[1]);
 			int nbProducteurs = Integer.parseInt(args[2]);
-			int quantiteRessource = Integer.parseInt(args[4]);
-			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs, new Ressource(args[2], quantiteRessource));
+			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs);
 			Naming.rebind( "rmi://localhost:" + args[0] + "/coordinateur" ,objLocal) ;
 			System.out.println("Coordinateur pret") ;
 		}

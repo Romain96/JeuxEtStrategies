@@ -28,16 +28,19 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	//							Getters
 	//==================================================================
 	
+	// retourne l'id du producteur
 	public int getIdProducteur()
 	{
 		return this.idProducteur;
 	}
 	
+	// retourne la ressource produite par le producteur
 	public String getTypeRessource()
 	{
 		return typeRessource;
 	}
 	
+	// retourne la quantité courante de cette ressource possédée
 	public int getQuantiteRessource()
 	{
 		return quantiteRessource;
@@ -47,16 +50,19 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	//							Setters
 	//==================================================================
 	
+	// positionne l'id du producteur
 	public void setIdProducteur(int idProducteur)
 	{
 		this.idProducteur = idProducteur;
 	}
 	
+	// positionne le type de ressource produite par le producteur
 	public void setTypeRessource(String typeRessource)
 	{
 		this.typeRessource = typeRessource;
 	}
 	
+	// positionne la quantité de ressources possédée par le producteur
 	public void setQuantiteRessource(int quantiteRessource)
 	{
 		this.quantiteRessource = quantiteRessource;
@@ -66,7 +72,12 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	//							Méthodes
 	//==================================================================
 	
-	// méthode appelée par un agent pour récupérer des ressources
+	/*
+	 * Fonction 	: atribuerRessources
+	 * Argument(s)	: la quantité de ressource demandée par l'agent demandeur
+	 * Résultat(s)	: la quantité de ressource attribuée par le producteur (>= 0 et <= quantité demandée)
+	 * Commentaires	: /
+	 */
 	public int attribuerRessources(int quantiteDemandee) throws RemoteException
 	{
 		int quantiteAttribuee = 0;
@@ -86,7 +97,12 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		}
 	}
 	
-	// génération des ressources
+	/*
+	 * Fonction 	: genererRessources
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: régénère les ressources suivant une certaine politique
+	 */
 	public void genererRessources()
 	{
 		// très simple pour l'instant on double ne nombre restant (si > 0)
@@ -100,7 +116,12 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		}
 	}
 	
-	// appelé par le cordinateur à la fin du jeu pour terminer le producteur
+	/*
+	 * Fonction 	: terminerJeu
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: appelé par le coordinateur pour terminer le producteur
+	 */
 	public void terminerJeu() throws RemoteException
 	{
 		System.out.println("Producteur " + idProducteur + " se termine" );

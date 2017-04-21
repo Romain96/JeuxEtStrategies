@@ -25,8 +25,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	// indique l'indice du prochain agent à faire démarer (dans l'ordre d'enregistrement pas d'indice des agents)
 	int prochainAgentAJouer;
 	
-	Ressource ressources;		// liste des ressources possédées
-	
 	//----------------------------------------------------------------------
 	//				cosntructeur
 	//----------------------------------------------------------------------
@@ -57,13 +55,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	//				getters
 	//----------------------------------------------------------------------
 	
-	// retourne le nombre d'agents
+	// retourne le nombre d'agents prévus
 	public int getNbAgents()
 	{
 		return nbAgents;
 	}
 	
-	// retourne le nombre de producteurs
+	// retourne le nombre de producteurs prévus
 	public int getNbProducteurs()
 	{
 		return nbProducteurs;
@@ -79,26 +77,19 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public int getNbProducteursEnregistres()
 	{
 		return nbProducteursEnregistres;
-	}
-	
-	// retourne le nombre courant de la ressouce type ou -1 si non trouvée
-	public int getQuantiteRessource()
-	{
-		return ressources.getQuantite();
-	}
-	
+	}	
 	
 	//----------------------------------------------------------------------
 	//				setters
 	//----------------------------------------------------------------------
 	
-	// positionne le nombre d'agents
+	// positionne le nombre d'agents prévus
 	public void setNbAgents(int nbAgents)
 	{
 		this.nbAgents = nbAgents;
 	}
 	
-	// positionne le nombre de producteurs
+	// positionne le nombre de producteurs prévus
 	public void setNbProducteurs(int nbProducteurs)
 	{
 		this.nbProducteurs = nbProducteurs;
@@ -116,21 +107,16 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		this.nbProducteursEnregistres = nbProducteursEnregistres;
 	}
 	
-	// positionne le nombre de ressources de la ressource type
-	public void setQuantiteRessource(int quantite)
-	{
-		ressources.setQuantite(quantite);
-	}
-	
 	//----------------------------------------------------------------------
 	//				methodes
 	//----------------------------------------------------------------------
 	
-	/* boucle principale du coordinateur
-	 * appelle chaque agent à tour de rôle avec la méthode demarrerTour 
-	 * attend la fin de tour de chaque agent avant de lancer le suivant avec signalerFinTour
-	 * vérifie que la quantité de ressource transmise par chaque agent est inférieure au but fixé
-	 * si un agent a terminé alors demande à tous les agents et tous les producteurs de se terminer avec terminerJeu
+	/*
+	 * Fonction 	: demarrerJeu
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: positionne la variable jeuEnCours et appelle la méthode
+	 * demarrerTour du 1er agent de la liste
 	 */
 	 public void demarrerJeu() throws RemoteException
 	 {
@@ -145,8 +131,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		 System.out.println("Coordinateur : prochain agent à jouer sera d'indice " + this.prochainAgentAJouer);	 
 	 }
 	
-	// vérifie si tous les agents et producteurs spécifiés sont enregistrés
-	// et le cas échéant lance le jeu
+	/*
+	 * Fonction 	: verificationLancementJeu
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: vérifie si le bon nombre d'agents et de producteurs
+	 * se sont ideitifié et le cas échéant lance le jeu en appelant le 1er agent
+	 */
 	public void verificationLancementJeu() throws RemoteException
 	{
 		if (this.nbAgentsEnregistres >= this.nbAgents && this.nbProducteursEnregistres >= this.nbProducteurs)
@@ -164,7 +155,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		}
 	}
 	
-	// termine le jeu
+	/*
+	 * Fonction 	: terminerJeu 
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: termine le jeu en appelant la fonction terminerJeu
+	 * de chaque agent et de chaque producteur
+	 */
 	public void terminerJeu() throws RemoteException
 	{
 		System.out.println("Coordinateur : le jeu se termine");
@@ -183,7 +180,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		System.exit(0);	// le coordinateur se termine
 	}
 	
-	// appelé par les agents pour s'enregistrer auprès du coordinateur
+	/*
+	 * Fonction 	: identifierAgent 
+	 * Argument(s)	: l'id de l'agent s'identifiant
+	 * Résultat(s)	: /
+	 * Commentaires	: l'agent est enregistrer dans la liste des agents du coordinateur
+	 */
 	public void identifierAgent(int idAgent) throws RemoteException
 	{
 		if (nbAgentsEnregistres < nbAgents )
@@ -209,7 +211,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		}
 	}
 	
-	// appelé par les producteurs pour s'enregistrer auprès du coordinateur
+	/*
+	 * Fonction 	: identifierProducteur
+	 * Argument(s)	: l'id du producteur s'identifiant
+	 * Résultat(s)	: /
+	 * Commentaires	: le producteur est enregistrer dans la liste des producteurs du coordinateur
+	 */
 	public void identifierProducteur(int idProducteur) throws RemoteException
 	{
 		if (nbProducteursEnregistres < nbProducteurs )
@@ -235,7 +242,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		}
 	}
 	
-	// appelé par les agents pour signaler la fin de leur tour
+	/*
+	 * Fonction 	: signalerFinTour
+	 * Argument(s)	: l'id de l'agent signalant la fin de son tour
+	 * Résultat(s)	: /
+	 * Commentaires	: lance le tour de l'agent suivant
+	 */
 	public void signalerFinTour(int idAgent) throws RemoteException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
@@ -245,7 +257,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		this.agents[this.prochainAgentAJouer].demarrerTour();
 	}
 	
-	// appelé par les agents pour signaler qu'ils ont atteint leur(s) objectif(s)
+	/*
+	 * Fonction 	: signalerObjectifAtteint
+	 * Argument(s)	: l'id de l'agent signalant l'objectif atteint
+	 * Résultat(s)	: /
+	 * Commentaires	: termine le jeu si la politique est que le premier agent 
+	 * ayant terminé marque la fin et sinon attends qua tous les agents aient terminés
+	 */
 	public void signalerObjectifAtteint(int idAgent) throws RemoteException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
