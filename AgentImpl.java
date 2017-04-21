@@ -52,6 +52,12 @@ public abstract class AgentImpl
 		return this.idAgent;
 	}
 	
+	// retourne le type de la ressource
+	public int getTypeRessource()
+	{
+		return this.typeRessource;
+	}
+	
 	// retourne la quantite de ressource de l'agent
 	public int getQuantiteRessource()
 	{
