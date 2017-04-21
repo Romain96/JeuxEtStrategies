@@ -1,4 +1,7 @@
+import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
+import java.rmi.* ; 
+import java.net.MalformedURLException ; 
 
 public class AgentCoop extends AgentImpl
 {
