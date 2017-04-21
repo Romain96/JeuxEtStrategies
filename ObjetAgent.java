@@ -20,11 +20,11 @@ public class ObjetAgent
 			AgentImpl objLocal;
 			
 			// créer et initialiser l'agent selon la personnalité 
-			if (args[3] == "indiv")
+			if (args[2] == "indiv")
 			{
 				objLocal = new AgentIndiv(idAgent, args[4], quantiteRessource, objectif);
 			}
-			else if (args[3] == "coop")
+			else if (args[2] == "coop")
 			{
 				objLocal = new AgentCoop(idAgent, args[4], quantiteRessource, objectif);
 			}
