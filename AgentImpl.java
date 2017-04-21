@@ -53,7 +53,7 @@ public abstract class AgentImpl
 	}
 	
 	// retourne le type de la ressource
-	public int getTypeRessource()
+	public String getTypeRessource()
 	{
 		return this.typeRessource;
 	}
