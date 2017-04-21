@@ -56,7 +56,7 @@ public class AgentCoop extends AgentImpl
 	 * les actions possibles sont : acquérirRessources, voler, surveillance et reporterVol
 	 * doit terminer en appelant soit signalerFinTour soit signalerObjectifAtteint
 	 */
-	 public void choixAction()
+	 public void choixAction() throws RemoteException
 	 {
 		/*
 		 * Un agent coopératif aura tendance à tenter d'acquérir des ressources

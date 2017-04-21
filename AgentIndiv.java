@@ -55,7 +55,7 @@ public class AgentIndiv extends AgentImpl
 	 * Commentaires	: choisi l'action à effectuer pour ce tour suivant la personnalité individualiste
 	 * les actions possibles sont : acquérirRessources, voler, surveillance et reporterVol
 	 */
-	 public void choixAction()
+	 public void choixAction() throws RemoteException
 	 {
 		/*
 		 * Un agent individualiste aura tendance à tenter d'acquérir des ressources systématiquement
