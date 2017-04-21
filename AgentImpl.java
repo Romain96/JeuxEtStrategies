@@ -192,7 +192,7 @@ public abstract class AgentImpl
 	 * Résultat(s)	: /
 	 * Commentaires	: choisi l'action à effectuer selon la personnalité de l'agent
 	 */
-	 public void choixAction()
+	 public void choixAction() throws RemoteException
 	 {
 		 System.out.println("Agent " + this.idAgent + " : je fais mon choix");
 		 // doit être redéfinie pour chaque personnalité d'agent
