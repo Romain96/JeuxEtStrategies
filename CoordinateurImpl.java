@@ -19,6 +19,9 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	int nbProducteurs;				// taille du tableau producteurs
 	int nbProducteursEnregistres;	// nombre de producteurs s'étant identifiés au coordinateur
 	
+	// liste des punitions des agents (nb de tours de non jeu)
+	int punitionsAgents[];
+	
 	// indique si le jeu a démarré ou non
 	boolean jeuEnCours;
 	
@@ -40,6 +43,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		this.producteurs = new Producteur[nbProducteurs];	// les producteurs s'identifiront au coordinateur à l'initialisation
 		this.nbProducteurs = nbProducteurs;
 		this.nbProducteursEnregistres = 0;			// aucun producteur enregistré pour l'instant (le coordinateur est lancé en premier)
+		
+		// on initialise les punitions
+		this.punitionsAgents = new int[nbAgents];
+		for (int i = 0; i < nbAgents; i++)
+		{
+			this.punitionsAgents[i] = 0;	// pas de punition au départ
+		}
 		
 		// le jeu n'a pas encore commencé (les agents/producteurs doivent d'abord s'inscrirent)
 		jeuEnCours = false;
@@ -250,9 +260,31 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
 		
 		this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-		System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
-		this.agents[this.prochainAgentAJouer].demarrerTour();
+		lancementProchainAgent();
 	}
+	
+	/*
+	 * Fonction 	: lancementProchainAgent
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: vérifie que l'agent n'est pas puni et lance l'agent
+	 * sinon lance l'agent suivant
+	 */
+	 public void lancementProchainAgent throws RemoteException
+	 {
+		 if (this.punitionsAgents[this.prochainAgentAJouer] > 0)
+		 {
+			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " est puni pour " this.punitionsAgents[this.prochainAgentAJouer] + " tours :(" );
+			 this.punitionsAgents[this.prochainAgentAJouer]--;	// un tour de passé
+			 this.prochainAgentAJouer++;	// on lance l'agent suivant
+			 lancementProchainAgent();
+		 }
+		 else
+		 {
+			 System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
+			 this.agents[this.prochainAgentAJouer].demarrerTour();
+		 }
+	 }
 	
 	/*
 	 * Fonction 	: signalerObjectifAtteint
@@ -266,4 +298,31 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
 		terminerJeu();
 	}
+	
+	// 
+	/*
+	 * Fonction 	: reporterTentativeVol
+	 * Argument(s)	: l'id de l'agent voleur
+	 * Résultat(s)	: /
+	 * Commentaires	: appelé par les agents pour reporter un vol observé
+	 * appelle la fonction punir sur l'agent en question
+	 */
+	public void reporterTentativeVol(int idAgent) throws RemoteException
+	{
+		System.out.println("Coordinateur : tentative de vol de l'agent " + idAgent + " reportée");
+		punirAgent(idAgent);
+	}
+	
+	/*
+	 * Fonction 	: signalerObjectifAtteint
+	 * Argument(s)	: l'id de l'agent signalant l'objectif atteint
+	 * Résultat(s)	: /
+	 * Commentaires	: termine le jeu si la politique est que le premier agent 
+	 * ayant terminé marque la fin et sinon attends qua tous les agents aient terminés
+	 */
+	 public void punirAgent(int idAgent)
+	 {
+		 this.punitionsAgents[idAgent] = 3;	// 3 tours de non jeu
+		 System.out.println("Coordinateur : agent d'indice " + idAgent + " passe son tour pour les " + this.punitionsAgents[idAgent] + " prochain(s) tour(s)");
+	 }
 }

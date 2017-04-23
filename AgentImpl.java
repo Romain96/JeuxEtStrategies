@@ -341,7 +341,7 @@ public abstract class AgentImpl
 	 * Fonction 	: terminerJeu 
 	 * Argument(s)	: /
 	 * Résultat(s)	: /
-	 * Commentaires	: appelé a^par le coordinateur pour terminer l'agent
+	 * Commentaires	: appelé par le coordinateur pour terminer l'agent
 	 */
 	public void terminerJeu() throws RemoteException
 	{
