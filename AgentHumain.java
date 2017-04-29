@@ -70,19 +70,15 @@ public class AgentHumain extends AgentImpl
 		String input = "dummy";
 		// boucle tant que la commande est incorrecte
 		
-		try
+		while (!verificationSyntaxiqueInput(input))
 		{
-			while (!verificationSyntaxiqueInput(input))
-			{
-				System.out.println("Choisir une action\n" + "Commandes :\n" + 
-				"a [idProducteur] [typeRessource] [quantiteRessource] : acquérir quantiteRessource ressources de la ressource typeRessource chez le producteur idProducteur\n" + 
-				"v [idAgent] [typeRessource] [quantiteRessource] : voler quantiteRessource ressources de la ressource typeRessource à l'agent idAgent\n" +
-				"s se mettre en surveillance jusqu'au tour suivant\n");
-				input = this.scanner.next();	// ligne de commande
-				System.out.println("input : " + input);
-			}
+			System.out.println("Choisir une action\n" + "Commandes :\n" + 
+			"a [idProducteur] [typeRessource] [quantiteRessource] : acquérir quantiteRessource ressources de la ressource typeRessource chez le producteur idProducteur\n" + 
+			"v [idAgent] [typeRessource] [quantiteRessource] : voler quantiteRessource ressources de la ressource typeRessource à l'agent idAgent\n" +
+			"s se mettre en surveillance jusqu'au tour suivant\n");
+			input = this.scanner.next();	// ligne de commande
+			System.out.println("input : " + input);
 		}
-		catch (RemoteException re) { System.out.println(re) ; }
 	}
 	
 	 /*
@@ -137,9 +133,13 @@ public class AgentHumain extends AgentImpl
 	}
 	
 	// tests
-	public static void main(String[] args)
+	public static void main(String[] args) throws RemoteException
 	{
-		AgentImpl a = new AgentHumain(666, "gold", 0, 10);
-		a.choixAction();
+		try
+		{
+			AgentImpl a = new AgentHumain(666, "gold", 0, 10);
+			a.choixAction();
+		}
+		catch (RemoteException re) { System.out.println(re) ; }
 	}
 }
