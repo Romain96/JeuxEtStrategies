@@ -17,11 +17,11 @@ x implémenter la classe CoordinateurImpl
 x implémenter la classe ObjetAgent pour l'initialisation des agents
 x implémenter la classe ObjetProducteur pour l'initialisation des producteurs
 x implémenter la classe ObjetCoordinateur pour l'initialisation du coordinateur
-- établir la communication RMI entre les agents et le coordinateur
-- établir la communication RMI entre les agents et les producteurs
-- établir la communication RMI entre les agents et les autres agents
-- tester le cycle simplifié 1
-- tester le cycle simplifié 2
+x établir la communication RMI entre les agents et le coordinateur
+x établir la communication RMI entre les agents et les producteurs
+x établir la communication RMI entre les agents et les autres agents
+x tester le cycle simplifié 1
+x tester le cycle simplifié 2
 - tester le cycle simplifié 3
 - tester le cycle simplifié 4
 - implémenter la sauvegarde des actions réalisées
