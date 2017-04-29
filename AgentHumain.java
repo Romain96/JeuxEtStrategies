@@ -130,4 +130,11 @@ public class AgentHumain extends AgentImpl
 				return false;
 		}
 	}
+	
+	// tests
+	public static void main(String[] args)
+	{
+		AgentImpl a = new AgentHumain(666, "gold", 0, 10);
+		a.choixAction();
+	}
 }
