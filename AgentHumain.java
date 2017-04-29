@@ -126,6 +126,8 @@ public class AgentHumain extends AgentImpl
 			{
 				return false;
 			}
+			default:
+				return false;
 		}
 	}
 }
