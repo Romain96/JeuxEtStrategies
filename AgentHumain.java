@@ -154,7 +154,7 @@ public class AgentHumain extends AgentImpl
 			objLocal = new AgentHumain(idAgent, args[2], quantiteRessource, objectif);
 
 			// enregistrement du coordinateur pour l'agent
-			objLocal.enregistrerCoordinateur(args[0], Integer.parseInt(args[1]));
+			objLocal.enregistrerCoordinateur("localhost", Integer.parseInt(args[1]));
 			
 			// s'enregistrer auprès du coordinateur (convention : port 9000)
 			Naming.rebind( "rmi://localhost:" + args[0] + "/agent" + args[1] ,objLocal) ;
