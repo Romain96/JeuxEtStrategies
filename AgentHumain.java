@@ -76,6 +76,7 @@ public class AgentHumain extends AgentImpl
 			"v [idAgent] [typeRessource] [quantiteRessource] : voler quantiteRessource ressources de la ressource typeRessource à l'agent idAgent\n" +
 			"s se mettre en surveillance jusqu'au tour suivant\n");
 			input = scan.next();	// ligne de commande
+			System.out.println("input : " + input);
 		}
 	}
 	
