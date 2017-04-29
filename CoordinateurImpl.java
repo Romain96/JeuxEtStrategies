@@ -270,7 +270,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Commentaires	: vérifie que l'agent n'est pas puni et lance l'agent
 	 * sinon lance l'agent suivant
 	 */
-	 public void lancementProchainAgent throws RemoteException
+	 public void lancementProchainAgent() throws RemoteException
 	 {
 		 if (this.punitionsAgents[this.prochainAgentAJouer] > 0)
 		 {

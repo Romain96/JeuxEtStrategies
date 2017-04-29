@@ -115,7 +115,7 @@ public class AgentHumain extends AgentImpl
 			{
 				return false;
 			}
-			break:
+			break;
 			
 			case 3:
 			// cas autorisés : "a [idProducteur] [typeRessource] [quantiteRessource]" (acquérirRessource) 
@@ -128,7 +128,7 @@ public class AgentHumain extends AgentImpl
 			{
 				return false;
 			}
-			break
+			break;
 		}
 	}
 }
