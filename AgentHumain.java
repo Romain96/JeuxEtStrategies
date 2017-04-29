@@ -69,15 +69,20 @@ public class AgentHumain extends AgentImpl
 		
 		String input = "dummy";
 		// boucle tant que la commande est incorrecte
-		while (!verificationSyntaxiqueInput(input))
+		
+		try
 		{
-			System.out.println("Choisir une action\n" + "Commandes :\n" + 
-			"a [idProducteur] [typeRessource] [quantiteRessource] : acquérir quantiteRessource ressources de la ressource typeRessource chez le producteur idProducteur\n" + 
-			"v [idAgent] [typeRessource] [quantiteRessource] : voler quantiteRessource ressources de la ressource typeRessource à l'agent idAgent\n" +
-			"s se mettre en surveillance jusqu'au tour suivant\n");
-			input = this.scanner.next();	// ligne de commande
-			System.out.println("input : " + input);
+			while (!verificationSyntaxiqueInput(input))
+			{
+				System.out.println("Choisir une action\n" + "Commandes :\n" + 
+				"a [idProducteur] [typeRessource] [quantiteRessource] : acquérir quantiteRessource ressources de la ressource typeRessource chez le producteur idProducteur\n" + 
+				"v [idAgent] [typeRessource] [quantiteRessource] : voler quantiteRessource ressources de la ressource typeRessource à l'agent idAgent\n" +
+				"s se mettre en surveillance jusqu'au tour suivant\n");
+				input = this.scanner.next();	// ligne de commande
+				System.out.println("input : " + input);
+			}
 		}
+		catch (RemoteException re) { System.out.println(re) ; }
 	}
 	
 	 /*
