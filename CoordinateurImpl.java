@@ -325,4 +325,23 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		 this.punitionsAgents[idAgent] = 3;	// 3 tours de non jeu
 		 System.out.println("Coordinateur : agent d'indice " + idAgent + " passe son tour pour les " + this.punitionsAgents[idAgent] + " prochain(s) tour(s)");
 	 }
+	 
+	 public static void main(String [] args)
+	{
+		if (args.length != 3)
+		{
+			System.out.println("Usage : java objetCoordinateur <port du rmiregistry> <nbAgents> <nbProducteurs>") ;
+			System.exit(0) ;
+		}
+		try
+		{
+			int nbAgents = Integer.parseInt(args[1]);
+			int nbProducteurs = Integer.parseInt(args[2]);
+			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs);
+			Naming.rebind( "rmi://localhost:" + args[0] + "/coordinateur" ,objLocal) ;
+			System.out.println("Coordinateur pret") ;
+		}
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
+	}
 }
