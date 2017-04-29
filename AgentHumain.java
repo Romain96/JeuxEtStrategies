@@ -76,7 +76,7 @@ public class AgentHumain extends AgentImpl
 			"a [idProducteur] [typeRessource] [quantiteRessource] : acquérir quantiteRessource ressources de la ressource typeRessource chez le producteur idProducteur\n" + 
 			"v [idAgent] [typeRessource] [quantiteRessource] : voler quantiteRessource ressources de la ressource typeRessource à l'agent idAgent\n" +
 			"s se mettre en surveillance jusqu'au tour suivant\n");
-			input = this.scanner.next();	// ligne de commande
+			input = this.scanner.nextLine();	// ligne de commande
 			System.out.println("input : " + input);
 		}
 	}
