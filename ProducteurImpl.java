@@ -127,4 +127,30 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		System.out.println("Producteur " + idProducteur + " se termine" );
 		System.exit(0);
 	}
+	
+	public static void main(String [] args)
+	{
+		if (args.length != 4)
+		{
+			System.out.println("Usage : java ObjectProducteur <port rmiregistry> <idProducteur> <typeRessource> <quantiteRessource>") ;
+			System.exit(0) ;
+		}
+		try
+		{
+			System.out.println("args : " + args[0]+ "  " + args[1] + " " + args[2] + " " + args[3]);
+			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:" + args[0] + "/coordinateur" );
+			
+			int idProducteur = Integer.parseInt(args[1]);
+			int quantiteRessource = Integer.parseInt(args[3]);
+			ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource );
+			Naming.rebind( "rmi://localhost:" + args[0] + "/producteur" + args[1] ,objLocal) ;
+			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
+			
+			// s'enregistrer auprès du coordinateur (convention : port 9000)
+			coordinateur.identifierProducteur(objLocal.getIdProducteur());
+		}
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
+	}
 }
