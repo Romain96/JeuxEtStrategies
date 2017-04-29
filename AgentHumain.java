@@ -134,12 +134,37 @@ public class AgentHumain extends AgentImpl
 	
 	// tests
 	public static void main(String[] args) throws RemoteException
-	{
+	{	
+		if (args.length != 5)
+		{
+			System.out.println("Usage : java AgentHumain <port du rmiregistry> <idAgent> <typeRessource> <quantiteRessource> <objectif>") ;
+			System.exit(0) ;
+		}
 		try
 		{
-			AgentImpl a = new AgentHumain(666, "gold", 0, 10);
+			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:" + args[0] + "/coordinateur" );
+			
+			int idAgent = Integer.parseInt(args[1]);
+			int quantiteRessource = Integer.parseInt(args[3]);
+			int objectif = Integer.parseInt(args[4]);
+			AgentImpl objLocal;
+
+
+			System.out.println("Je suis humain : ");
+			objLocal = new AgentHumain(idAgent, args[2], quantiteRessource, objectif);
+
+			// enregistrement du coordinateur pour l'agent
+			objLocal.enregistrerCoordinateur(args[0], Integer.parseInt(args[1]));
+			
+			// s'enregistrer auprès du coordinateur (convention : port 9000)
+			Naming.rebind( "rmi://localhost:" + args[0] + "/agent" + args[1] ,objLocal) ;
+			coordinateur.identifierAgent(objLocal.getIdAgent());
+			
+			// test
 			a.choixAction();
 		}
+		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
 	}
 }
