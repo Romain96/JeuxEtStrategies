@@ -30,10 +30,8 @@ Le projet sera réalisé en Java et en utilisant l'API Remote Method Invocation 
 | AgentImpl.java | implémentation abstraite des agents |
 | AgentCoop.java | implémentation concrète des agents avec une personnalité coopérative |
 | AgentIndiv.java | implémentation concrète des agents avec une personnalité individuelle |
+| AgentHumain.java | implémentation concrète des agents controlé par un joueur humain |
 | Producteur.java | implémentation des producteurs |
-| ObjetCoordinateur.java | objet utilisé comme coordinateur |
-| ObjetAgent.java | objet utilisé comme agent |
-| ObjetProducteur.java | objet utilisé comme producteur |
 | Ressources.java | définition des ressources utilisées |
 | objectifs.txt | définition des objectifs courants du projet |
 | README.md | fichier descriptif |
