@@ -161,7 +161,7 @@ public class AgentHumain extends AgentImpl
 			coordinateur.identifierAgent(objLocal.getIdAgent());
 			
 			// test
-			a.choixAction();
+			objLocal.choixAction();
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
