@@ -116,7 +116,7 @@ public class AgentHumain extends AgentImpl
 				return false;
 			}
 			
-			case 3:
+			case 4:
 			// cas autorisés : "a [idProducteur] [typeRessource] [quantiteRessource]" (acquérirRessource) 
 			// et "v [idProducteur/idAgent] [typeRessource] [quantiteRessource]" (voler)
 			if (mots[0].equals("a") || mots[0].equals("v"))
