@@ -87,4 +87,37 @@ public class AgentCoop extends AgentImpl
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 	 }
+	 
+	 public static void main(String[] args)
+	 {
+		 if (args.length != 5)
+		{
+			System.out.println("Usage : java AgentCoop <port du rmiregistry> <idAgent> <typeRessource> <quantiteRessource> <objectif>") ;
+			System.exit(0) ;
+		}
+		try
+		{
+			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:" + args[0] + "/coordinateur" );
+			
+			int idAgent = Integer.parseInt(args[1]);
+			int quantiteRessource = Integer.parseInt(args[3]);
+			int objectif = Integer.parseInt(args[4]);
+			AgentImpl objLocal;
+
+
+			System.out.println("Je suis coopératif");
+			objLocal = new AgentCoop(idAgent, args[2], quantiteRessource, objectif);
+
+			// enregistrement du coordinateur pour l'agent
+			objLocal.enregistrerCoordinateur("localhost", Integer.parseInt(args[0]));
+			
+			// s'enregistrer auprès du coordinateur (convention : port 9000)
+			Naming.rebind( "rmi://localhost:" + args[0] + "/agent" + args[1] ,objLocal) ;
+			coordinateur.identifierAgent(objLocal.getIdAgent());
+		}
+		catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
+	}
+	 }
 }

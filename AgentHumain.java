@@ -150,7 +150,7 @@ public class AgentHumain extends AgentImpl
 			AgentImpl objLocal;
 
 
-			System.out.println("Je suis humain : ");
+			System.out.println("Je suis humain");
 			objLocal = new AgentHumain(idAgent, args[2], quantiteRessource, objectif);
 
 			// enregistrement du coordinateur pour l'agent
