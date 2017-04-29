@@ -95,7 +95,7 @@ public class AgentHumain extends AgentImpl
 		{
 			case 1:	
 			// seul cas autorisé : "s" (surveillance)
-			if (String.equals(mots[0],"s"))
+			if (mots[0].equals("s"))
 			{
 				return true;	// syntaxe valide
 			}
@@ -107,7 +107,7 @@ public class AgentHumain extends AgentImpl
 			
 			case 2:
 			// seul cas autorisé : "o [idAgent/idProducteur]" (observer)
-			if (String.equals(mots[0],"o"))
+			if (mots[0].equals("o"))
 			{
 				return true;	// syntaxe valide
 			}
@@ -120,7 +120,7 @@ public class AgentHumain extends AgentImpl
 			case 3:
 			// cas autorisés : "a [idProducteur] [typeRessource] [quantiteRessource]" (acquérirRessource) 
 			// et "v [idProducteur/idAgent] [typeRessource] [quantiteRessource]" (voler)
-			if (String.equals(mots[0],"a") || String.equals(mots[0],"v"))
+			if (mots[0].equals("a") || mots[0].equals("v"))
 			{
 				return true;	// syntaxe valide
 			}
