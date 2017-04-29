@@ -274,7 +274,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 {
 		 if (this.punitionsAgents[this.prochainAgentAJouer] > 0)
 		 {
-			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " est puni pour " this.punitionsAgents[this.prochainAgentAJouer] + " tours :(" );
+			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " est puni pour " + this.punitionsAgents[this.prochainAgentAJouer] + " tours :(" );
 			 this.punitionsAgents[this.prochainAgentAJouer]--;	// un tour de passé
 			 this.prochainAgentAJouer++;	// on lance l'agent suivant
 			 lancementProchainAgent();
