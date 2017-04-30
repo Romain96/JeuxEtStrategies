@@ -242,8 +242,8 @@ public class AgentHumain extends AgentImpl
 					int idProducteurArg = Integer.parseInt(mots[2]);
 					Ressource ressourcesObserveesProducteur = getProducteurAtPos(idProducteurArg).observer(getIdAgent());
 					System.out.println("Agent " + getIdAgent() + " : j'ai observé le producteur " + idProducteurArg + 
-					" et reçu le résultat " + ressourcesObserveesAgent.getTypeRessource() + " " + 
-					ressourcesObserveesAgent.getQuantiteRessource());
+					" et reçu le résultat " + ressourcesObserveesProducteur.getTypeRessource() + " " + 
+					ressourcesObserveesProducteur.getQuantiteRessource());
 					break;
 				}
 			}
