@@ -142,8 +142,8 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 
 			// supprime du runtime RMI
 			UnicastRemoteObject.unexportObject(this, true);
-		}
-		System.out.println("Producteur " + idProducteur + " se termine" );
+			
+			System.out.println("Producteur " + idProducteur + " se termine" );
 		} catch(Exception e){System.out.println(e)}
 		System.exit(0);
 	}

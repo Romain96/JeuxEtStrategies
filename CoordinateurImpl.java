@@ -191,8 +191,8 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 
 			// supprime du runtime RMI
 			UnicastRemoteObject.unexportObject(this, true);
-		}
-		System.out.println("Coordinateur se termine");
+			
+			System.out.println("Coordinateur se termine");
 		} catch(Exception e){System.out.println(e)}
 		System.exit(0);	// le coordinateur se termine
 	}
