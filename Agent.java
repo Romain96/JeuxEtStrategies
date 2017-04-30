@@ -13,6 +13,6 @@ public interface Agent extends Remote
 	public void terminerJeu() throws RemoteException;
 	
 	// permet à l'agent de tenter de voler un autre agent
-	public int voler(int idAgent, String type, int nb) throws RemoteException;
+	public int voler(int idAgent, String typeRessource, int quantiteRessource) throws RemoteException;
 }
 

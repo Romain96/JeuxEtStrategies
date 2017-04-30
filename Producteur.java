@@ -7,5 +7,5 @@ public interface Producteur extends Remote
 	public void terminerJeu() throws RemoteException;
 	
 	// appelé par les agents pour acquérir des ressources
-	public int attribuerRessources(int quantiteDemandee) throws RemoteException;
+	public int attribuerRessources(String typeRessource, int quantiteDemandee) throws RemoteException;
 }
