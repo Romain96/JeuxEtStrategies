@@ -1,5 +1,7 @@
 import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
+import java.rmi.* ; 
+import java.net.MalformedURLException ; 
 import java.util.*;
 
 public class ProducteurImpl extends UnicastRemoteObject implements Producteur
