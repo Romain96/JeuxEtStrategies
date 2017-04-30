@@ -78,8 +78,14 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	 * Résultat(s)	: la quantité de ressource attribuée par le producteur (>= 0 et <= quantité demandée)
 	 * Commentaires	: /
 	 */
-	public int attribuerRessources(int quantiteDemandee) throws RemoteException
+	public int attribuerRessources(String typeRessource, int quantiteDemandee) throws RemoteException
 	{
+		// si le type de ressource n'est pas produit par le producteur
+		if (!this.typeRessource.equals(typeRessource))
+		{
+			return 0;
+		}
+		
 		int quantiteAttribuee = 0;
 		// si la quantité demandée est supérieure à la quantité disponible
 		// l'agent ne reçoit que le maximum disponible
