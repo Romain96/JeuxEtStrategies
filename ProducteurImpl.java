@@ -152,7 +152,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 			
 			int idProducteur = Integer.parseInt(args[1]);
 			int quantiteRessource = Integer.parseInt(args[3]);
-			ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource );
+			final ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource );
 			Naming.rebind( "rmi://localhost:" + args[0] + "/producteur" + args[1] ,objLocal) ;
 			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
 			
