@@ -118,7 +118,7 @@ public class AgentHumain extends AgentImpl
 				{
 					// syntaxe correcte, vérification de la validité de l'argument
 					int nbAgentsArg = Integer.parseInt(mots[2]);
-					if (nbAgentsArg < getNbAgents() && nbAgentArg >= 0)
+					if (nbAgentsArg < getNbAgents() && nbAgentsArg >= 0)
 					{
 						// syntaxe correcte et argument valide
 						return true;
