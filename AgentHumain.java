@@ -118,7 +118,7 @@ public class AgentHumain extends AgentImpl
 				{
 					// syntaxe correcte, vérification de la validité de l'argument
 					int nbAgentsArg = Integer.parseInt(mots[2]);
-					if (nbAgentsArg < this.getNbAgents() && nbAgentArg >= 0)
+					if (nbAgentsArg < getNbAgents() && nbAgentArg >= 0)
 					{
 						// syntaxe correcte et argument valide
 						return true;
@@ -134,7 +134,7 @@ public class AgentHumain extends AgentImpl
 				{
 					// syntaxe correcte, vérification de la validité de l'argument
 					int nbProducteurArg = Integer.parseInt(mots[2]);
-					if (nbProducteurArg < this.getNbProducteurs() && nbProducteurArg >= 0)
+					if (nbProducteurArg < getNbProducteurs() && nbProducteurArg >= 0)
 					{
 						// syntaxe correcte et argument valide
 						return true;
@@ -163,9 +163,9 @@ public class AgentHumain extends AgentImpl
 			if (mots[0].equals("a"))
 			{
 				// vérification de la commande d'acquisition de ressources (sauf le typeRessource)
-				int idProducteurArg = Interger.parseInt(mots[1]);
-				int quantiteRessourceArg = Interger.parseInt(mots[3]);
-				if (idProducteurArg > 0 && idProducteurArg <= this.getNbProducteurs() && quantiteRessourceArg >= 0)
+				int idProducteurArg = Integer.parseInt(mots[1]);
+				int quantiteRessourceArg = Integer.parseInt(mots[3]);
+				if (idProducteurArg > 0 && idProducteurArg <= getNbProducteurs() && quantiteRessourceArg >= 0)
 				{
 					// syntaxe correcte et arguments valides
 					return true;
@@ -179,9 +179,9 @@ public class AgentHumain extends AgentImpl
 			else if (mots[0].equals("v"))
 			{
 				// véridication de la commande de vol de ressources
-				int idAgentArg = Interger.parseInt(mots[1]);
-				int quantiteRessourceArg = Interger.parseInt(mots[3]);
-				if (idAgentArg > 0 && idAgentArg <= this.getNbAgents() && idAgentArg != this.getIdAgent() && quantiteRessourceArg >= 0)
+				int idAgentArg = Integer.parseInt(mots[1]);
+				int quantiteRessourceArg = Integer.parseInt(mots[3]);
+				if (idAgentArg > 0 && idAgentArg <= getNbAgents() && idAgentArg != getIdAgent() && quantiteRessourceArg >= 0)
 				{
 					// syntaxe correcte et arguments valides
 					return true;
