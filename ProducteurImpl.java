@@ -28,9 +28,9 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
 		this.timer = new Timer();	
-		this.Timer.schedule(new TimerTask() {
+		this.timer.schedule(new TimerTask() {
             public void run() {
-                this.genererRessources();
+                ProducteurImpl.genererRessources();
             }
         }, 0, this.temps);
 		
