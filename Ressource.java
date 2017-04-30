@@ -1,4 +1,5 @@
-public class Ressource
+import java.rmi.server.UnicastRemoteObject ;
+public class Ressource extends UnicastRemoteObject
 {
 	//----------------------------------------------------------------------
 	//				attributs
