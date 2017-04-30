@@ -111,6 +111,12 @@ public abstract class AgentImpl
 		return this.ressources.get(i);
 	}
 	
+	// retourne la liste des ressources possédées
+	public ArrayList<Ressource> getRessources()
+	{
+		return this.ressources;
+	}
+	
 	//----------------------------------------------------------------------
 	//				setters
 	//----------------------------------------------------------------------
@@ -354,6 +360,30 @@ public abstract class AgentImpl
 				}
 			}
 			return 0;	// non trouvé
+		}
+	}
+	
+	/*
+	 * Fonction 	: observer
+	 * Argument(s)	: l'id de l'agent demandeur
+	 * Résultat(s)	: les ressources produites (type, quantité et objectif)
+	 * Commentaires	: /
+	 */
+	public ArrayList<Ressource> observer(int idAgent) throws RemoteException
+	{
+		System.out.println("Agent " + getIdAgent() + " : l'agent " + idAgent + " m'observe");
+		
+		// si on est en surveillance, on ne divulge rien
+		if (getEnSurveillance())
+		{
+			System.out.println("Agent " + getIdAgent() + " : je suis en mode NSA, je ne dirai rien !");
+			return null;
+		}
+		// sinon on ne voit rien de cet espionnage
+		else
+		{
+			System.out.println("Agent " + getIdAgent() + " : je n'ai rien vu");
+			return getRessources();
 		}
 	}
 	

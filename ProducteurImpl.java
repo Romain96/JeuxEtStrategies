@@ -107,10 +107,10 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		}
 	}
 	
-		/*
+	/*
 	 * Fonction 	: observer
-	 * Argument(s)	: la quantité de ressource demandée par l'agent demandeur
-	 * Résultat(s)	: la quantité de ressource attribuée par le producteur (>= 0 et <= quantité demandée)
+	 * Argument(s)	: l'id de l'agent demandeur
+	 * Résultat(s)	: la ressource produite (type, quantité)
 	 * Commentaires	: /
 	 */
 	public Ressource observer(int idAgent) throws RemoteException
