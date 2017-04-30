@@ -387,7 +387,7 @@ public abstract class AgentImpl
 			// supprime du runtime RMI
 			UnicastRemoteObject.unexportObject(this, true);
 			System.out.println("Agent " + getIdAgent() + " se termine" );
-		} catch(Exception e){System.out.println(e)}
+		} catch(Exception e){System.out.println(e);}
 		System.exit(0);
 	}
 }

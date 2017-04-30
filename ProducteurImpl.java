@@ -144,7 +144,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 			UnicastRemoteObject.unexportObject(this, true);
 			
 			System.out.println("Producteur " + idProducteur + " se termine" );
-		} catch(Exception e){System.out.println(e)}
+		} catch(Exception e){System.out.println(e);}
 		System.exit(0);
 	}
 	

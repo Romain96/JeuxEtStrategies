@@ -193,7 +193,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			UnicastRemoteObject.unexportObject(this, true);
 			
 			System.out.println("Coordinateur se termine");
-		} catch(Exception e){System.out.println(e)}
+		} catch(Exception e){System.out.println(e);}
 		System.exit(0);	// le coordinateur se termine
 	}
 	
