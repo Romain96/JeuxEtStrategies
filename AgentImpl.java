@@ -47,10 +47,16 @@ public abstract class AgentImpl
 		return this.idAgent;
 	}
 	
-	// retourne le nombre de prducteurs connus de cet agent
+	// retourne le nombre d'agents connus de cet agent
+	public int getNbAgents()
+	{
+		return this.nbAgents;
+	}
+	
+	// retourne le nombre de producteurs connus de cet agent
 	public int getNbProducteurs()
 	{
-		return nbProducteurs;
+		return this.nbProducteurs;
 	}
 	
 	// retourne vrai si l'agent est en surveillance, faux sinon
