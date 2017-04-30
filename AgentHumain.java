@@ -244,6 +244,7 @@ public class AgentHumain extends AgentImpl
 					System.out.println("Agent " + getIdAgent() + " : j'ai observé le producteur " + idProducteurArg + 
 					" et reçu le résultat " + ressourcesObserveesAgent.getTypeRessource() + " " + 
 					ressourcesObserveesAgent.getQuantiteRessource());
+					break;
 				}
 			}
 			
