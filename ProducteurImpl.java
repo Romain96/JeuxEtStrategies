@@ -1,5 +1,6 @@
 import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
+import java.util.*;
 
 public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 {  

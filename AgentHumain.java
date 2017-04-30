@@ -3,6 +3,7 @@ import java.rmi.RemoteException ;
 import java.rmi.* ; 
 import java.net.MalformedURLException ; 
 import java.util.Scanner; 
+import java.util.*;
 
 public class AgentHumain extends AgentImpl
 {
