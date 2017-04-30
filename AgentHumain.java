@@ -71,11 +71,13 @@ public class AgentHumain extends AgentImpl
 		String input = "dummy";
 		// boucle tant que la commande est incorrecte
 		
-		while (!verificationSyntaxiqueInput(input))
+		while (!verificationInput(input))
 		{
 			System.out.println("Choisir une action\n" + "Commandes :\n" + 
 			"a [idProducteur] [typeRessource] [quantiteRessource] : acquérir quantiteRessource ressources de la ressource typeRessource chez le producteur idProducteur\n" + 
 			"v [idAgent] [typeRessource] [quantiteRessource] : voler quantiteRessource ressources de la ressource typeRessource à l'agent idAgent\n" +
+			"o a [idAgent] : observer l'agent idAgent\n" +
+			"o p [idProducteur] : observer le producteur idProducteur\n" +
 			"s se mettre en surveillance jusqu'au tour suivant\n");
 			input = this.scanner.nextLine();	// ligne de commande
 			System.out.println("input : " + input);
@@ -85,11 +87,11 @@ public class AgentHumain extends AgentImpl
 	 /*
 	 * Fonction 	: verificationSyntaxiqueInput
 	 * Argument(s)	: la chaine entrée par le joueur humain
-	 * Résultat(s)	: vrai si la chaine est correcte (syntaxiquement), faux sinon
-	 * Commentaires	: ne vérifie pas la validité des arguments (ex idProducteur = -5)
-	 * mais vérifie syntaxiquement que la chaine est conforme
+	 * Résultat(s)	: vrai si la chaine est correcte, faux sinon
+	 * Commentaires	: vérifie la syntaxe de la commande ainsi que 
+	 * la validité des arguments donnés
 	 */
-	public boolean verificationSyntaxiqueInput(String input)
+	public boolean verificationInput(String input)
 	{
 		String mots[] = input.split(" ");	// sépare les mots pour les compter et le analyser
 		
@@ -99,33 +101,100 @@ public class AgentHumain extends AgentImpl
 			// seul cas autorisé : "s" (surveillance)
 			if (mots[0].equals("s"))
 			{
-				return true;	// syntaxe valide
+				return true;	// syntaxe valide et pas d'arguments
 			}
 			else
 			{
 				return false;
 			}
 			
-			case 2:
-			// seul cas autorisé : "o [idAgent/idProducteur]" (observer)
-			if (mots[0].equals("o"))
+			case 3:
+			// deux cas autorisés : "o a [idAgent]" (observer un agent) 
+			// ou "o p [idProducteur]" (observer un producteur)
+			if (mots[0].equals("o") && ( || ))
 			{
-				return true;	// syntaxe valide
+				// vérifiaction avec l'argument agent
+				if (mots[1].equals("a"))
+				{
+					// syntaxe correcte, vérification de la validité de l'argument
+					int nbAgentsArg = Integer.parseInt(mots[2]);
+					if (nbAgentsArg < this.getNbAgents() && nbAgentArg >= 0)
+					{
+						// syntaxe correcte et argument valide
+						return true
+					}
+					else
+					{
+						// syntaxe correcte et argument invalide
+						return false;
+					}
+				}
+				// vérification avec l'argument producteur
+				else if (mots[1].equals("p"))
+				{
+					// syntaxe correcte, vérification de la validité de l'argument
+					int nbProducteurArg = Integer.parseInt(mots[2]);
+					if (nbProducteurArg < this.getNbProducteurs() && nbProducteurArg >= 0)
+					{
+						// syntaxe correcte et argument valide
+						return true
+					}
+					else
+					{
+						// syntaxe correcte et argument invalide
+						return false;
+					}
+				}
+				else
+				{
+					// syntaxe fausse (2e mot)
+					return false;
+				}
 			}
 			else
 			{
+				// syntaxe fausse (1er mot)
 				return false;
 			}
 			
 			case 4:
 			// cas autorisés : "a [idProducteur] [typeRessource] [quantiteRessource]" (acquérirRessource) 
 			// et "v [idProducteur/idAgent] [typeRessource] [quantiteRessource]" (voler)
-			if (mots[0].equals("a") || mots[0].equals("v"))
+			if (mots[0].equals("a"))
 			{
-				return true;	// syntaxe valide
+				// vérification de la commande d'acquisition de ressources (sauf le typeRessource)
+				int idProducteurArg = Interger.parseInt(mots[1]);
+				int quantiteRessourceArg = Interger.parseInt(mots[3]);
+				if (idProducteurArg > 0 && idProducteurArg <= this.getNbProducteurs() && quantiteRessourceArg >= 0)
+				{
+					// syntaxe correcte et arguments valides
+					return true;
+				}
+				else
+				{
+					// syntaxe correcte et arguments invalides
+					return false;
+				}
+			}
+			else if (mots[0].equals("v"))
+			{
+				// véridication de la commande de vol de ressources
+				int idAgentArg = Interger.parseInt(mots[1]);
+				int quantiteRessourceArg = Interger.parseInt(mots[3]);
+				if (idAgentArg > 0 && idAgentArg <= this.getNbAgents() && idAgentArg != this.getIdAgent() && quantiteRessourceArg >= 0)
+				{
+					// syntaxe correcte et arguments valides
+					return true;
+				}
+				else
+				{
+					// syntaxe correcte et arguments invalides
+					return false;
+				}
 			}
 			else
 			{
+				// syntaxe fausse (1er mot)
 				return false;
 			}
 			default:
