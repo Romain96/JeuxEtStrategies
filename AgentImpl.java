@@ -100,7 +100,7 @@ public abstract class AgentImpl
 	}
 	
 	// retourne la ième ressource (précondition : 0 <= i < size)
-	public ArrayList<Ressource> getRessourceAtPos(int i)
+	public Ressource getRessourceAtPos(int i)
 	{
 		return this.ressources.get(i);
 	}
