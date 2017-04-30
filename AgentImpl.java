@@ -282,17 +282,30 @@ public abstract class AgentImpl
 		else
 		{
 			System.out.println("Agent " + this.idAgent + " : Je n'ai rien vu !");
-			if (this.quantiteRessource >= quantiteRessource)
+			
+			// recherche de la ressource contenant le typeRessource demandé
+			for (int i = 0; i < this.ressources.size(); i++)
 			{
-				int quantiteVolee = quantiteRessource;
-				this.quantiteRessource -= quantiteRessource;
-				return quantiteVolee;
-			}
-			else
-			{
-				int quantiteVolee = this.quantiteRessource;
-				this.quantiteRessource = 0;
-				return quantiteVolee;
+				// le type de ressource coorespond
+				if (this.ressources.get(i).getTypeRessource().equals(typeRessource))
+				{
+					Ressource modif = this.ressources.get(i);	// réccupération de la ressource
+					if (this.ressources.get(i).getQuantiteRessource() >= quantiteRessource)
+					{
+						int quantiteVolee = quantiteRessource;		// on prend ce qui est demandé
+						// on retire la quantité volée à la copie locale
+						modif.setQuantiteRessource(modif.getQuantiteRessource() - quantiteVolee);
+						this.ressources.set(i,modif);	// on met à jour la liste des ressources
+						return quantiteVolee;
+					}
+					else
+					{
+						int quantiteVolee = modif.getQuantiteRessource();	// on prend tout ce qu'il reste
+						modif.setQuantiteRessource(0);	// il reste donc 0 (localement)
+						this.ressources.set(i,modif);	// on met à jour la liste des ressources
+						return quantiteVolee;
+					}
+				}
 			}
 		}
 	}
