@@ -184,6 +184,16 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			this.producteurs[i].terminerJeu();	// les producteurs se terminent
 		}
 		
+		try
+		{
+			// unbind avant la suppression
+			Naming.unbind("rmi://localhost:9000/coordinateur", true);
+
+			// supprime du runtime RMI
+			UnicastRemoteObject.unexportObject(this, true);
+		}
+		System.out.println("Coordinateur se termine");
+		} catch(Exception e){System.out.println(e)}
 		System.exit(0);	// le coordinateur se termine
 	}
 	
