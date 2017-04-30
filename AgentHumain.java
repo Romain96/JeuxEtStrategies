@@ -82,6 +82,7 @@ public class AgentHumain extends AgentImpl
 			input = this.scanner.nextLine();	// ligne de commande
 			System.out.println("input : " + input);
 		}
+		// effectuer l'action demandée
 	}
 	
 	 /*
@@ -199,6 +200,76 @@ public class AgentHumain extends AgentImpl
 			}
 			default:
 				return false;
+		}
+	}
+	
+	 /*
+	 * Fonction 	: lancerAction
+	 * Argument(s)	: la chaine entrée par le joueur humain
+	 * Résultat(s)	: /
+	 * Commentaires	: la chaine doit avoir été préalablement testée
+	 * par verificationInput
+	 */
+	public void lancerAction(String input) throws RemoteException
+	{
+		String mots[] = input.split(" ");	// sépare les mots pour les compter et le analyser
+		
+		switch (mots.length)
+		{
+			case 1:	
+			// seul cas autorisé : "s" (surveillance)
+			surveillance();
+			break;
+			
+			
+			case 3:
+			// deux cas autorisés : "o a [idAgent]" (observer un agent) 
+			// ou "o p [idProducteur]" (observer un producteur)
+			if (mots[0].equals("o"))
+			{
+				// vérifiaction avec l'argument agent
+				if (mots[1].equals("a"))
+				{
+					int idAgentArg = Integer.parseInt(mots[2]);
+					ArrayList<Ressource> ressourcesObserveesAgent = getAgentAtPos(idAgentArg).observer(getIdAgent());
+					System.out.println("Agent " + getIdAgent() + " : j'ai observé l'agent " + idAgentArg + 
+					" et reçu une liste de " + ressourcesObserveesAgent.size() + " ressources");
+					break;		// pour l'instant
+				}
+				// vérification avec l'argument producteur
+				else if (mots[1].equals("p"))
+				{
+					int idProducteurArg = Integer.parseInt(mots[2]);
+					Ressource ressourcesObserveesProducteur = getProducteurAtPos(idProducteurArg).observer(getIdAgent());
+					System.out.println("Agent " + getIdAgent() + " : j'ai observé le producteur " + idProducteurArg + 
+					" et reçu le résultat " + ressourcesObserveesAgent.getTypeRessource() + " " + 
+					ressourcesObserveesAgent.getQuantiteRessource());
+				}
+			}
+			
+			case 4:
+			// cas autorisés : "a [idProducteur] [typeRessource] [quantiteRessource]" (acquérirRessource) 
+			// et "v [idAgent] [typeRessource] [quantiteRessource]" (voler)
+			if (mots[0].equals("a"))
+			{
+				int idProducteurArg = Integer.parseInt(mots[1]);
+				int quantiteRessourceArg = Integer.parseInt(mots[3]);
+				int quantiteAcquise = getProducteurAtPos(idProducteurArg).attribuerRessources(mots[2], quantiteRessourceArg);
+				System.out.println("Vous avez acquis " + quantiteAcquise + " exemplaires de la ressource " + mots[2] + " du producteur " + idProducteurArg);
+			}
+			else if (mots[0].equals("v"))
+			{
+				int idAgentArg = Integer.parseInt(mots[1]);
+				int quantiteRessourceArg = Integer.parseInt(mots[3]);
+				int quantiteVolee = getAgentAtPos(idAgentArg).voler(getIdAgent(), mots[2], quantiteRessourceArg);
+				System.out.println("Vous avez volé " + quantiteVolee + " exemplaires de la ressource " + mots[2] + " de l'agent " + idAgentArg);
+			}
+			else
+			{
+				break;
+			}
+			default:
+				break;
 		}
 	}
 	
