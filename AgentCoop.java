@@ -70,6 +70,7 @@ public class AgentCoop extends AgentImpl
 		try
 		{
 			Ressource aAcquerir = getRessourceAtPos(0);	// la 1e ressource
+			System.out.println("AcquerirRessource : " + aAcquerir.getTypeRessource() + " " + aAcquerir.getQuantiteRessource() + " " + aAcquerir.getObjectifRessource()); 
 			int ressourcesAcquises = getProducteurAtPos(0).attribuerRessources(aAcquerir.getTypeRessource(), 5);
 			System.out.println("Agent " + getIdAgent() + " : j'acquiers " + ressourcesAcquises + " exemplaires de la ressource " + 
 			aAcquerir.getTypeRessource());
