@@ -390,3 +390,4 @@ public abstract class AgentImpl
 		} catch(Exception e){System.out.println(e);}
 		System.exit(0);
 	}
+}
