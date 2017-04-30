@@ -335,6 +335,7 @@ public abstract class AgentImpl
 					}
 				}
 			}
+			return 0;	// non trouvé
 		}
 	}
 
