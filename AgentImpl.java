@@ -171,7 +171,9 @@ public abstract class AgentImpl
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
 		choixAction();
-		if (verifierObjectifAtteint())
+		boolean fin = this.verifierObjectifAtteint();
+		System.out.println("fin = " + fin);
+		if (fin)
 		{
 			System.out.println("Agent " + getIdAgent() + " : objectif atteint !");
 			getCoordinateur().signalerObjectifAtteint(getIdAgent());
@@ -363,7 +365,6 @@ public abstract class AgentImpl
 			System.out.println("ressource " + this.ressources.get(i).getTypeRessource() + " : " + this.ressources.get(i).getQuantiteRessource() + " / " + this.ressources.get(i).getObjectifRessource());
 			if (this.ressources.get(i).getQuantiteRessource() >= this.ressources.get(i).getObjectifRessource())
 			{
-				System.out.println("yeah");
 				return false;
 			}
 		}
