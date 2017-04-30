@@ -99,6 +99,12 @@ public abstract class AgentImpl
 		}
 	}
 	
+	// retourne la ième ressource (précondition : 0 <= i < size)
+	public ArrayList<Ressource> getRessourceAtPos(int i)
+	{
+		return this.ressources.get(i);
+	}
+	
 	//----------------------------------------------------------------------
 	//				setters
 	//----------------------------------------------------------------------
@@ -125,6 +131,28 @@ public abstract class AgentImpl
 	public void setCoordinateur(Coordinateur coordinateur)
 	{
 		this.coordinateur = coordinateur;
+	}
+	
+	// positionne la ressource à la position i (précondition : 0 <= i < size)
+	public void setRessourceAtPos(int i, Ressource ressource)
+	{
+		this.ressources.set(i,ressource);
+	}
+	
+	// positionne la quantité de la ressource typeRessource
+	public void setRessourceByType(Ressource ressource)
+	{
+		// recherche de la position
+		int pos = -1;
+		for (int i = 0; i < this.ressources.size() && pos < 0; i++)
+		{
+			if (this.ressources.get(i).getTypeRessource().equals(ressources.getTypeRessource()))
+			{
+				pos = i;
+			}
+		}
+		// mise à jour
+		this.ressources.set(pos,ressource);
 	}
 	
 	//----------------------------------------------------------------------

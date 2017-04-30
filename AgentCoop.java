@@ -69,22 +69,13 @@ public class AgentCoop extends AgentImpl
 		
 		try
 		{
-		  
-			// tentative d'acquisition de ressources (on teste avec 5)
-			int ressourcesAcquises = getProducteurAtPos(0).attribuerRessources(5);
-			System.out.println("Agent " + getIdAgent() + " : j'acquiers " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource());
-			setQuantiteRessource(getQuantiteRessource() + ressourcesAcquises);
-			
-			if (getQuantiteRessource() >= getObjectif() )
-			{
-				System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
-				getCoordinateur().signalerObjectifAtteint(getIdAgent());
-			}
-			else
-			{
-				System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
-				getCoordinateur().signalerFinTour(getObjectif());
-			}
+			Ressource aAcquerir = getRessourceAtPos(0);	// la 1e ressource
+			int ressourcesAcquises = getProducteurAtPos(0).attribuerRessources(aAcquerir.getTypeRessource(), 5);
+			System.out.println("Agent " + getIdAgent() + " : j'acquiers " + ressourcesAcquises + " exemplaires de la ressource " + 
+			aAcquerir.getTypeRessource());
+			setRessourceByType(new Ressource(aAcquerir.getTypeRessource(), aAcquerir.getQuantiteRessource() + ressourcesAcquises, 
+			aAcquerir.getObjectifRessource()));
+			getCoordinateur().signalerFinTour(getIdAgent());
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 	 }

@@ -73,16 +73,13 @@ public class AgentIndiv extends AgentImpl
 			System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + getTypeRessource());
 			setQuantiteRessource(getQuantiteRessource() + ressourcesVolees);
 			  
-			if (getQuantiteRessource() >= getObjectif() )
-			{
-				System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
-				getCoordinateur().signalerObjectifAtteint(getIdAgent());
-			}
-			else
-			{
-				System.out.println("Agent " + getIdAgent() + " : je possède " + getQuantiteRessource() + " exemplaires de la ressource " + getTypeRessource() + "/" + getObjectif());
-				getCoordinateur().signalerFinTour(getIdAgent());
-			}
+			Ressource aVoler = getRessourceAtPos(0);	// la 1e ressource
+			int ressourcesVolees = getAgentAtPos(0).voler(getIdAgent(), aVoler.getTypeRessource(), 2);
+			System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + 
+			aVoler.getTypeRessource() + " à l'agent 0");
+			setRessourceByType(new Ressource(aVoler.getTypeRessource(), aVoler.getQuantiteRessource() + ressourcesVolees, 
+			aVoler.getObjectifRessource()));
+			getCoordinateur().signalerFinTour(getIdAgent());
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 	}
