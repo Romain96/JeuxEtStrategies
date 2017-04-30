@@ -317,9 +317,6 @@ public class AgentHumain extends AgentImpl
 			// s'enregistrer auprès du coordinateur (convention : port 9000)
 			Naming.rebind( "rmi://localhost:" + args[0] + "/agent" + args[1] ,objLocal) ;
 			coordinateur.identifierAgent(objLocal.getIdAgent());
-			
-			// test
-			objLocal.choixAction();
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
