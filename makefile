@@ -38,13 +38,13 @@ prod:
 
 # lance un agent (trois versions un coop, un indiv et un humain)
 # format des arguments de Agentxxx :
-# <port du rmiregistry> <idAgent> <typeRessource> <quantiteRessource> <objectif>
-# arguments utilisés : 9000 0,1,...,n gold 0 50
+# <port du rmiregistry> <idAgent> <typeRessource> <quantiteRessource> <objectif> (triplet à répéter)
+# arguments utilisés : 9000 0,1,...,n gold 0 50 silver 0 100
 agent1:
-	java AgentCoop 9000 0 gold 0 50
+	java AgentCoop 9000 0 gold 0 50 silver 0 100
 	
 agent2:
-	java AgentIndiv 9000 1 gold 0 50
+	java AgentIndiv 9000 1 gold 0 50 silver 0 100
 	
 agenth:
-	java AgentHumain 9000 2 gold 0 50
+	java AgentHumain 9000 2 gold 0 50 silver 0 100
