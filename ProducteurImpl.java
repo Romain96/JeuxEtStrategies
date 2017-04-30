@@ -135,7 +135,16 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	 */
 	public void terminerJeu() throws RemoteException
 	{
+		try
+		{
+			// unbind avant la suppression
+			Naming.unbind("rmi://localhost:9000/producteur" + getIdProducteur() ,true);
+
+			// supprime du runtime RMI
+			UnicastRemoteObject.unexportObject(this, true);
+		}
 		System.out.println("Producteur " + idProducteur + " se termine" );
+		} catch(Exception e){System.out.println(e)}
 		System.exit(0);
 	}
 	
