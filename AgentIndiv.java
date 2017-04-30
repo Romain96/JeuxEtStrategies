@@ -67,12 +67,7 @@ public class AgentIndiv extends AgentImpl
 		 */
 		  
 		try 
-		{
-			// tentative de vol (on teste avec 2)
-			int ressourcesVolees = getAgentAtPos(0).voler(getIdAgent(), getTypeRessource(), 2);
-			System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + getTypeRessource());
-			setQuantiteRessource(getQuantiteRessource() + ressourcesVolees);
-			  
+		{		
 			Ressource aVoler = getRessourceAtPos(0);	// la 1e ressource
 			int ressourcesVolees = getAgentAtPos(0).voler(getIdAgent(), aVoler.getTypeRessource(), 2);
 			System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + 
