@@ -180,6 +180,7 @@ public abstract class AgentImpl
 		{
 			System.out.println("Agent " + getIdAgent() + " : objectif non atteint");
 			getCoordinateur.signalerFinTour(getIdAgent());
+		}
 	}
 	
 	/*
