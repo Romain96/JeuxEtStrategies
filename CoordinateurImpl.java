@@ -187,7 +187,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		try
 		{
 			// unbind avant la suppression
-			Naming.unbind("rmi://localhost:9000/coordinateur", true);
+			Naming.unbind("rmi://localhost:9000/coordinateur");
 
 			// supprime du runtime RMI
 			UnicastRemoteObject.unexportObject(this, true);

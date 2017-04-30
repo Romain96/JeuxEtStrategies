@@ -382,7 +382,7 @@ public abstract class AgentImpl
 		try
 		{
 			// unbind avant la suppression
-			Naming.unbind("rmi://localhost:9000/agent" + getIdAgent(), true);
+			Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
 
 			// supprime du runtime RMI
 			UnicastRemoteObject.unexportObject(this, true);

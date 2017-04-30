@@ -138,7 +138,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		try
 		{
 			// unbind avant la suppression
-			Naming.unbind("rmi://localhost:9000/producteur" + getIdProducteur() ,true);
+			Naming.unbind("rmi://localhost:9000/producteur" + getIdProducteur());
 
 			// supprime du runtime RMI
 			UnicastRemoteObject.unexportObject(this, true);
