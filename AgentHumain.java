@@ -258,6 +258,10 @@ public class AgentHumain extends AgentImpl
 				int quantiteRessourceArg = Integer.parseInt(mots[3]);
 				int quantiteAcquise = getProducteurAtPos(idProducteurArg).attribuerRessources(mots[2], quantiteRessourceArg);
 				System.out.println("Vous avez acquis " + quantiteAcquise + " exemplaires de la ressource " + mots[2] + " du producteur " + idProducteurArg);
+				// récupération de la ressource
+				Ressource modif = getRessourceByType(mots[2]);
+				modif.setQuantiteRessource(modif.getQuantiteRessource() + quantiteAcquise);
+				setRessourceByType(modif);
 			}
 			else if (mots[0].equals("v"))
 			{
@@ -265,6 +269,10 @@ public class AgentHumain extends AgentImpl
 				int quantiteRessourceArg = Integer.parseInt(mots[3]);
 				int quantiteVolee = getAgentAtPos(idAgentArg).voler(getIdAgent(), mots[2], quantiteRessourceArg);
 				System.out.println("Vous avez volé " + quantiteVolee + " exemplaires de la ressource " + mots[2] + " de l'agent " + idAgentArg);
+				// récupération de la ressource
+				Ressource modif = getRessourceByType(mots[2]);
+				modif.setQuantiteRessource(modif.getQuantiteRessource() + quantiteVolee);
+				setRessourceByType(modif);
 			}
 			else
 			{

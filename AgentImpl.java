@@ -117,6 +117,21 @@ public abstract class AgentImpl
 		return this.ressources;
 	}
 	
+	// retourne la quantité de la ressource typeRessource
+	public Ressource getRessourceByType(String typeRessource)
+	{
+		// recherche de la position
+		int pos = -1;
+		for (int i = 0; i < this.ressources.size() && pos < 0; i++)
+		{
+			if (this.ressources.get(i).getTypeRessource().equals(ressource.getTypeRessource()))
+			{
+				return this.ressources.get(i);
+			}
+		}
+		return null;
+	}
+	
 	//----------------------------------------------------------------------
 	//				setters
 	//----------------------------------------------------------------------
