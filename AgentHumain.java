@@ -165,7 +165,7 @@ public class AgentHumain extends AgentImpl
 				// vérification de la commande d'acquisition de ressources (sauf le typeRessource)
 				int idProducteurArg = Integer.parseInt(mots[1]);
 				int quantiteRessourceArg = Integer.parseInt(mots[3]);
-				if (idProducteurArg > 0 && idProducteurArg <= getNbProducteurs() && quantiteRessourceArg >= 0)
+				if (idProducteurArg >= 0 && idProducteurArg <= getNbProducteurs() && quantiteRessourceArg >= 0)
 				{
 					// syntaxe correcte et arguments valides
 					return true;
