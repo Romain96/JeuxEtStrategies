@@ -1,4 +1,4 @@
-/* example trouvé
+/* example trouvÃ©
 public void plot2d() 
 {
     JGnuplot jg = new JGnuplot();
@@ -16,7 +16,7 @@ public void plot2d()
 }
 */
 
-
+/*
 // Aplication
 public void plot2d() 
 {
@@ -24,7 +24,7 @@ public void plot2d()
     Plot plot = new Plot("") {
         {
             xlabel = "x";	// abssisse = nb de tours
-            ylabel = "y";	// ordonné = nb de ressource obtenu	
+            ylabel = "y";	// ordonnÃ© = nb de ressource obtenu	
         }
     };
 
@@ -54,3 +54,4 @@ public void plot2d()
 
     jg.execute(plot, jg.plot2d);
 }
+*/
