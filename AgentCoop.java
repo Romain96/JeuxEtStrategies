@@ -18,9 +18,9 @@ public class AgentCoop extends AgentImpl
 	// initialise un agent coopératif avec un id et un numéro de port pour
 	// permettre d'agir comme serveur pour les autres agents et pour le coordinateur
 	// et initialise ses objectifs de ressources avec le tableau passé en argument
-	public AgentCoop(int idAgent, String typeRessource, int quantiteRessource, int objectif) throws RemoteException
+	public AgentCoop(int idAgent, ArrayList<Ressource> ressources) throws RemoteException
 	{
-		super(idAgent, typeRessource, quantiteRessource, objectif);
+		super(idAgent, ressources);
 	}
 	
 	//----------------------------------------------------------------------

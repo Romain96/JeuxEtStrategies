@@ -20,9 +20,9 @@ public class AgentHumain extends AgentImpl
 	// initialise un agent humain avec un id et un numéro de port pour
 	// permettre d'agir comme serveur pour les autres agents et pour le coordinateur
 	// et initialise ses objectifs de ressources avec le tableau passé en argument
-	public AgentHumain(int idAgent, String typeRessource, int quantiteRessource, int objectif) throws RemoteException
+	public AgentHumain(int idAgent, ArrayList<Ressource> ressources) throws RemoteException
 	{
-		super(idAgent, typeRessource, quantiteRessource, objectif);
+		super(idAgent, ressources);
 		scanner = new Scanner(System.in);
 	}
 	

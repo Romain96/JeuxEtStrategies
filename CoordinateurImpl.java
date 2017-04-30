@@ -330,7 +330,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		if (args.length != 3)
 		{
-			System.out.println("Usage : java objetCoordinateur <port du rmiregistry> <nbAgents> <nbProducteurs>") ;
+			System.out.println("Usage : java objetCoordinateur <port du rmiregistry> <nbAgents> <nbProducteurs>");
 			System.exit(0) ;
 		}
 		try

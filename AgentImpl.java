@@ -12,9 +12,7 @@ public abstract class AgentImpl
 	//----------------------------------------------------------------------
 	
 	private int idAgent;			// identifiant unique de l'agent 
-	private String typeRessource;	// type de ressource acquise
-	private int quantiteRessource;	// quantité de cette ressource acquise
-	private int objectif;			// quantité de ressouce ciblée
+	private ArrayList<Ressource> ressources;	// tableau de : typeRessource,QuantiteRessource,ObjectiRessource
 	private boolean enSurveillance;	// indique si l'agent est actuellement en surveillance
 	
 	private Producteur producteurs[];	// liste des producteurs
@@ -29,17 +27,13 @@ public abstract class AgentImpl
 	//				constructeur
 	//----------------------------------------------------------------------
 	
-	public AgentImpl(int idAgent, String typeRessource, int quantiteRessource, int objectif) throws RemoteException
+	public AgentImpl(int idAgent, ArrayList<Ressource> ressources) throws RemoteException
 	{
 		this.idAgent = idAgent;
-		this.typeRessource = typeRessource;
-		this.quantiteRessource = quantiteRessource;
-		this.objectif = objectif;
+		this.ressources = ressources;
 		this.nbProducteurs = 0;
 		this.nbAgents = 0;
-		this.enSurveillance = false;	// pas au début
-		// DEBUG
-		System.out.println("Agent init : " + idAgent + " " + typeRessource + " " + quantiteRessource + " " + objectif );	
+		this.enSurveillance = false;	// pas au début	
 	}
 
 	//----------------------------------------------------------------------
@@ -50,24 +44,6 @@ public abstract class AgentImpl
 	public int getIdAgent()
 	{
 		return this.idAgent;
-	}
-	
-	// retourne le type de la ressource
-	public String getTypeRessource()
-	{
-		return this.typeRessource;
-	}
-	
-	// retourne la quantite de ressource de l'agent
-	public int getQuantiteRessource()
-	{
-		return quantiteRessource;
-	}
-	
-	// Retourne l'objectif de ressource actuel
-	public int getObjectif()
-	{
-		return objectif;
 	}
 	
 	// retourne le nombre de prducteurs connus de cet agent
@@ -130,24 +106,6 @@ public abstract class AgentImpl
 	public void setIdAgent(int idAgent)
 	{
 		this.idAgent = idAgent;
-	}
-	
-	// positionne le type de ressource
-	public void setTypeRessource(String typeRessource)
-	{
-		this.typeRessource = typeRessource;
-	}
-	
-	// positionne la quantité de ressource possédée
-	public void setQuantiteRessource(int quantite)
-	{
-		this.quantiteRessource = quantite;
-	}
-	
-	// positionne l'objectif de ressources
-	public void setObjectif(int nb)
-	{
-		this.objectif = nb;
 	}
 	
 	// positionne le nombre de producteurs connus de cet agent
@@ -310,9 +268,10 @@ public abstract class AgentImpl
 	 * Résultat(s)	: le nombre de cette ressource volée (>= 0)
 	 * Commentaires	: /
 	 */
-	public int voler(int idAgent, String type, int nb) throws RemoteException
+	public int voler(int idAgent, String typeRessource, int quantiteRessource) throws RemoteException
 	{
-		System.out.println("Agent " + this.idAgent + " : tentative de vol de " + nb + " exemplaires de la ressource " + type + " (voleur : agent " + idAgent + ")");
+		System.out.println("Agent " + this.idAgent + " : tentative de vol de " + quantiteRessource + 
+		" exemplaires de la ressource " + typeRessource + " (voleur : agent " + idAgent + ")");
 		if (getEnSurveillance())
 		{
 			System.out.println("Agent " + this.idAgent + " : je suis en mode NSA ! J'ai tout vu !");
@@ -322,10 +281,10 @@ public abstract class AgentImpl
 		else
 		{
 			System.out.println("Agent " + this.idAgent + " : Je n'ai rien vu !");
-			if (this.quantiteRessource >= nb)
+			if (this.quantiteRessource >= quantiteRessource)
 			{
-				int quantiteVolee = nb;
-				this.quantiteRessource -= nb;
+				int quantiteVolee = quantiteRessource;
+				this.quantiteRessource -= quantiteRessource;
 				return quantiteVolee;
 			}
 			else
