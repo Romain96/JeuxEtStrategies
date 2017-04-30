@@ -174,12 +174,12 @@ public abstract class AgentImpl
 		if (verifierObjectifAtteint())
 		{
 			System.out.println("Agent " + getIdAgent() + " : objectif atteint !");
-			getCoordinateur.signalerObjectifAtteint(getIdAgent());
+			getCoordinateur().signalerObjectifAtteint(getIdAgent());
 		}
 		else
 		{
 			System.out.println("Agent " + getIdAgent() + " : objectif non atteint");
-			getCoordinateur.signalerFinTour(getIdAgent());
+			getCoordinateur().signalerFinTour(getIdAgent());
 		}
 	}
 	
