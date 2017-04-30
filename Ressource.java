@@ -1,6 +1,6 @@
 import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
-public class Ressource extends UnicastRemoteObject throws RemoteException
+public class Ressource extends UnicastRemoteObject
 {
 	//----------------------------------------------------------------------
 	//				attributs
@@ -15,7 +15,7 @@ public class Ressource extends UnicastRemoteObject throws RemoteException
 	//----------------------------------------------------------------------
 	
 	// constructeur standard
-	public Ressource(String typeRessource, int quantiteRessource, int objectifRessource)
+	public Ressource(String typeRessource, int quantiteRessource, int objectifRessource) throws RemoteException
 	{
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
