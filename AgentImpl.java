@@ -146,7 +146,7 @@ public abstract class AgentImpl
 		int pos = -1;
 		for (int i = 0; i < this.ressources.size() && pos < 0; i++)
 		{
-			if (this.ressources.get(i).getTypeRessource().equals(ressources.getTypeRessource()))
+			if (this.ressources.get(i).getTypeRessource().equals(ressource.getTypeRessource()))
 			{
 				pos = i;
 			}
