@@ -15,9 +15,6 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	private String typeRessource;	// pour l'instant un seule ressource
 	private int quantiteRessource;	// idem
 	
-	private Timer timer;
-	private int temps = 1000;	// 1s
-	
 	//==================================================================
 	//							Constructeur
 	//==================================================================
@@ -27,13 +24,6 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		this.idProducteur = idProducteur;
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
-		this.timer = new Timer();	
-		this.timer.schedule(new TimerTask() {
-            public void run() {
-                ProducteurImpl.genererRessources();
-            }
-        }, 0, this.temps);
-		
 		// DEBUG
 		System.out.println("Producteur init : " + idProducteur  + " " + typeRessource + " " + quantiteRessource );
 	}
@@ -168,6 +158,15 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 			
 			// s'enregistrer auprès du coordinateur (convention : port 9000)
 			coordinateur.identifierProducteur(objLocal.getIdProducteur());
+
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() 
+			{
+				public void run() 
+				{
+					objLocal.genererRessources();
+				}
+			}, 0, 1000)
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
