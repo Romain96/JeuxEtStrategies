@@ -74,7 +74,6 @@ public class AgentIndiv extends AgentImpl
 			aVoler.getTypeRessource() + " à l'agent 0");
 			setRessourceByType(new Ressource(aVoler.getTypeRessource(), aVoler.getQuantiteRessource() + ressourcesVolees, 
 			aVoler.getObjectifRessource()));
-			getCoordinateur().signalerFinTour(getIdAgent());
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 	}

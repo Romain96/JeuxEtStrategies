@@ -75,7 +75,6 @@ public class AgentCoop extends AgentImpl
 			aAcquerir.getTypeRessource());
 			setRessourceByType(new Ressource(aAcquerir.getTypeRessource(), aAcquerir.getQuantiteRessource() + ressourcesAcquises, 
 			aAcquerir.getObjectifRessource()));
-			getCoordinateur().signalerFinTour(getIdAgent());
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 	 }

@@ -171,6 +171,15 @@ public abstract class AgentImpl
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
 		choixAction();
+		if (verifierObjectifAtteint())
+		{
+			System.out.println("Agent " + getIdAgent() + " : objectif atteint !");
+			getCoordinateur.signalerObjectifAtteint(getIdAgent());
+		}
+		else
+		{
+			System.out.println("Agent " + getIdAgent() + " : objectif non atteint");
+			getCoordinateur.signalerFinTour(getIdAgent());
 	}
 	
 	/*
@@ -337,6 +346,24 @@ public abstract class AgentImpl
 			}
 			return 0;	// non trouvé
 		}
+	}
+	
+	/*
+	 * Fonction 	: verifierObjectifAtteint 
+	 * Argument(s)	: aucun
+	 * Résultat(s)	: vrai si tous les abjectifs sont atteints, faux sinon
+	 * Commentaires	: permet de lancer signalerObjectifAtteint quand le résultat est vrai
+	 */
+	public boolean verifierObjectifAtteint()
+	{
+		for( int i = 0; i < this.ressources.size(); i++)
+		{
+			if (this.ressources.get(i).getQuantiteRessource() < this.ressources.get(i).getObjectifRessource())
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/*
