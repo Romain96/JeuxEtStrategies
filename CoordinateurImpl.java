@@ -212,7 +212,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 				System.out.println("Coordinateur : agent " + idAgent + " s'identifie" );
 				// on réccupère l'agent enregistré comme étant l'agent "agent + id de l'agent"
 				Agent agent = (Agent) Naming.lookup( "rmi://localhost:9000/agent" + idAgent );
-				agents[nbAgentsEnregistres] = agent;
+				agents[idAgent] = agent;
 				nbAgentsEnregistres++;
 				System.out.println("Coordinateur : il y a désormais " + nbAgentsEnregistres + "/" + nbAgents + " agents enregistrés" );
 			}
@@ -243,7 +243,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 				System.out.println("Coordinateur : producteur " + idProducteur + " s'identifie" );
 				// on réccupère le producteur enregistré comme étant le producteur "producteur + id du producteur"
 				Producteur producteur = (Producteur) Naming.lookup( "rmi://localhost:9000/producteur" + idProducteur );
-				producteurs[nbProducteursEnregistres] = producteur;
+				producteurs[idProducteur] = producteur;
 				nbProducteursEnregistres++;
 				System.out.println("Coordinateur : il y a désormais " + nbProducteursEnregistres + "/" + nbProducteurs + " producteurs enregistrés" );
 			}
