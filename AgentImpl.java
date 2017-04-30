@@ -32,6 +32,12 @@ public abstract class AgentImpl
 	{
 		this.idAgent = idAgent;
 		this.ressources = ressources;
+		// debug
+		for (int i = 0; i < this.ressources.size(); i++)
+		{
+			System.out.println("AgentImpl init : " + this.ressources.get(i).getTypeRessource() + " " + 
+			this.ressources.get(i).getQuantiteRessource() + " " + this.ressources.get(i).getObjectifRessource());
+		}
 		this.nbProducteurs = 0;
 		this.nbAgents = 0;
 		this.enSurveillance = false;	// pas au début	
