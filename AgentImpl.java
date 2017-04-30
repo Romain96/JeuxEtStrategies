@@ -384,23 +384,18 @@ public abstract class AgentImpl
 		{
 			public void run() 
 			{
-				this.stopLocal();
+				try
+				{
+					// unbind avant la suppression
+					Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
+
+					// supprime du runtime RMI
+					UnicastRemoteObject.unexportObject(this, true);
+					System.out.println("Agent " + getIdAgent() + " se termine" );
+				} catch(Exception e){System.out.println(e);}
+				System.exit(0);
 			}
 		}, 100);
-	}
-	
-	public void stopLocal() throws RemoteException
-	{
-		try
-		{
-			// unbind avant la suppression
-			Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
-
-			// supprime du runtime RMI
-			UnicastRemoteObject.unexportObject(this, true);
-			System.out.println("Agent " + getIdAgent() + " se termine" );
-		} catch(Exception e){System.out.println(e);}
-		System.exit(0);
 	}
 }
 
