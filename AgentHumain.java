@@ -83,6 +83,7 @@ public class AgentHumain extends AgentImpl
 			System.out.println("input : " + input);
 		}
 		// effectuer l'action demandée
+		lancerAction(input);
 	}
 	
 	 /*
