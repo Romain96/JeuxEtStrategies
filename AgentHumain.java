@@ -283,6 +283,30 @@ public class AgentHumain extends AgentImpl
 		}
 	}
 	
+	/*
+	 * Fonction 	: terminerJeu 
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: appelé par le coordinateur pour terminer l'agent
+	 * a besoin d'être redéfinie à cause du scanner qu'il faut fermer
+	 */
+	public void terminerJeu() throws RemoteException
+	{	
+		try
+		{
+			// fermeture du scanner
+			this.scanner.close();
+			
+			// unbind avant la suppression
+			Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
+
+			// supprime du runtime RMI
+			UnicastRemoteObject.unexportObject(this, true);
+			System.out.println("Agent " + getIdAgent() + " se termine" );
+		} catch(Exception e){System.out.println(e);}
+		System.exit(0);
+	}
+	
 	// tests
 	public static void main(String[] args) throws RemoteException
 	{	
