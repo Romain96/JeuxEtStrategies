@@ -359,6 +359,8 @@ public abstract class AgentImpl
 	{
 		for( int i = 0; i < this.ressources.size(); i++)
 		{
+			// debug
+			System.out.println("ressource " + this.ressources.get(i).getTypeRessource() + " : " + this.ressources.get(i).getQuantiteRessource() + " / " + this.ressources.get(i).getObjectifRessource());
 			if (this.ressources.get(i).getQuantiteRessource() >= this.ressources.get(i).getObjectifRessource())
 			{
 				return false;
