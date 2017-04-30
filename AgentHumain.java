@@ -135,23 +135,30 @@ public class AgentHumain extends AgentImpl
 	// tests
 	public static void main(String[] args) throws RemoteException
 	{	
-		if (args.length != 5)
+		// au moins un triplet type quantite objectif en plus des deux arguments obligatoires
+		if (args.length >= 5 && args.length%3 == 0)
 		{
-			System.out.println("Usage : java AgentHumain <port du rmiregistry> <idAgent> <typeRessource> <quantiteRessource> <objectif>") ;
-			System.exit(0) ;
+			System.out.println("Usage : java AgentHumain <port du rmiregistry> <idAgent> <typeRessource> <quantiteRessource> <objectif> (répéter le triplet)") ;
+			System.exit(0);
 		}
 		try
 		{
 			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:" + args[0] + "/coordinateur" );
 			
 			int idAgent = Integer.parseInt(args[1]);
-			int quantiteRessource = Integer.parseInt(args[3]);
-			int objectif = Integer.parseInt(args[4]);
+			ArrayList<Ressource> ressources = new ArrayList<Ressource>();
+			for (int i = 2; i < args.length; i++)
+			{
+				int quantiteRessource = Integer.parseInt(args[3+i]);
+				int objectif = Integer.parseInt(args[4+i]);
+				Ressource ressource = new Ressource(args[2+i], quantiteRessource, objectifRessource);
+				ressources.add(ressource);
+			}
 			AgentImpl objLocal;
 
 
 			System.out.println("Je suis humain");
-			objLocal = new AgentHumain(idAgent, args[2], quantiteRessource, objectif);
+			objLocal = new AgentHumain(idAgent, ressources);
 
 			// enregistrement du coordinateur pour l'agent
 			objLocal.enregistrerCoordinateur("localhost", Integer.parseInt(args[0]));
