@@ -115,6 +115,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	 */
 	public void genererRessources()
 	{
+		System.out.println("Producteur " + getIdProducteur() + " : je régénère mes ressources");
 		// très simple pour l'instant on double ne nombre restant (si > 0)
 		if (this.quantiteRessource > 0)
 		{
