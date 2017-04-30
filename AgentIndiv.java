@@ -101,7 +101,7 @@ public class AgentIndiv extends AgentImpl
 			for (int i = 2; i < args.length; i++)
 			{
 				int quantiteRessource = Integer.parseInt(args[3+i]);
-				int objectif = Integer.parseInt(args[4+i]);
+				int objectifRessource = Integer.parseInt(args[4+i]);
 				Ressource ressource = new Ressource(args[2+i], quantiteRessource, objectifRessource);
 				ressources.add(ressource);
 			}
