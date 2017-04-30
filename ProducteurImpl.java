@@ -166,7 +166,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 				{
 					objLocal.genererRessources();
 				}
-			}, 0, 1000)
+			}, 0, 1000);
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
