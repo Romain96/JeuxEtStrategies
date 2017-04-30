@@ -148,11 +148,11 @@ public class AgentHumain extends AgentImpl
 			
 			int idAgent = Integer.parseInt(args[1]);
 			ArrayList<Ressource> ressources = new ArrayList<Ressource>();
-			for (int i = 2; i < args.length; i++)
+			for (int i = 2; i < args.length; i+=3)
 			{
-				int quantiteRessource = Integer.parseInt(args[3+i]);
-				int objectifRessource = Integer.parseInt(args[4+i]);
-				Ressource ressource = new Ressource(args[2+i], quantiteRessource, objectifRessource);
+				int quantiteRessource = Integer.parseInt(args[i+1]);
+				int objectifRessource = Integer.parseInt(args[i+2]);
+				Ressource ressource = new Ressource(args[i], quantiteRessource, objectifRessource);
 				ressources.add(ressource);
 			}
 			AgentImpl objLocal;
