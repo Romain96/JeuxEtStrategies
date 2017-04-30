@@ -3,6 +3,7 @@ import java.rmi.RemoteException ;
 import java.rmi.* ; 
 import java.net.MalformedURLException ; 
 import java.util.*;
+import java.util.Timer;
 
 public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 {  
@@ -14,6 +15,9 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	private String typeRessource;	// pour l'instant un seule ressource
 	private int quantiteRessource;	// idem
 	
+	private Timer timer;
+	private int temps = 1000;	// 1s
+	
 	//==================================================================
 	//							Constructeur
 	//==================================================================
@@ -23,6 +27,13 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		this.idProducteur = idProducteur;
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
+		this.timer = new Timer();	
+		this.Timer.schedule(new TimerTask() {
+            public void run() {
+                this.genererRessources();
+            }
+        }, 0, this.temps);
+		
 		// DEBUG
 		System.out.println("Producteur init : " + idProducteur  + " " + typeRessource + " " + quantiteRessource );
 	}
