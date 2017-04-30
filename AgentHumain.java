@@ -111,7 +111,7 @@ public class AgentHumain extends AgentImpl
 			case 3:
 			// deux cas autorisés : "o a [idAgent]" (observer un agent) 
 			// ou "o p [idProducteur]" (observer un producteur)
-			if (mots[0].equals("o") && ( || ))
+			if (mots[0].equals("o"))
 			{
 				// vérifiaction avec l'argument agent
 				if (mots[1].equals("a"))
@@ -121,7 +121,7 @@ public class AgentHumain extends AgentImpl
 					if (nbAgentsArg < this.getNbAgents() && nbAgentArg >= 0)
 					{
 						// syntaxe correcte et argument valide
-						return true
+						return true;
 					}
 					else
 					{
@@ -137,7 +137,7 @@ public class AgentHumain extends AgentImpl
 					if (nbProducteurArg < this.getNbProducteurs() && nbProducteurArg >= 0)
 					{
 						// syntaxe correcte et argument valide
-						return true
+						return true;
 					}
 					else
 					{
