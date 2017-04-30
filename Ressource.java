@@ -13,7 +13,7 @@ public class Ressource
 	//----------------------------------------------------------------------
 	
 	// constructeur standard
-	public Ressource(String typeRessource, int quantiteRessource, int ObjectifRessource)
+	public Ressource(String typeRessource, int quantiteRessource, int objectifRessource)
 	{
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
