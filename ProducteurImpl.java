@@ -100,8 +100,8 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		}
 		else
 		{
-			quantiteAttribuee = quantiteDemandee;
-			this.quantiteRessource -= quantiteDemandee;
+			quantiteAttribuee = this.quantiteRessource;
+			this.quantiteRessource = 0;
 			return quantiteAttribuee;
 		}
 	}
