@@ -379,6 +379,18 @@ public abstract class AgentImpl
 	 */
 	public void terminerJeu() throws RemoteException
 	{	
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() 
+		{
+			public void run() 
+			{
+				this.stopLocal();
+			}
+		}, 100);
+	}
+	
+	public void stopLocal() throws RemoteException
+	{
 		try
 		{
 			// unbind avant la suppression
