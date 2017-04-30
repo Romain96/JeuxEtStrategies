@@ -181,7 +181,7 @@ public class AgentHumain extends AgentImpl
 				// véridication de la commande de vol de ressources
 				int idAgentArg = Integer.parseInt(mots[1]);
 				int quantiteRessourceArg = Integer.parseInt(mots[3]);
-				if (idAgentArg > 0 && idAgentArg <= getNbAgents() && idAgentArg != getIdAgent() && quantiteRessourceArg >= 0)
+				if (idAgentArg >= 0 && idAgentArg <= getNbAgents() && idAgentArg != getIdAgent() && quantiteRessourceArg >= 0)
 				{
 					// syntaxe correcte et arguments valides
 					return true;
