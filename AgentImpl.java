@@ -379,23 +379,14 @@ public abstract class AgentImpl
 	 */
 	public void terminerJeu() throws RemoteException
 	{	
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() 
+		try
 		{
-			public void run() 
-			{
-				try
-				{
-					// unbind avant la suppression
-					Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
+			// unbind avant la suppression
+			Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
 
-					// supprime du runtime RMI
-					UnicastRemoteObject.unexportObject(this, true);
-					System.out.println("Agent " + getIdAgent() + " se termine" );
-				} catch(Exception e){System.out.println(e);}
-				System.exit(0);
-			}
-		}, 100);
+			// supprime du runtime RMI
+			UnicastRemoteObject.unexportObject(this, true);
+			System.out.println("Agent " + getIdAgent() + " se termine" );
+		} catch(Exception e){System.out.println(e);}
+		System.exit(0);
 	}
-}
-
