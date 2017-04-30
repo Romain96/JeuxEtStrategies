@@ -70,7 +70,6 @@ public class AgentCoop extends AgentImpl
 		try
 		{
 			Ressource aAcquerir = getRessourceAtPos(0);	// la 1e ressource
-			System.out.println("AcquerirRessource : " + aAcquerir.getTypeRessource() + " " + aAcquerir.getQuantiteRessource() + " " + aAcquerir.getObjectifRessource()); 
 			int ressourcesAcquises = getProducteurAtPos(0).attribuerRessources(aAcquerir.getTypeRessource(), 5);
 			System.out.println("Agent " + getIdAgent() + " : j'acquiers " + ressourcesAcquises + " exemplaires de la ressource " + 
 			aAcquerir.getTypeRessource());
@@ -98,7 +97,6 @@ public class AgentCoop extends AgentImpl
 			{
 				int quantiteRessource = Integer.parseInt(args[i+1]);
 				int objectifRessource = Integer.parseInt(args[i+2]);
-				System.out.println("init : Ressource(" + args[i] + ", " + quantiteRessource + ", " + objectifRessource + ");");
 				Ressource ressource = new Ressource(args[i], quantiteRessource, objectifRessource);
 				ressources.add(ressource);
 			}

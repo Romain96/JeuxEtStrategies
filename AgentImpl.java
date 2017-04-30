@@ -32,12 +32,6 @@ public abstract class AgentImpl
 	{
 		this.idAgent = idAgent;
 		this.ressources = ressources;
-		// debug
-		for (int i = 0; i < this.ressources.size(); i++)
-		{
-			System.out.println("AgentImpl init : " + this.ressources.get(i).getTypeRessource() + " " + 
-			this.ressources.get(i).getQuantiteRessource() + " " + this.ressources.get(i).getObjectifRessource());
-		}
 		this.nbProducteurs = 0;
 		this.nbAgents = 0;
 		this.enSurveillance = false;	// pas au début	
@@ -369,6 +363,7 @@ public abstract class AgentImpl
 			System.out.println("ressource " + this.ressources.get(i).getTypeRessource() + " : " + this.ressources.get(i).getQuantiteRessource() + " / " + this.ressources.get(i).getObjectifRessource());
 			if (this.ressources.get(i).getQuantiteRessource() >= this.ressources.get(i).getObjectifRessource())
 			{
+				System.out.println("yeah");
 				return false;
 			}
 		}
