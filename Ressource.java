@@ -1,5 +1,6 @@
 import java.rmi.server.UnicastRemoteObject ;
-public class Ressource extends UnicastRemoteObject
+import java.rmi.RemoteException ;
+public class Ressource extends UnicastRemoteObject throws RemoteException
 {
 	//----------------------------------------------------------------------
 	//				attributs
