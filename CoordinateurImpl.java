@@ -333,8 +333,19 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			// fin seulement quand le dernier agent a terminé
 			this.terminaisonsAgents[idAgent] = true;	// cet agent a terminé
-			this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-			lancementProchainAgent();
+			
+			// si tous les agents ont fini on stoppe le jeu
+			for (int i = 0; i < this.nbAgents; i++)
+			{
+				if (!terminaisonsAgents[i])
+				{
+					// au moins un agent n'a pas fini
+					this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
+					lancementProchainAgent();
+				}
+			}
+			// sinon tous les agents ont fini
+			terminerJeu();
 		}
 		
 	}
