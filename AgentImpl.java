@@ -84,7 +84,7 @@ public abstract class AgentImpl
 		}
 		else if (pos >= getIdAgent())	// id supérieurs à soi (agent id+1 = id)
 		{
-			return agents[pos-1]
+			return agents[pos-1];
 		}
 		else 
 		{
