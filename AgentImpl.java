@@ -458,6 +458,7 @@ public abstract class AgentImpl
 				{
 					Thread.sleep(100);
 				} catch (InterruptedException e) {/* rien */}
+				catch (RemoteException re) { /*rien*/ }
 				
 				// unbind avant la suppression
 				Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
