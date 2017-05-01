@@ -82,7 +82,7 @@ public class AgentCoop extends AgentImpl
 						// demander au producteur la ressource qu'il produit
 						String typeProduit = getProducteurAtPos(j).observerTypeRessource(getIdAgent());
 						int quantiteProduite = getProducteurAtPos(j).observerQuantiteRessource(getIdAgent());
-						System.out.println("Agent " + getIdAgent() + " : le producteur " + j + " produit " + quantiteProduite + " de " typeProduit);
+						System.out.println("Agent " + getIdAgent() + " : le producteur " + j + " produit " + quantiteProduite + " de " + typeProduit);
 						if (typeProduit.equals(copie.get(i).getTypeRessource()))
 						{
 							System.out.println("Agent " + getIdAgent() + " : je demande au producteur " + j);
