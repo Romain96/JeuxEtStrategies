@@ -153,7 +153,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		 this.jeuEnCours = true;	
 		  
 		 // lance le 1er agent
-		 this.agents[this.prochainAgentAJouer].demarrerTour();
+		 this.agents[this.prochainAgentAJouer].demarrerTour(this.numeroTour);
 		 System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
 		 
 		 this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
@@ -297,7 +297,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
 		
 		this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-		lancementProchainAgent(this.numeroTour);
+		lancementProchainAgent();
 	}
 	
 	/*
