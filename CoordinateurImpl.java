@@ -52,6 +52,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		
 		// on initialise les punitions
 		this.punitionsAgents = new int[nbAgents];
+		this.terminaisonsAgents = new boolean[nbAgents];
 		for (int i = 0; i < nbAgents; i++)
 		{
 			this.punitionsAgents[i] = 0;	// pas de punition au départ
