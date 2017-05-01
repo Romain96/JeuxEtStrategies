@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class Historique
 {
@@ -31,7 +32,7 @@ public class Historique
 	
 	public File getFile()
 	{
-		return this.fout;
+		return this.nom;
 	}
 	
 	public FileOutputStream getFileOutputStream()
@@ -50,7 +51,7 @@ public class Historique
 	
 	public void setFile(File fout)
 	{
-		this.fout = fout;
+		this.nom = fout;
 	}
 	
 	public void setFileOutputStream(FileOutputStream fos)
@@ -67,7 +68,7 @@ public class Historique
 	//				méthodes
 	//----------------------------------------------------------------------
 	
-	public static void ecrireLigne(int idAgent, int temps, String typeRessource, int quantiteRessource) throws IOException 
+	public void ecrireLigne(int idAgent, int temps, String typeRessource, int quantiteRessource) throws IOException 
 	{ 
 		String ligneAEcrire = "" + idAgent + "," + temps + "," + typeRessource + "," + quantiteRessource;
 		bw.write(ligneAEcrire);
