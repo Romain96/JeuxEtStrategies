@@ -5,7 +5,7 @@ import java.util.*;
 public interface Agent extends Remote
 {
 	// appelé par le coordinateur pour demander à l'agent de démarrer son tour
-	public void demarrerTour(int numeroTour) throws RemoteException;
+	public void demarrerTour(int numeroTour) throws RemoteException, IOException;
 	
 	// appelé par le coordinateur pour transmettre le nombre d'agents/producteurs
 	public void signalerNbAgentsEtProducteurs(int nbAgents, int nbProducteurs) throws RemoteException; 
