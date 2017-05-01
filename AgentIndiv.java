@@ -19,7 +19,7 @@ public class AgentIndiv extends AgentImpl
 	// initialise un agent coopératif avec un id et un numéro de port pour
 	// permettre d'agir comme serveur pour les autres agents et pour le coordinateur
 	// et initialise ses objectifs de ressources avec le tableau passé en argument
-	public AgentIndiv(int idAgent, ArrayList<RessourceImpl> ressources) throws RemoteException
+	public AgentIndiv(int idAgent, ArrayList<Ressource> ressources) throws RemoteException
 	{
 		super(idAgent, ressources);
 	}
@@ -68,11 +68,11 @@ public class AgentIndiv extends AgentImpl
 		  
 		try 
 		{		
-			RessourceImpl aVoler = getRessourceAtPos(0);	// la 1e ressource
+			Ressource aVoler = getRessourceAtPos(0);	// la 1e ressource
 			int ressourcesVolees = getAgentAtPos(0).voler(getIdAgent(), aVoler.getTypeRessource(), 2);
 			System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + 
 			aVoler.getTypeRessource() + " à l'agent 0");
-			setRessourceByType(new RessourceImpl(aVoler.getTypeRessource(), aVoler.getQuantiteRessource() + ressourcesVolees, 
+			setRessourceByType(new Ressource(aVoler.getTypeRessource(), aVoler.getQuantiteRessource() + ressourcesVolees, 
 			aVoler.getObjectifRessource()));
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
@@ -91,12 +91,12 @@ public class AgentIndiv extends AgentImpl
 			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:" + args[0] + "/coordinateur" );
 			
 			int idAgent = Integer.parseInt(args[1]);
-			ArrayList<RessourceImpl> ressources = new ArrayList<RessourceImpl>();
+			ArrayList<Ressource> ressources = new ArrayList<Ressource>();
 			for (int i = 2; i < args.length; i+=3)
 			{
 				int quantiteRessource = Integer.parseInt(args[i+1]);
 				int objectifRessource = Integer.parseInt(args[i+2]);
-				RessourceImpl ressource = new RessourceImpl(args[i], quantiteRessource, objectifRessource);
+				Ressource ressource = new Ressource(args[i], quantiteRessource, objectifRessource);
 				ressources.add(ressource);
 			}
 			AgentImpl objLocal;

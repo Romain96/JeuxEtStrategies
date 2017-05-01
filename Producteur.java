@@ -10,5 +10,5 @@ public interface Producteur extends Remote
 	public int attribuerRessources(String typeRessource, int quantiteDemandee) throws RemoteException;
 	
 	// appelé par les agents pour observer le producteur (type et quantité de ressource disponible)
-	public RessourceImpl observer(int idAgent) throws RemoteException;
+	public Ressource observer(int idAgent) throws RemoteException;
 }

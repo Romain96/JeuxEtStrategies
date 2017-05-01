@@ -13,7 +13,7 @@ public abstract class AgentImpl
 	//----------------------------------------------------------------------
 	
 	private int idAgent;			// identifiant unique de l'agent 
-	private ArrayList<RessourceImpl> ressources;	// tableau de : typeRessource,QuantiteRessource,ObjectiRessource
+	private ArrayList<Ressource> ressources;	// tableau de : typeRessource,QuantiteRessource,ObjectiRessource
 	private boolean enSurveillance;	// indique si l'agent est actuellement en surveillance
 	
 	private Producteur producteurs[];	// liste des producteurs
@@ -28,7 +28,7 @@ public abstract class AgentImpl
 	//				constructeur
 	//----------------------------------------------------------------------
 	
-	public AgentImpl(int idAgent, ArrayList<RessourceImpl> ressources) throws RemoteException
+	public AgentImpl(int idAgent, ArrayList<Ressource> ressources) throws RemoteException
 	{
 		this.idAgent = idAgent;
 		this.ressources = ressources;
@@ -106,19 +106,19 @@ public abstract class AgentImpl
 	}
 	
 	// retourne la ième ressource (précondition : 0 <= i < size)
-	public RessourceImpl getRessourceAtPos(int i)
+	public Ressource getRessourceAtPos(int i)
 	{
 		return this.ressources.get(i);
 	}
 	
 	// retourne la liste des ressources possédées
-	public ArrayList<RessourceImpl> getRessources()
+	public ArrayList<Ressource> getRessources()
 	{
 		return this.ressources;
 	}
 	
 	// retourne la quantité de la ressource typeRessource
-	public RessourceImpl getRessourceByType(String typeRessource)
+	public Ressource getRessourceByType(String typeRessource)
 	{
 		// recherche de la position
 		int pos = -1;
@@ -161,13 +161,13 @@ public abstract class AgentImpl
 	}
 	
 	// positionne la ressource à la position i (précondition : 0 <= i < size)
-	public void setRessourceAtPos(int i, RessourceImpl ressource)
+	public void setRessourceAtPos(int i, Ressource ressource)
 	{
 		this.ressources.set(i,ressource);
 	}
 	
 	// positionne la quantité de la ressource typeRessource
-	public void setRessourceByType(RessourceImpl ressource)
+	public void setRessourceByType(Ressource ressource)
 	{
 		// recherche de la position
 		int pos = -1;
@@ -356,7 +356,7 @@ public abstract class AgentImpl
 				// le type de ressource coorespond
 				if (this.ressources.get(i).getTypeRessource().equals(typeRessource))
 				{
-					RessourceImpl modif = this.ressources.get(i);	// réccupération de la ressource
+					Ressource modif = this.ressources.get(i);	// réccupération de la ressource
 					if (this.ressources.get(i).getQuantiteRessource() >= quantiteRessource)
 					{
 						int quantiteVolee = quantiteRessource;		// on prend ce qui est demandé
@@ -384,7 +384,7 @@ public abstract class AgentImpl
 	 * Résultat(s)	: les ressources produites (type, quantité et objectif)
 	 * Commentaires	: /
 	 */
-	public ArrayList<RessourceImpl> observer(int idAgent) throws RemoteException
+	public ArrayList<Ressource> observer(int idAgent) throws RemoteException
 	{
 		System.out.println("Agent " + getIdAgent() + " : l'agent " + idAgent + " m'observe");
 		
