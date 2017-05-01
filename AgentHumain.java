@@ -272,6 +272,11 @@ public class AgentHumain extends AgentImpl
 			}
 			else if (mots[0].equals("o"))
 			{
+				int idAgentArg = Integer.parseInt(mots[2]);
+				int quantiteObservee = getAgentAtPos(idAgentArg).observerRessourceParType(mots[3]);
+				System.out.println("Vous avez observé l'agent " + idAgentArg + " et il possède " + quantiteObservee + " exemplaires de la ressource " + mots[3]);
+				choixAction();
+				break;
 			}
 			else
 			{
