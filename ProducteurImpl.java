@@ -17,17 +17,19 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	private String typeRessource;	// pour l'instant un seule ressource
 	private int quantiteRessource;	// idem
 	private int quantiteMax;		// le maximum qu'un agent peut obtenir
+	private Timer timer;			// référence sur le timer
 	
 	//==================================================================
 	//							Constructeur
 	//==================================================================
 	
-	public ProducteurImpl(int idProducteur, String typeRessource, int quantiteRessource, int quantiteMax) throws RemoteException
+	public ProducteurImpl(int idProducteur, String typeRessource, int quantiteRessource, int quantiteMax, Timer timer) throws RemoteException
 	{
 		this.idProducteur = idProducteur;
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
 		this.quantiteMax = quantiteMax;
+		this.timer = timer;
 		// DEBUG
 		System.out.println("Producteur init : " + idProducteur  + " " + typeRessource + " " + quantiteRessource );
 	}
@@ -180,6 +182,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	public void terminerJeu() throws RemoteException
 	{
 		System.out.println("Producteur " + getIdProducteur() + " : le coordinateur me demande de terminer");
+		this.timer.cancel();
 		new Thread(new Runnable() 
 		{
 			public void run() 
@@ -221,13 +224,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 			int idProducteur = Integer.parseInt(args[1]);
 			int quantiteRessource = Integer.parseInt(args[3]);
 			int quantiteMax = Integer.parseInt(args[4]);
-			final ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource, quantiteMax );
-			Naming.rebind( "rmi://localhost:" + args[0] + "/producteur" + args[1] ,objLocal) ;
-			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
 			
-			// s'enregistrer auprès du coordinateur (convention : port 9000)
-			coordinateur.identifierProducteur(objLocal.getIdProducteur());
-
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() 
 			{
@@ -236,6 +233,13 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 					objLocal.genererRessources();
 				}
 			}, 0, 1000);
+			
+			final ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource, quantiteMax, timer);
+			Naming.rebind( "rmi://localhost:" + args[0] + "/producteur" + args[1] ,objLocal) ;
+			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
+			
+			// s'enregistrer auprès du coordinateur (convention : port 9000)
+			coordinateur.identifierProducteur(objLocal.getIdProducteur());
 		}
 		catch (NotBoundException re) { System.out.println(re) ; }
 		catch (RemoteException re) { System.out.println(re) ; }
