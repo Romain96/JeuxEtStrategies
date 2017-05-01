@@ -21,9 +21,12 @@ public class Historique
 	public Historique()
 	{
 		System.out.println("Création du fichier " + this.nom + " pour stocker l'historique");
-		File fout = new File(this.nom);
-		this.fos = new FileOutputStream(fout);
-		this.bw = new BufferedWriter(new OutputStreamWriter(this.fos));
+		try 
+		{
+			File fout = new File(this.nom);
+			this.fos = new FileOutputStream(fout);
+			this.bw = new BufferedWriter(new OutputStreamWriter(this.fos));
+		} catch (FileNotFoundException fnfe) { fnfe.printStackTrace(); }
 	}
 	
 	//----------------------------------------------------------------------
@@ -87,10 +90,13 @@ public class Historique
 	public static void main(String[] args)
 	{
 		Historique his = new Historique();
-		his.ecrireLigne(0,0,"gold",0);
-		his.ecrireLigne(0,1,"gold",5);
-		his.ecrireLigne(0,2,"gold",10);
-		his.ecrireLigne(0,3,"gold",15);
-		his.fermerFichier();
+		try
+		{
+			his.ecrireLigne(0,0,"gold",0);
+			his.ecrireLigne(0,1,"gold",5);
+			his.ecrireLigne(0,2,"gold",10);
+			his.ecrireLigne(0,3,"gold",15);
+			his.fermerFichier();
+		} catch (IOException ioe) { ioe.printStackTrace(); }
 	}
 }
