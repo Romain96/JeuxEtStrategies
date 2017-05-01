@@ -109,7 +109,7 @@ public class AgentCoop extends AgentImpl
 		catch (RemoteException re) { System.out.println(re) ; }
 	 }
 	 
-	 public static void main(String[] args)
+	 public static void main(String[] args) throws IOException
 	 {
 		 // au moins un triplet type quantite objectif en plus des deux arguments obligatoires
 		if (args.length >= 5 && args.length%3 == 0)
