@@ -1,6 +1,7 @@
 import java.rmi.Remote ; 
 import java.rmi.RemoteException ; 
 import java.util.*;
+import java.io.IOException;;
 
 public interface Agent extends Remote
 {
