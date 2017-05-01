@@ -207,20 +207,32 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			System.out.println("Coordinateur : ordonne à l'agent d'indice " + i + " dasns le tableau de s'arrêter");
 			this.agents[i].terminerJeu();	// les agents se terminent
-		}
+		}	
 		
-		try
+		new Thread(new Runnable() 
 		{
-			// unbind avant la suppression
-			Naming.unbind("rmi://localhost:9000/coordinateur");
-
-			// supprime du runtime RMI
-			UnicastRemoteObject.unexportObject(this, true);
-			
-			System.out.println("Coordinateur se termine");
-			this.historique.fermerFichier();
-		} catch(Exception e){System.out.println(e);}
-		System.exit(0);	// le coordinateur se termine
+			public void run() 
+			{
+				try 
+				{
+					Thread.sleep(100);
+				} catch (InterruptedException e) {/* rien */}
+					
+				try
+				{
+					// unbind avant la suppression
+					Naming.unbind("rmi://localhost:9000/coordinateur");
+				}catch (NotBoundException re) { System.out.println(re) ; }
+				catch (RemoteException re) { System.out.println(re) ; }
+				catch (MalformedURLException e) { System.out.println(e) ; }
+					
+				// supprime du runtime RMI
+				//UnicastRemoteObject.unexportObject(this, true);
+				System.out.println("Coordinateur se termine" );
+				System.exit(0);
+			}
+		});
+		
 	}
 	
 	/*
