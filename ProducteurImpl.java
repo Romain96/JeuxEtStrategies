@@ -178,6 +178,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	 */
 	public void terminerJeu() throws RemoteException
 	{
+		System.out.println("Producteur " + getIdProducteur() + " : le coordinateur me demande de terminer");
 		new Thread(new Runnable() 
 		{
 			public void run() 
