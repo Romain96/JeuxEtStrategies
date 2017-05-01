@@ -470,7 +470,9 @@ public abstract class AgentImpl
 					System.exit(0);
 				}
 			});
-		} catch (Exception e) { /*rien*/ }
+		} catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
 		return;
 	}
 }
