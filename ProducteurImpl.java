@@ -165,6 +165,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		{
 			this.quantiteRessource = 100;	// nombre arbitraire
 		}
+		System.out.println("Producteur " + getIdProducteur() + " : nouvelle quantité : " + this.quantiteRessource);
 	}
 	
 	/*
