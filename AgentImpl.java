@@ -449,26 +449,28 @@ public abstract class AgentImpl
 	 * Commentaires	: appelé par le coordinateur pour terminer l'agent
 	 */
 	public void terminerJeu() throws RemoteException
-	{			
-		new Thread(new Runnable() 
-		{
-			public void run() 
+	{	
+		try
+		{		
+			new Thread(new Runnable() 
 			{
-				try 
+				public void run() 
 				{
-					Thread.sleep(100);
-				} catch (InterruptedException e) {/* rien */}
-				catch (RemoteException re) { /*rien*/ }
-				
-				// unbind avant la suppression
-				Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
-				
-				// supprime du runtime RMI
-				//UnicastRemoteObject.unexportObject(this, true);
-				System.out.println("Agent " + getIdAgent() + " se termine" );
-				System.exit(0);
-			}
-		});
+					try 
+					{
+						Thread.sleep(100);
+					} catch (InterruptedException e) {/* rien */}
+					
+					// unbind avant la suppression
+					Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
+					
+					// supprime du runtime RMI
+					//UnicastRemoteObject.unexportObject(this, true);
+					System.out.println("Agent " + getIdAgent() + " se termine" );
+					System.exit(0);
+				}
+			});
+		} catch (RemoteException re) { /*rien*/ }
 		return;
 	}
 }
