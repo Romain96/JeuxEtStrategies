@@ -168,7 +168,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Commentaires	: vérifie si le bon nombre d'agents et de producteurs
 	 * se sont ideitifié et le cas échéant lance le jeu en appelant le 1er agent
 	 */
-	public void verificationLancementJeu() throws RemoteException
+	public void verificationLancementJeu() throws RemoteException, IOException
 	{
 		if (this.nbAgentsEnregistres >= this.nbAgents && this.nbProducteursEnregistres >= this.nbProducteurs)
 		{
