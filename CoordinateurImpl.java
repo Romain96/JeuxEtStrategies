@@ -376,7 +376,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			int nbAgents = Integer.parseInt(args[1]);
 			int nbProducteurs = Integer.parseInt(args[2]);
-			boolean finPremierAgent = Boolean.parseBoolean(args[3])
+			boolean finPremierAgent = Boolean.parseBoolean(args[3]);
 			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs, finPremierAgent);
 			Naming.rebind( "rmi://localhost:" + args[0] + "/coordinateur" ,objLocal) ;
 			System.out.println("Coordinateur pret") ;
