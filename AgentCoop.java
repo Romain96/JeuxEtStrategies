@@ -69,12 +69,36 @@ public class AgentCoop extends AgentImpl
 		
 		try
 		{
-			Ressource aAcquerir = getRessourceAtPos(0);	// la 1e ressource
-			int ressourcesAcquises = getProducteurAtPos(0).attribuerRessources(aAcquerir.getTypeRessource(), 5);
-			System.out.println("Agent " + getIdAgent() + " : j'acquiers " + ressourcesAcquises + " exemplaires de la ressource " + 
-			aAcquerir.getTypeRessource());
-			setRessourceByType(new Ressource(aAcquerir.getTypeRessource(), aAcquerir.getQuantiteRessource() + ressourcesAcquises, 
-			aAcquerir.getObjectifRessource()));
+			ArrayList<Ressource> copie = getRessources();	// copie des ressources de l'agent
+			// parcours des ressources jusqu'à trouver une ressource dont l'objectif de quantité n'est pas atteint
+			for (int i = 0; i < copie.size(); i++)
+			{
+				if (copie.get(i).getQuantiteRessource() < copie.get(i).getObjectifRessource())
+				{
+					// parcours des producteurs jusqu'à en trouver un qui produit la ressource recherchée
+					for (int j = 0; j < getNbProducteurs(); j++)
+					{
+						// demander au producteur la ressource qu'il produit
+						Ressource ressourceProduite = getProducteurAtPos(j).observer(getIdAgent());
+						if (ressourceProduite.getTypeRessource().equals(copie.get(i).getTypeRessource()))
+						{
+							// acquérir cette ressource
+							Ressource aAcquerir = copie.get(i);
+							int ressourcesAcquises = getProducteurAtPos(j).attribuerRessources(aAcquerir.getTypeRessource(), 5);
+							System.out.println("Agent " + getIdAgent() + " : j'acquiers " + ressourcesAcquises + 
+							" exemplaires de la ressource " + aAcquerir.getTypeRessource());
+							// mettre à jour
+							setRessourceByType(new Ressource(aAcquerir.getTypeRessource(), aAcquerir.getQuantiteRessource() + 
+							ressourcesAcquises, aAcquerir.getObjectifRessource()));
+						}
+					}
+					// sinon aucun producteur ne produit cette resource, on se met en surveillance
+					surveillance();
+				}
+				// si ce cas est atteint alors tous les objectifs sont atteints
+				// on ne devrait pas être ici !!
+				System.out.println("Pas de ressources à acquérir :(");
+			}	
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 	 }
