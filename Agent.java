@@ -17,6 +17,6 @@ public interface Agent extends Remote
 	public int voler(int idAgent, String typeRessource, int quantiteRessource) throws RemoteException;
 	
 	// permet à un agent de connaître les ressources possédées par un autre agent
-	public ArrayList<Ressource> observer(int idAgent) throws RemoteException;
+	public ArrayList<RessourceImpl> observer(int idAgent) throws RemoteException;
 }
 
