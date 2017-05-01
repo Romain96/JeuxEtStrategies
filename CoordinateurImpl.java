@@ -298,7 +298,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			 this.prochainAgentAJouer++;	// on lance l'agent suivant
 			 lancementProchainAgent();
 		 }
-		 else if (this.terminaisonsAgents[i])
+		 else if (this.terminaisonsAgents[this.prochainAgentAJouer])
 		 {
 			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " a déjà terminé" );
 			 this.prochainAgentAJouer++;	// on lance l'agent suivant
