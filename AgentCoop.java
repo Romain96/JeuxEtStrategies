@@ -95,6 +95,7 @@ public class AgentCoop extends AgentImpl
 							// mettre à jour
 							setRessourceByType(new Ressource(aAcquerir.getTypeRessource(), aAcquerir.getQuantiteRessource() + 
 							ressourcesAcquises, aAcquerir.getObjectifRessource()));
+							return;
 						}
 					}
 					// sinon aucun producteur ne produit cette resource, on se met en surveillance
