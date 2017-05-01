@@ -111,28 +111,11 @@ public class AgentHumain extends AgentImpl
 			}
 			
 			case 3:
-			// deux cas autorisés : "o a [idAgent]" (observer un agent) 
-			// ou "o p [idProducteur]" (observer un producteur)
+			// seul cas autorisé : "o p [idProducteur]" (observer un producteur)
 			if (mots[0].equals("o"))
 			{
-				// vérifiaction avec l'argument agent
-				if (mots[1].equals("a"))
-				{
-					// syntaxe correcte, vérification de la validité de l'argument
-					int nbAgentsArg = Integer.parseInt(mots[2]);
-					if (nbAgentsArg < getNbAgents() && nbAgentsArg >= 0)
-					{
-						// syntaxe correcte et argument valide
-						return true;
-					}
-					else
-					{
-						// syntaxe correcte et argument invalide
-						return false;
-					}
-				}
 				// vérification avec l'argument producteur
-				else if (mots[1].equals("p"))
+				if (mots[1].equals("p"))
 				{
 					// syntaxe correcte, vérification de la validité de l'argument
 					int nbProducteurArg = Integer.parseInt(mots[2]);
@@ -161,7 +144,8 @@ public class AgentHumain extends AgentImpl
 			
 			case 4:
 			// cas autorisés : "a [idProducteur] [typeRessource] [quantiteRessource]" (acquérirRessource) 
-			// et "v [idProducteur/idAgent] [typeRessource] [quantiteRessource]" (voler)
+			// et "v [idAgent] [typeRessource] [quantiteRessource]" (voler)
+			// et "o a [idAgent] [typeRessource] (observer un agent)
 			if (mots[0].equals("a"))
 			{
 				// vérification de la commande d'acquisition de ressources (sauf le typeRessource)
@@ -194,6 +178,25 @@ public class AgentHumain extends AgentImpl
 					return false;
 				}
 			}
+			else if (mots[0].equals("o"))
+			{
+				// vérifiaction avec l'argument agent
+				if (mots[1].equals("a"))
+				{
+					// syntaxe correcte, vérification de la validité de l'argument
+					int nbAgentsArg = Integer.parseInt(mots[2]);
+					if (nbAgentsArg < getNbAgents() && nbAgentsArg >= 0)
+					{
+						// syntaxe correcte et argument valide
+						return true;
+					}
+					else
+					{
+						// syntaxe correcte et argument invalide
+						return false;
+					}
+				}
+			}
 			else
 			{
 				// syntaxe fausse (1er mot)
@@ -224,21 +227,12 @@ public class AgentHumain extends AgentImpl
 			
 			
 			case 3:
-			// deux cas autorisés : "o a [idAgent]" (observer un agent) 
+			// deux cas autorisés : 
 			// ou "o p [idProducteur]" (observer un producteur)
 			if (mots[0].equals("o"))
 			{
-				// vérifiaction avec l'argument agent
-				if (mots[1].equals("a"))
-				{
-					int idAgentArg = Integer.parseInt(mots[2]);
-					ArrayList<Ressource> ressourcesObserveesAgent = getAgentAtPos(idAgentArg).observer(getIdAgent());
-					System.out.println("Agent " + getIdAgent() + " : j'ai observé l'agent " + idAgentArg + 
-					" et reçu une liste de " + ressourcesObserveesAgent.size() + " ressources");
-					break;		// pour l'instant
-				}
 				// vérification avec l'argument producteur
-				else if (mots[1].equals("p"))
+				if (mots[1].equals("p"))
 				{
 					int idProducteurArg = Integer.parseInt(mots[2]);
 					String typeProduit = getProducteurAtPos(idProducteurArg).observerTypeRessource(getIdAgent());
@@ -247,11 +241,13 @@ public class AgentHumain extends AgentImpl
 					" et il possède " + quantiteProduite + " exemplaires de la ressource " + typeProduit);
 					break;
 				}
+				break;
 			}
 			
 			case 4:
 			// cas autorisés : "a [idProducteur] [typeRessource] [quantiteRessource]" (acquérirRessource) 
 			// et "v [idAgent] [typeRessource] [quantiteRessource]" (voler)
+			// et "o a [idAgent] [typeRessource]" (observer un agent) 
 			if (mots[0].equals("a"))
 			{
 				int idProducteurArg = Integer.parseInt(mots[1]);
@@ -273,6 +269,9 @@ public class AgentHumain extends AgentImpl
 				Ressource modif = getRessourceByType(mots[2]);
 				modif.setQuantiteRessource(modif.getQuantiteRessource() + quantiteVolee);
 				setRessourceByType(modif);
+			}
+			else if (mots[0].equals("o"))
+			{
 			}
 			else
 			{
