@@ -5,6 +5,7 @@ import java.net.MalformedURLException ;
 import java.util.*;
 import java.util.Timer;
 import java.io.IOException;
+import java.lang.Thread;
 
 public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 {  
@@ -202,6 +203,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 				System.exit(0);
 			}
 		});
+		return;
 	}
 	
 	public static void main(String [] args) throws IOException
