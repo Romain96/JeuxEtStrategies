@@ -158,7 +158,8 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		// très simple pour l'instant on double ne nombre restant (si > 0)
 		if (this.quantiteRessource > 0)
 		{
-			this.quantiteRessource *= 2;
+			// augmente du maximum de 1 et de 10% des ressources
+			this.quantiteRessource += Math.max(this.quantiteRessource/10, 1);
 		}
 		else
 		{

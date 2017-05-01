@@ -101,11 +101,12 @@ public class AgentCoop extends AgentImpl
 					}
 					// sinon aucun producteur ne produit cette resource, on se met en surveillance
 					surveillance();
+					return;
 				}
-				// si ce cas est atteint alors tous les objectifs sont atteints
-				// on ne devrait pas être ici !!
-				System.out.println("Pas de ressources à acquérir :(");
-			}	
+			}
+			// si ce cas est atteint alors tous les objectifs sont atteints
+			// on ne devrait pas être ici !!
+			System.out.println("Pas de ressources à acquérir :(");	
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 	 }
