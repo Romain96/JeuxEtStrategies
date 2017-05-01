@@ -241,10 +241,10 @@ public class AgentHumain extends AgentImpl
 				else if (mots[1].equals("p"))
 				{
 					int idProducteurArg = Integer.parseInt(mots[2]);
-					Ressource ressourcesObserveesProducteur = getProducteurAtPos(idProducteurArg).observer(getIdAgent());
+					String typeProduit = getProducteurAtPos(idProducteurArg).observerTypeRessource(getIdAgent());
+					int quantiteProduite = getProducteurAtPos(idProducteurArg).observerQuantiteRessource(getIdAgent());
 					System.out.println("Agent " + getIdAgent() + " : j'ai observé le producteur " + idProducteurArg + 
-					" et reçu le résultat " + ressourcesObserveesProducteur.getTypeRessource() + " " + 
-					ressourcesObserveesProducteur.getQuantiteRessource());
+					" et il possède " + quantiteProduite + " exemplaires de la ressource " + typeProduit);
 					break;
 				}
 			}
