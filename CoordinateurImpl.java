@@ -201,7 +201,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			System.out.println("Coordinateur : ordonne au producteur d'indice " + i + " dasns le tableau de s'arrêter");
 			this.producteurs[i].terminerJeu();	// les producteurs se terminent
-			try 
 		}
 		// fin des agents
 		for (int i = 0; i < this.nbAgentsEnregistres; i++)
