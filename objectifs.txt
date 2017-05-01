@@ -2,7 +2,7 @@
 		OBJECTIFS DU PROJET "JEUX ET STRATEGIES"
 ================================================================================
 
-### Objectifs courants [2017-04-17] 
+### Objectifs courants [2017-05-01] 
 
 x définir l'interface Producteur 							
 x définir l'interface Agent	 
@@ -31,9 +31,8 @@ x tester le cycle complet
 - corriger les bugs éventuels
 
 NOTES :
-- le coordinateur doit obligatoirement connaître tous les agents et tous les producteurs
-- les agents doivent connaître obligatoirement tous les producteurs et peuvent connaître tous les autres agents
-- les producteurs n'ont pas à connaître qui que ce soit excepté le coordinateur
+- le projet est officiellement terminé [2017-05-01]
+- les tracé Gnuplot n'est pas terminé
 
 * cycle simplifié 1 *
 
