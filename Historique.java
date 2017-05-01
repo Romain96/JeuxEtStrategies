@@ -19,8 +19,9 @@ public class Historique
 	//				constructeur
 	//----------------------------------------------------------------------
 	
-	public Historique()
+	public Historique(String nom)
 	{
+		setNom(nom);
 		System.out.println("Création du fichier " + this.nom + " pour stocker l'historique");
 		try 
 		{
