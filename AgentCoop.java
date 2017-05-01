@@ -121,7 +121,7 @@ public class AgentCoop extends AgentImpl
 			{
 				int quantiteRessource = Integer.parseInt(args[i+1]);
 				int objectifRessource = Integer.parseInt(args[i+2]);
-				Ressource ressource = new RessourceImpl(args[i], quantiteRessource, objectifRessource);
+				RessourceImpl ressource = new RessourceImpl(args[i], quantiteRessource, objectifRessource);
 				ressources.add(ressource);
 			}
 			AgentImpl objLocal;
