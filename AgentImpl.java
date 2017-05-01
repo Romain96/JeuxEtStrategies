@@ -364,7 +364,7 @@ public abstract class AgentImpl
 					if (this.ressources.get(i).getQuantiteRessource() >= quantiteRessource)
 					{
 						// on prend le plus petit entre 10% + 1 et la quantité demandée
-						int quantiteVolee = Math.min(this.quantiteRessource/10 + 1, quantiteRessource);
+						int quantiteVolee = Math.min(modif.getQuantiteRessource()/10 + 1, quantiteRessource);
 						// on retire la quantité volée à la copie locale
 						modif.setQuantiteRessource(modif.getQuantiteRessource() - quantiteVolee);
 						this.ressources.set(i,modif);	// on met à jour la liste des ressources
@@ -373,7 +373,7 @@ public abstract class AgentImpl
 					else
 					{
 						// on prend le plus petit entre 10% + 1 et la quantité possédée
-						int quantiteVolee = Math.min(this.quantiteRessource/10 + 1, this.quantiteRessource);
+						int quantiteVolee = Math.min(modif.getQuantiteRessource()/10 + 1, modif.getQuantiteRessource());
 						modif.setQuantiteRessource(modif.getQuantiteRessource() - quantiteVolee);
 						this.ressources.set(i,modif);	// on met à jour la liste des ressources
 						return quantiteVolee;
