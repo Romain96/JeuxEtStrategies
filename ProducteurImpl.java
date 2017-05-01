@@ -188,19 +188,20 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	
 	public static void main(String [] args)
 	{
-		if (args.length != 4)
+		if (args.length != 5)
 		{
-			System.out.println("Usage : java ObjectProducteur <port rmiregistry> <idProducteur> <typeRessource> <quantiteRessource>") ;
+			System.out.println("Usage : java ObjectProducteur <port rmiregistry> <idProducteur> <typeRessource> <quantiteRessource> <quantiteMax>") ;
 			System.exit(0) ;
 		}
 		try
 		{
-			System.out.println("args : " + args[0]+ "  " + args[1] + " " + args[2] + " " + args[3]);
+			System.out.println("args : " + args[0]+ "  " + args[1] + " " + args[2] + " " + args[3] + " " + args[4]);
 			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:" + args[0] + "/coordinateur" );
 			
 			int idProducteur = Integer.parseInt(args[1]);
 			int quantiteRessource = Integer.parseInt(args[3]);
-			final ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource );
+			int quantiteMax = Integer.parseInt(args[4]);
+			final ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource, quantiteMax );
 			Naming.rebind( "rmi://localhost:" + args[0] + "/producteur" + args[1] ,objLocal) ;
 			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
 			
