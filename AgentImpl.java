@@ -4,6 +4,7 @@ import java.rmi.* ;
 import java.net.MalformedURLException ; 
 import java.util.*;
 import java.io.IOException;
+import java.lang.Thread;
 
 public abstract class AgentImpl 
   extends UnicastRemoteObject
@@ -448,16 +449,25 @@ public abstract class AgentImpl
 	 * Commentaires	: appelé par le coordinateur pour terminer l'agent
 	 */
 	public void terminerJeu() throws RemoteException
-	{	
-		try
+	{			
+		new Thread(new Runnable() 
 		{
-			// unbind avant la suppression
-			Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
-
-			// supprime du runtime RMI
-			UnicastRemoteObject.unexportObject(this, true);
-			System.out.println("Agent " + getIdAgent() + " se termine" );
-		} catch(Exception e){System.out.println(e);}
-		System.exit(0);
+			public void run() 
+			{
+				try 
+				{
+					Thread.sleep(100);
+				} catch (InterruptedException e) {/* rien */}
+				
+				// unbind avant la suppression
+				Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
+				
+				// supprime du runtime RMI
+				UnicastRemoteObject.unexportObject(this, true);
+				System.out.println("Agent " + getIdAgent() + " se termine" );
+				System.exit(0);
+			}
+		});
+		return;
 	}
 }
