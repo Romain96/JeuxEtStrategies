@@ -449,7 +449,8 @@ public abstract class AgentImpl
 	 * Commentaires	: appelé par le coordinateur pour terminer l'agent
 	 */
 	public void terminerJeu() throws RemoteException
-	{		
+	{
+		System.out.println("Agent " + getIdAgent() + " : le coordinateur me demande de terminer");		
 		new Thread(new Runnable() 
 		{
 			public void run() 
