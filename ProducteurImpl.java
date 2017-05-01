@@ -108,16 +108,27 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	}
 	
 	/*
-	 * Fonction 	: observer
+	 * Fonction 	: observerTypeRessource
 	 * Argument(s)	: l'id de l'agent demandeur
-	 * Résultat(s)	: la ressource produite (type, quantité)
+	 * Résultat(s)	: la ressource produite (type)
 	 * Commentaires	: /
 	 */
-	public Ressource observer(int idAgent) throws RemoteException
+	public String observerTypeRessource(int idAgent) throws RemoteException
 	{
-		Ressource ressourceProduite = new Ressource(this.typeRessource, this.quantiteRessource, 0);	// 0 pour l'objectif
-		System.out.println("Producteur " + getIdProducteur() + " : l'agent " + idAgent + " m'observe");
-		return ressourceProduite;
+		System.out.println("Producteur " + getIdProducteur() + " : l'agent " + idAgent + " m'observe (type)");
+		return this.typeRessource;
+	}
+	
+	/*
+	 * Fonction 	: observerQuantiteRessource
+	 * Argument(s)	: l'id de l'agent demandeur
+	 * Résultat(s)	: la ressource produite (quantité)
+	 * Commentaires	: /
+	 */
+	public int observerQuantiteRessource(int idAgent) throws RemoteException
+	{
+		System.out.println("Producteur " + getIdProducteur() + " : l'agent " + idAgent + " m'observe (quantité)");
+		return this.quantiteRessource;
 	}
 	
 	/*

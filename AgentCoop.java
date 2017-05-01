@@ -79,12 +79,14 @@ public class AgentCoop extends AgentImpl
 					for (int j = 0; j < getNbProducteurs(); j++)
 					{
 						// demander au producteur la ressource qu'il produit
-						Ressource ressourceProduite = (Ressource)getProducteurAtPos(j).observer(getIdAgent());
-						if (ressourceProduite.getTypeRessource().equals(copie.get(i).getTypeRessource()))
+						String typeProduit = getProducteurAtPos(j).observerTypeRessource(getIdAgent());
+						int quantiteProduite = getProducteurAtPos(j).observerQuantiteRessource(getIdAgent());
+						if (typeProduit.equals(copie.get(i).getTypeRessource()))
 						{
 							// acquérir cette ressource
 							Ressource aAcquerir = copie.get(i);
-							int ressourcesAcquises = getProducteurAtPos(j).attribuerRessources(aAcquerir.getTypeRessource(), 5);
+							// on en demande autant que ce qui est disponible
+							int ressourcesAcquises = getProducteurAtPos(j).attribuerRessources(aAcquerir.getTypeRessource(), quantiteProduite);
 							System.out.println("Agent " + getIdAgent() + " : j'acquiers " + ressourcesAcquises + 
 							" exemplaires de la ressource " + aAcquerir.getTypeRessource());
 							// mettre à jour
