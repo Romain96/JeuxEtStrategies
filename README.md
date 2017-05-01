@@ -37,6 +37,7 @@ Le projet sera réalisé en Java et en utilisant l'API Remote Method Invocation 
 | objectifs.txt | définition des objectifs courants du projet |
 | Plot.java | tracé de Gnuplot |
 | README.md | fichier descriptif |
+| Projet.pdf | Rapport du projet |
 
 ## Auteurs
 
