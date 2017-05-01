@@ -119,10 +119,10 @@ public class AgentIndiv extends AgentImpl
 						}
 					}
 				}
-				// si ce cas est atteint alors tous les objectifs sont atteints
-				// on ne devrait pas être ici !!
-				System.out.println("Pas de ressources à acquérir :(");
-			}	
+			}
+			// si ce cas est atteint alors tous les objectifs sont atteints
+			// on ne devrait pas être ici !!
+			System.out.println("Pas de ressources à acquérir :(");	
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
 	 }
