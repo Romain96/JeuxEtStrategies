@@ -22,6 +22,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	// liste des punitions des agents (nb de tours de non jeu)
 	int punitionsAgents[];
 	
+	// liste des agents ayant terminé (si le politique de fin est que tout le monde doit finir)
+	boolean terminaisonsAgents[];
+	
+	// vrai si le jeu se finit quand le premier agent termine, faux si tous les agents doivent terminer
+	boolean finPremierAgent;
+	
 	// indique si le jeu a démarré ou non
 	boolean jeuEnCours;
 	
@@ -32,7 +38,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	//				cosntructeur
 	//----------------------------------------------------------------------
 	
-	public CoordinateurImpl(int nbAgents, int nbProducteurs) throws RemoteException
+	public CoordinateurImpl(int nbAgents, int nbProducteurs, boolean finPremierAgent) throws RemoteException
 	{
 		// initialisation du tableau d'agents
 		this.agents = new Agent[nbAgents];	// les agents s'identifiront au coordinateur à l'initialisation
@@ -49,7 +55,10 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		for (int i = 0; i < nbAgents; i++)
 		{
 			this.punitionsAgents[i] = 0;	// pas de punition au départ
+			this.terminaisonsAgents[i] = false;	// aucun agent n'a terminé
 		}
+		
+		this.finPremierAgent = finPremierAgent;
 		
 		// le jeu n'a pas encore commencé (les agents/producteurs doivent d'abord s'inscrirent)
 		jeuEnCours = false;
@@ -289,6 +298,12 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			 this.prochainAgentAJouer++;	// on lance l'agent suivant
 			 lancementProchainAgent();
 		 }
+		 else if (this.terminaisonsAgents[i])
+		 {
+			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " a déjà terminé" );
+			 this.prochainAgentAJouer++;	// on lance l'agent suivant
+			 lancementProchainAgent();
+		 }
 		 else
 		 {
 			 System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
@@ -306,7 +321,21 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public void signalerObjectifAtteint(int idAgent) throws RemoteException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
-		terminerJeu();
+		
+		// vérification de la fin
+		if (this.finPremierAgent)
+		{
+			// fin quand le premier agent termine
+			terminerJeu();
+		}
+		else
+		{
+			// fin seulement quand le dernier agent a terminé
+			this.terminaisonsAgents[idAgent] = true;	// cet agent a terminé
+			this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
+			lancementProchainAgent();
+		}
+		
 	}
 	
 	// 
@@ -338,16 +367,17 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 
 	 public static void main(String [] args)
 	{
-		if (args.length != 3)
+		if (args.length != 4)
 		{
-			System.out.println("Usage : java objetCoordinateur <port du rmiregistry> <nbAgents> <nbProducteurs>");
+			System.out.println("Usage : java objetCoordinateur <port du rmiregistry> <nbAgents> <nbProducteurs> <finPremierAgent>");
 			System.exit(0) ;
 		}
 		try
 		{
 			int nbAgents = Integer.parseInt(args[1]);
 			int nbProducteurs = Integer.parseInt(args[2]);
-			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs);
+			boolean finPremierAgent = Boolean.parseBoolean(args[3])
+			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs, finPremierAgent);
 			Naming.rebind( "rmi://localhost:" + args[0] + "/coordinateur" ,objLocal) ;
 			System.out.println("Coordinateur pret") ;
 		}
