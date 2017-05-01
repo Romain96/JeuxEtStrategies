@@ -3,6 +3,7 @@ import java.rmi.RemoteException ;
 import java.rmi.* ; 
 import java.net.MalformedURLException ; 
 import java.util.*;
+import java.io.IOException;
 
 public class AgentCoop extends AgentImpl
 {
