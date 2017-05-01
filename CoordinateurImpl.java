@@ -229,7 +229,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Résultat(s)	: /
 	 * Commentaires	: l'agent est enregistrer dans la liste des agents du coordinateur
 	 */
-	public void identifierAgent(int idAgent) throws RemoteException
+	public void identifierAgent(int idAgent) throws RemoteException, IOException
 	{
 		if (nbAgentsEnregistres < nbAgents )
 		{
@@ -260,7 +260,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Résultat(s)	: /
 	 * Commentaires	: le producteur est enregistrer dans la liste des producteurs du coordinateur
 	 */
-	public void identifierProducteur(int idProducteur) throws RemoteException
+	public void identifierProducteur(int idProducteur) throws RemoteException, IOException
 	{
 		if (nbProducteursEnregistres < nbProducteurs )
 		{
