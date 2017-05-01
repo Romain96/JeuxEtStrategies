@@ -18,6 +18,7 @@ présentera l'historique global à la fin et éventuellement des statistiques.
 ## Outils
 
 Le projet sera réalisé en Java et en utilisant l'API Remote Method Invocation (RMI)
+Gnuplot sera utilisé pour les tracés de fin de partie
 
 ## Fichiers
 
