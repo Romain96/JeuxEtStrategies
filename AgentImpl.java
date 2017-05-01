@@ -198,7 +198,7 @@ public abstract class AgentImpl
 	 * de l'agent, appelle la fonction choixAction qui est différente selon
 	 * la personnalité de l'agent
 	 */
-	public void demarrerTour(int numeroTour) throws RemoteException
+	public void demarrerTour(int numeroTour) throws RemoteException, IOException
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
 		choixAction();
