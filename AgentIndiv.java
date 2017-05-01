@@ -62,21 +62,69 @@ public class AgentIndiv extends AgentImpl
 	 public void choixAction() throws RemoteException
 	 {
 		/*
-		 * Un agent individualiste aura tendance à tenter d'acquérir des ressources systématiquement
-		 * et à défaut de pouvoir acquérir des ressources, il tentera de les voler 
+		 * Un agent individualiste aura tendance à tenter d'acquérir des ressources
+		 * et à défaut de pouvoir acquérir des ressources, se mettra en quête de les voler (pas de surveillance)
 		 */
-		  
-		try 
-		{		
-			Ressource aVoler = getRessourceAtPos(0);	// la 1e ressource
-			int ressourcesVolees = getAgentAtPos(0).voler(getIdAgent(), aVoler.getTypeRessource(), 2);
-			System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + " exemplaires de la ressource " + 
-			aVoler.getTypeRessource() + " à l'agent 0");
-			setRessourceByType(new Ressource(aVoler.getTypeRessource(), aVoler.getQuantiteRessource() + ressourcesVolees, 
-			aVoler.getObjectifRessource()));
+		
+		try
+		{
+			ArrayList<Ressource> copie = getRessources();	// copie des ressources de l'agent
+			// parcours des ressources jusqu'à trouver une ressource dont l'objectif de quantité n'est pas atteint
+			for (int i = 0; i < copie.size(); i++)
+			{
+				if (copie.get(i).getQuantiteRessource() < copie.get(i).getObjectifRessource())
+				{
+					System.out.println("Agent " + getIdAgent() + " : je choisi la ressource " + copie.get(i).getTypeRessource());
+					// parcours des producteurs jusqu'à en trouver un qui produit la ressource recherchée
+					for (int j = 0; j < getNbProducteurs(); j++)
+					{
+						// demander au producteur la ressource qu'il produit
+						String typeProduit = getProducteurAtPos(j).observerTypeRessource(getIdAgent());
+						int quantiteProduite = getProducteurAtPos(j).observerQuantiteRessource(getIdAgent());
+						System.out.println("Agent " + getIdAgent() + " : le producteur " + j + " produit " + quantiteProduite + " de " + typeProduit);
+						if (typeProduit.equals(copie.get(i).getTypeRessource()))
+						{
+							System.out.println("Agent " + getIdAgent() + " : je demande au producteur " + j);
+							// acquérir cette ressource
+							Ressource aAcquerir = copie.get(i);
+							// on en demande autant que ce qui est disponible
+							int ressourcesAcquises = getProducteurAtPos(j).attribuerRessources(aAcquerir.getTypeRessource(), quantiteProduite);
+							System.out.println("Agent " + getIdAgent() + " : j'acquiers " + ressourcesAcquises + 
+							" exemplaires de la ressource " + aAcquerir.getTypeRessource());
+							// mettre à jour
+							setRessourceByType(new Ressource(aAcquerir.getTypeRessource(), aAcquerir.getQuantiteRessource() + 
+							ressourcesAcquises, aAcquerir.getObjectifRessource()));
+							return;
+						}
+					}
+					// sinon aucun producteur ne produit cette resource, on tente de voler la ressource au premier agent en ayant plus que 0
+					for (int j = 0; j < getNbAgents(); j++)
+					{
+						int quantitePossedee = getAgentAtPos(j).observerRessourceParType(copie.get(i).getTypeRessource());
+						System.out.println("Agent " + getIdAgent() + " : j'ai observé l'agent " + j + " et il possède " +
+						quantitePossedee + " exemplaires de la resource " + copie.get(i).getTypeRessource());
+						// si cette quantité est supérieure à 0 on vole ce qu'on peut
+						if (quantitePossedee > 0)
+						{
+							Ressource aVoler = copie.get(i);
+							// voler la ressource (autant que l'agent possède)
+							int ressourcesVolees = getAgentAtPos(j).voler(getIdAgent(), aVoler.getTypeRessource(), quantitePossedee);
+							System.out.println("Agent " + getIdAgent() + " : je vole " + ressourcesVolees + 
+							" exemplaires de la ressource " + aVoler.getTypeRessource());
+							// mettre à jour
+							setRessourceByType(new Ressource(aVoler.getTypeRessource(), aVoler.getQuantiteRessource() + 
+							ressourcesVolees, aVoler.getObjectifRessource()));
+							return;
+						}
+					}
+				}
+				// si ce cas est atteint alors tous les objectifs sont atteints
+				// on ne devrait pas être ici !!
+				System.out.println("Pas de ressources à acquérir :(");
+			}	
 		}
 		catch (RemoteException re) { System.out.println(re) ; }
-	}
+	 }
 	
 	public static void main(String[] args)
 	{

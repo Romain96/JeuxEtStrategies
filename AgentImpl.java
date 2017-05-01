@@ -384,21 +384,22 @@ public abstract class AgentImpl
 	 * Résultat(s)	: les ressources produites (type, quantité et objectif)
 	 * Commentaires	: /
 	 */
-	public ArrayList<Ressource> observer(int idAgent) throws RemoteException
+	public int observerRessourceParType(String typeRessource) throws RemoteException
 	{
-		System.out.println("Agent " + getIdAgent() + " : l'agent " + idAgent + " m'observe");
+		System.out.println("Agent " + getIdAgent() + " : l'agent " + idAgent + " m'observe (ressource " + typeRessource + ")");
 		
 		// si on est en surveillance, on ne divulge rien
 		if (getEnSurveillance())
 		{
 			System.out.println("Agent " + getIdAgent() + " : je suis en mode NSA, je ne dirai rien !");
-			return null;
+			return 0;	// l'agent pensera que je n'ai pas la ressource
 		}
-		// sinon on ne voit rien de cet espionnage
+		// sinon on ne voit rien de cet espionnage et on divulge la quantité possédée
 		else
 		{
 			System.out.println("Agent " + getIdAgent() + " : je n'ai rien vu");
-			return getRessources();
+			Ressource ressourceObservee = getRessourceByType(typeRessource);
+			return ressourceObservee.getQuantiteRessource();
 		}
 	}
 	
