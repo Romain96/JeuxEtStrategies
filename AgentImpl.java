@@ -451,29 +451,18 @@ public abstract class AgentImpl
 	public void terminerJeu() throws RemoteException
 	{
 		System.out.println("Agent " + getIdAgent() + " : le coordinateur me demande de terminer");		
-		new Thread(new Runnable() 
+					
+		try
 		{
-			public void run() 
-			{
-				try 
-				{
-					Thread.sleep(100);
-				} catch (InterruptedException e) {/* rien */}
+			// unbind avant la suppression
+			Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
+		}catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
 					
-				try
-				{
-					// unbind avant la suppression
-					Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
-				}catch (NotBoundException re) { System.out.println(re) ; }
-				catch (RemoteException re) { System.out.println(re) ; }
-				catch (MalformedURLException e) { System.out.println(e) ; }
-					
-				// supprime du runtime RMI
-				//UnicastRemoteObject.unexportObject(this, true);
-				System.out.println("Agent " + getIdAgent() + " se termine" );
-				System.exit(0);
-			}
-		});
-		return;
+		// supprime du runtime RMI
+		UnicastRemoteObject.unexportObject(this, true);
+		System.out.println("Agent " + getIdAgent() + " se termine" );
+		//System.exit(0);
 	}
 }

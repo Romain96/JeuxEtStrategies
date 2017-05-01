@@ -182,31 +182,19 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	public void terminerJeu() throws RemoteException
 	{
 		System.out.println("Producteur " + getIdProducteur() + " : le coordinateur me demande de terminer");
-		this.timer.cancel();
-		new Thread(new Runnable() 
+		this.timer.cancel();		
+		try
 		{
-			public void run() 
-			{
-				try 
-				{
-					Thread.sleep(100);
-				} catch (InterruptedException e) {/* rien */}
+			// unbind avant la suppression
+			Naming.unbind("rmi://localhost:9000/producteur" + getIdProducteur());
+		}catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
 					
-				try
-				{
-					// unbind avant la suppression
-					Naming.unbind("rmi://localhost:9000/producteur" + getIdProducteur());
-				}catch (NotBoundException re) { System.out.println(re) ; }
-				catch (RemoteException re) { System.out.println(re) ; }
-				catch (MalformedURLException e) { System.out.println(e) ; }
-					
-				// supprime du runtime RMI
-				//UnicastRemoteObject.unexportObject(this, true);
-				System.out.println("Producteur " + getIdProducteur() + " se termine" );
-				System.exit(0);
-			}
-		});
-		return;
+		// supprime du runtime RMI
+		UnicastRemoteObject.unexportObject(this, true);
+		System.out.println("Producteur " + getIdProducteur() + " se termine" );
+		//System.exit(0);
 	}
 	
 	public static void main(String [] args) throws IOException

@@ -202,45 +202,25 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			System.out.println("Coordinateur : ordonne au producteur d'indice " + i + " dasns le tableau de s'arrêter");
 			this.producteurs[i].terminerJeu();	// les producteurs se terminent
 			try 
-			{
-				Thread.sleep(100);
-			} catch (InterruptedException e) {/* rien */}
 		}
 		// fin des agents
 		for (int i = 0; i < this.nbAgentsEnregistres; i++)
 		{
 			System.out.println("Coordinateur : ordonne à l'agent d'indice " + i + " dasns le tableau de s'arrêter");
 			this.agents[i].terminerJeu();	// les agents se terminent
-			try 
-			{
-				Thread.sleep(100);
-			} catch (InterruptedException e) {/* rien */}
 		}	
-		
-		new Thread(new Runnable() 
+		try
 		{
-			public void run() 
-			{
-				try 
-				{
-					Thread.sleep(100);
-				} catch (InterruptedException e) {/* rien */}
+			// unbind avant la suppression
+			Naming.unbind("rmi://localhost:9000/coordinateur");
+		}catch (NotBoundException re) { System.out.println(re) ; }
+		catch (RemoteException re) { System.out.println(re) ; }
+		catch (MalformedURLException e) { System.out.println(e) ; }
 					
-				try
-				{
-					// unbind avant la suppression
-					Naming.unbind("rmi://localhost:9000/coordinateur");
-				}catch (NotBoundException re) { System.out.println(re) ; }
-				catch (RemoteException re) { System.out.println(re) ; }
-				catch (MalformedURLException e) { System.out.println(e) ; }
-					
-				// supprime du runtime RMI
-				//UnicastRemoteObject.unexportObject(this, true);
-				System.out.println("Coordinateur se termine" );
-				System.exit(0);
-			}
-		});
-		return;
+		// supprime du runtime RMI
+		UnicastRemoteObject.unexportObject(this, true);
+		System.out.println("Coordinateur se termine" );
+		//System.exit(0);
 	}
 	
 	/*
