@@ -12,8 +12,8 @@ public void plot2d()
 	     y1 = { 2, 4, 6, 8, 10 },		// valeur de y1(x)
 	     y2 = { 3, 6, 9, 12, 15 };		// valeur de y2(x)
     DataTableSet dts = plot.addNewDataTableSet("2D Plot");
-    dts.addNewDataTable("y=2x", x, y1);		// plot des points de coordonn�es (x[i],y1[i]) ET de la courbe y=2x
-    dts.addNewDataTable("y=3x", x, y2); 	// plot des points de coordonn�es (x[i],y2[i]) ET de la courbe y=3x
+    dts.addNewDataTable("y=2x", x, y1);		// plot des points de coordonnées (x[i],y1[i]) ET de la courbe y=2x
+    dts.addNewDataTable("y=3x", x, y2); 	// plot des points de coordonnées (x[i],y2[i]) ET de la courbe y=3x
     jg.execute(plot, jg.plot2d);
 }
 */
@@ -26,7 +26,7 @@ public void plot2d()
     Plot plot = new Plot("") {
         {
             xlabel = "x";	// abscisse = nb de tours
-            ylabel = "y";	// ordonné = nb de ressource obtenu	
+            ylabel = "y";	// ordonnÃ© = nb de ressource obtenu	
         }
     };
 
