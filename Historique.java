@@ -30,7 +30,7 @@ public class Historique
 	//				getters
 	//----------------------------------------------------------------------
 	
-	public File getNom()
+	public String getNom()
 	{
 		return this.nom;
 	}
