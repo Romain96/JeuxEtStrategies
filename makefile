@@ -24,17 +24,17 @@ reg:
 
 # lance un coordinateur avec 3 agents et 1 producteur
 # format des arguments de CoordinateurImpl :
-# <port rmiregistry> <nbAgents> <nbProducteurs>
+# <port rmiregistry> <nbAgents> <nbProducteurs> <FinPremierAgent> <FichierLog>
 # arguments utilisés : 9000 3 1 gold 100
 coord:
-	java CoordinateurImpl 9000 2 1
+	java CoordinateurImpl 9000 2 1 false log
 
 # lance un producteur
 # format des arguments de ProducteurImpl :
-# <port rmiregistry> <idProducteur> <typeRessource> <quantiteRessource>
-# arguments utilisés : 9000 0 gold 200
+# <port rmiregistry> <idProducteur> <typeRessource> <quantiteRessource> <quantiteMax>
+# arguments utilisés : 9000 0 gold 200 10 silver 200 10
 prod:
-	java ProducteurImpl 9000 0 gold 200
+	java ProducteurImpl 9000 0 gold 200 10 silver 200 10
 
 # lance un agent (trois versions un coop, un indiv et un humain)
 # format des arguments de Agentxxx :
@@ -44,7 +44,4 @@ agent1:
 	java AgentCoop 9000 0 gold 0 50 silver 0 100
 	
 agent2:
-	java AgentIndiv 9000 1 gold 0 50 silver 0 100
-	
-agenth:
-	java AgentHumain 9000 2 gold 0 50 silver 0 100
+	java AgentHumain 9000 1 gold 0 50 silver 0 100

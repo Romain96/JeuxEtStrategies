@@ -22,12 +22,12 @@ x établir la communication RMI entre les agents et les producteurs
 x établir la communication RMI entre les agents et les autres agents
 x tester le cycle simplifié 1
 x tester le cycle simplifié 2
-- tester le cycle simplifié 3
-- tester le cycle simplifié 4
-- implémenter la sauvegarde des actions réalisées
+x tester le cycle simplifié 3
+x tester le cycle simplifié 4
+x implémenter la sauvegarde des actions réalisées
 - implémenter l'interface graphique de présentation des résultats
 - créér un script de lancement du jeu avec initialisation de tous les protagonistes
-- tester le cycle complet
+x tester le cycle complet
 - corriger les bugs éventuels
 
 NOTES :

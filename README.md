@@ -33,12 +33,14 @@ Le projet sera réalisé en Java et en utilisant l'API Remote Method Invocation 
 | AgentHumain.java | implémentation concrète des agents controlé par un joueur humain |
 | Producteur.java | implémentation des producteurs |
 | Ressources.java | définition des ressources utilisées |
+| Historique.java | écriture dans le fichier des logs |
 | objectifs.txt | définition des objectifs courants du projet |
+| Plot.java | tracé de Gnuplot |
 | README.md | fichier descriptif |
 
 ## Auteurs
 
-* BALZAN Juan
-* PERRIN Romain
+* BALZAN Juan (Dawguie)
+* PERRIN Romain (Romain96)
 
 
