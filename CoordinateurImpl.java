@@ -148,7 +148,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Commentaires	: positionne la variable jeuEnCours et appelle la méthode
 	 * demarrerTour du 1er agent de la liste
 	 */
-	 public void demarrerJeu() throws RemoteException
+	 public void demarrerJeu() throws RemoteException, IOException
 	 {
 		 // positionne la variable jeuEnCours à vrai
 		 this.jeuEnCours = true;	
@@ -311,7 +311,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Commentaires	: vérifie que l'agent n'est pas puni et lance l'agent
 	 * sinon lance l'agent suivant
 	 */
-	 public void lancementProchainAgent() throws RemoteException
+	 public void lancementProchainAgent() throws RemoteException, IOException
 	 {
 		 if (this.punitionsAgents[this.prochainAgentAJouer] > 0)
 		 {
