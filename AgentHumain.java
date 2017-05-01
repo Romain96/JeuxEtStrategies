@@ -21,7 +21,7 @@ public class AgentHumain extends AgentImpl
 	// initialise un agent humain avec un id et un numéro de port pour
 	// permettre d'agir comme serveur pour les autres agents et pour le coordinateur
 	// et initialise ses objectifs de ressources avec le tableau passé en argument
-	public AgentHumain(int idAgent, ArrayList<Ressource> ressources) throws RemoteException
+	public AgentHumain(int idAgent, ArrayList<RessourceImpl> ressources) throws RemoteException
 	{
 		super(idAgent, ressources);
 		scanner = new Scanner(System.in);
@@ -232,7 +232,7 @@ public class AgentHumain extends AgentImpl
 				if (mots[1].equals("a"))
 				{
 					int idAgentArg = Integer.parseInt(mots[2]);
-					ArrayList<Ressource> ressourcesObserveesAgent = getAgentAtPos(idAgentArg).observer(getIdAgent());
+					ArrayList<RessourceImpl> ressourcesObserveesAgent = getAgentAtPos(idAgentArg).observer(getIdAgent());
 					System.out.println("Agent " + getIdAgent() + " : j'ai observé l'agent " + idAgentArg + 
 					" et reçu une liste de " + ressourcesObserveesAgent.size() + " ressources");
 					break;		// pour l'instant
@@ -241,7 +241,7 @@ public class AgentHumain extends AgentImpl
 				else if (mots[1].equals("p"))
 				{
 					int idProducteurArg = Integer.parseInt(mots[2]);
-					Ressource ressourcesObserveesProducteur = getProducteurAtPos(idProducteurArg).observer(getIdAgent());
+					RessourceImpl ressourcesObserveesProducteur = getProducteurAtPos(idProducteurArg).observer(getIdAgent());
 					System.out.println("Agent " + getIdAgent() + " : j'ai observé le producteur " + idProducteurArg + 
 					" et reçu le résultat " + ressourcesObserveesProducteur.getTypeRessource() + " " + 
 					ressourcesObserveesProducteur.getQuantiteRessource());
@@ -259,7 +259,7 @@ public class AgentHumain extends AgentImpl
 				int quantiteAcquise = getProducteurAtPos(idProducteurArg).attribuerRessources(mots[2], quantiteRessourceArg);
 				System.out.println("Vous avez acquis " + quantiteAcquise + " exemplaires de la ressource " + mots[2] + " du producteur " + idProducteurArg);
 				// récupération de la ressource
-				Ressource modif = getRessourceByType(mots[2]);
+				RessourceImpl modif = getRessourceByType(mots[2]);
 				modif.setQuantiteRessource(modif.getQuantiteRessource() + quantiteAcquise);
 				setRessourceByType(modif);
 			}
@@ -270,7 +270,7 @@ public class AgentHumain extends AgentImpl
 				int quantiteVolee = getAgentAtPos(idAgentArg).voler(getIdAgent(), mots[2], quantiteRessourceArg);
 				System.out.println("Vous avez volé " + quantiteVolee + " exemplaires de la ressource " + mots[2] + " de l'agent " + idAgentArg);
 				// récupération de la ressource
-				Ressource modif = getRessourceByType(mots[2]);
+				RessourceImpl modif = getRessourceByType(mots[2]);
 				modif.setQuantiteRessource(modif.getQuantiteRessource() + quantiteVolee);
 				setRessourceByType(modif);
 			}
@@ -321,12 +321,12 @@ public class AgentHumain extends AgentImpl
 			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:" + args[0] + "/coordinateur" );
 			
 			int idAgent = Integer.parseInt(args[1]);
-			ArrayList<Ressource> ressources = new ArrayList<Ressource>();
+			ArrayList<RessourceImpl> ressources = new ArrayList<RessourceImpl>();
 			for (int i = 2; i < args.length; i+=3)
 			{
 				int quantiteRessource = Integer.parseInt(args[i+1]);
 				int objectifRessource = Integer.parseInt(args[i+2]);
-				Ressource ressource = new Ressource(args[i], quantiteRessource, objectifRessource);
+				RessourceImpl ressource = new RessourceImpl(args[i], quantiteRessource, objectifRessource);
 				ressources.add(ressource);
 			}
 			AgentImpl objLocal;

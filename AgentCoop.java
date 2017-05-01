@@ -19,7 +19,7 @@ public class AgentCoop extends AgentImpl
 	// initialise un agent coopératif avec un id et un numéro de port pour
 	// permettre d'agir comme serveur pour les autres agents et pour le coordinateur
 	// et initialise ses objectifs de ressources avec le tableau passé en argument
-	public AgentCoop(int idAgent, ArrayList<Ressource> ressources) throws RemoteException
+	public AgentCoop(int idAgent, ArrayList<RessourceImpl> ressources) throws RemoteException
 	{
 		super(idAgent, ressources);
 	}
@@ -69,7 +69,7 @@ public class AgentCoop extends AgentImpl
 		
 		try
 		{
-			ArrayList<Ressource> copie = getRessources();	// copie des ressources de l'agent
+			ArrayList<RessourceImpl> copie = getRessources();	// copie des ressources de l'agent
 			// parcours des ressources jusqu'à trouver une ressource dont l'objectif de quantité n'est pas atteint
 			for (int i = 0; i < copie.size(); i++)
 			{
@@ -79,16 +79,16 @@ public class AgentCoop extends AgentImpl
 					for (int j = 0; j < getNbProducteurs(); j++)
 					{
 						// demander au producteur la ressource qu'il produit
-						Ressource ressourceProduite = (Ressource)getProducteurAtPos(j).observer(getIdAgent());
+						RessourceImpl ressourceProduite = (RessourceImpl)getProducteurAtPos(j).observer(getIdAgent());
 						if (ressourceProduite.getTypeRessource().equals(copie.get(i).getTypeRessource()))
 						{
 							// acquérir cette ressource
-							Ressource aAcquerir = copie.get(i);
+							RessourceImpl aAcquerir = copie.get(i);
 							int ressourcesAcquises = getProducteurAtPos(j).attribuerRessources(aAcquerir.getTypeRessource(), 5);
 							System.out.println("Agent " + getIdAgent() + " : j'acquiers " + ressourcesAcquises + 
 							" exemplaires de la ressource " + aAcquerir.getTypeRessource());
 							// mettre à jour
-							setRessourceByType(new Ressource(aAcquerir.getTypeRessource(), aAcquerir.getQuantiteRessource() + 
+							setRessourceByType(new RessourceImpl(aAcquerir.getTypeRessource(), aAcquerir.getQuantiteRessource() + 
 							ressourcesAcquises, aAcquerir.getObjectifRessource()));
 						}
 					}
@@ -116,12 +116,12 @@ public class AgentCoop extends AgentImpl
 			Coordinateur coordinateur = (Coordinateur) Naming.lookup( "rmi://localhost:" + args[0] + "/coordinateur" );
 			
 			int idAgent = Integer.parseInt(args[1]);
-			ArrayList<Ressource> ressources = new ArrayList<Ressource>();
+			ArrayList<RessourceImpl> ressources = new ArrayList<RessourceImpl>();
 			for (int i = 2; i < args.length; i+=3)
 			{
 				int quantiteRessource = Integer.parseInt(args[i+1]);
 				int objectifRessource = Integer.parseInt(args[i+2]);
-				Ressource ressource = new Ressource(args[i], quantiteRessource, objectifRessource);
+				Ressource ressource = new RessourceImpl(args[i], quantiteRessource, objectifRessource);
 				ressources.add(ressource);
 			}
 			AgentImpl objLocal;
