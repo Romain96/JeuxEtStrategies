@@ -178,17 +178,29 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	 */
 	public void terminerJeu() throws RemoteException
 	{
-		try
+		new Thread(new Runnable() 
 		{
-			// unbind avant la suppression
-			Naming.unbind("rmi://localhost:9000/producteur" + getIdProducteur());
-
-			// supprime du runtime RMI
-			UnicastRemoteObject.unexportObject(this, true);
-			
-			System.out.println("Producteur " + idProducteur + " se termine" );
-		} catch(Exception e){System.out.println(e);}
-		System.exit(0);
+			public void run() 
+			{
+				try 
+				{
+					Thread.sleep(100);
+				} catch (InterruptedException e) {/* rien */}
+					
+				try
+				{
+					// unbind avant la suppression
+					Naming.unbind("rmi://localhost:9000/producteur" + getIdProducteur());
+				}catch (NotBoundException re) { System.out.println(re) ; }
+				catch (RemoteException re) { System.out.println(re) ; }
+				catch (MalformedURLException e) { System.out.println(e) ; }
+					
+				// supprime du runtime RMI
+				//UnicastRemoteObject.unexportObject(this, true);
+				System.out.println("Producteur " + getIdProducteur() + " se termine" );
+				System.exit(0);
+			}
+		});
 	}
 	
 	public static void main(String [] args) throws IOException
