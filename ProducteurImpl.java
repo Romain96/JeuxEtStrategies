@@ -99,7 +99,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	 */
 	public int attribuerRessources(String typeRessource, int quantiteDemandee) throws RemoteException
 	{
-		System.out.println("Producteur " + getIdProducteur() + " : l'agent " + idAgent + " demande " + quantiteRessource + " de " + typeRessource);
+		System.out.println("Producteur " + getIdProducteur() + " : demande de " + quantiteRessource + " de " + typeRessource);
 		
 		// si le type de ressource n'est pas produit par le producteur
 		if (!this.typeRessource.equals(typeRessource))
