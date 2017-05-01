@@ -71,8 +71,11 @@ public class Historique
 	public void ecrireLigne(int idAgent, int temps, String typeRessource, int quantiteRessource) throws IOException 
 	{ 
 		String ligneAEcrire = "" + idAgent + "," + temps + "," + typeRessource + "," + quantiteRessource;
-		bw.write(ligneAEcrire);
-		bw.newLine();
+		try
+		{
+			bw.write(ligneAEcrire);
+			bw.newLine();
+		} catch (IOException ioe) { ioe.printStackTrace(); }
 	}
 	
 	public void fermerFichier()
