@@ -1,11 +1,12 @@
 import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
-public class Ressource extends UnicastRemoteObject
+public class Ressource extends UnicastRemoteObject implements Serializable 
 {
 	//----------------------------------------------------------------------
 	//				attributs
 	//----------------------------------------------------------------------
 	
+	private  static  final  long serialVersionUID =  1350092881346723535L;
 	private String typeRessource;	// type de ressource
 	private int quantiteRessource;	// nombre de cette ressource
 	private int objectifRessource;	// objectif de quantité à atteindre
