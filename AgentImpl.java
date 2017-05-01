@@ -338,7 +338,7 @@ public abstract class AgentImpl
 	 * Fonction 	: voler
 	 * Argument(s)	: l'id de l'agent (voleur), le type de ressource à voler et la quantité à voler
 	 * Résultat(s)	: le nombre de cette ressource volée (>= 0)
-	 * Commentaires	: /
+	 * Commentaires	: on ne peut pas voler plus de 10% de ce qu'on possède (min 1)
 	 */
 	public int voler(int idAgent, String typeRessource, int quantiteRessource) throws RemoteException
 	{
@@ -357,13 +357,14 @@ public abstract class AgentImpl
 			// recherche de la ressource contenant le typeRessource demandé
 			for (int i = 0; i < this.ressources.size(); i++)
 			{
-				// le type de ressource coorespond
+				// le type de ressource correspond
 				if (this.ressources.get(i).getTypeRessource().equals(typeRessource))
 				{
-					Ressource modif = this.ressources.get(i);	// réccupération de la ressource
+					Ressource modif = this.ressources.get(i);	// récupération de la ressource
 					if (this.ressources.get(i).getQuantiteRessource() >= quantiteRessource)
 					{
-						int quantiteVolee = quantiteRessource;		// on prend ce qui est demandé
+						// on prend le plus petit entre 10% + 1 et la quantité demandée
+						int quantiteVolee = Math.min(this.quantiteRessource/10 + 1, quantiteRessource);
 						// on retire la quantité volée à la copie locale
 						modif.setQuantiteRessource(modif.getQuantiteRessource() - quantiteVolee);
 						this.ressources.set(i,modif);	// on met à jour la liste des ressources
@@ -371,8 +372,9 @@ public abstract class AgentImpl
 					}
 					else
 					{
-						int quantiteVolee = modif.getQuantiteRessource();	// on prend tout ce qu'il reste
-						modif.setQuantiteRessource(0);	// il reste donc 0 (localement)
+						// on prend le plus petit entre 10% + 1 et la quantité possédée
+						int quantiteVolee = Math.min(this.quantiteRessource/10 + 1, this.quantiteRessource);
+						modif.setQuantiteRessource(modif.getQuantiteRessource() - quantiteVolee);
 						this.ressources.set(i,modif);	// on met à jour la liste des ressources
 						return quantiteVolee;
 					}
