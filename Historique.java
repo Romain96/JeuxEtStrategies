@@ -94,7 +94,7 @@ public class Historique
 	// pour les tests
 	public static void main(String[] args)
 	{
-		Historique his = new Historique();
+		Historique his = new Historique("test");
 		try
 		{
 			his.ecrireLigne(0,0,"gold",0);
