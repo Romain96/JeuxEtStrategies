@@ -73,12 +73,11 @@ public class Historique
 	//				méthodes
 	//----------------------------------------------------------------------
 	
-	public void ecrireLigne(int idAgent, int temps, String typeRessource, int quantiteRessource) throws IOException 
+	public void ecrireLigne(String log) throws IOException 
 	{ 
-		String ligneAEcrire = "" + idAgent + "," + temps + "," + typeRessource + "," + quantiteRessource;
 		try
 		{
-			bw.write(ligneAEcrire);
+			bw.write(log);
 			bw.newLine();
 		} catch (IOException ioe) { ioe.printStackTrace(); }
 	}
@@ -88,20 +87,6 @@ public class Historique
 		try
 		{
 			this.bw.close();
-		} catch (IOException ioe) { ioe.printStackTrace(); }
-	}
-	
-	// pour les tests
-	public static void main(String[] args)
-	{
-		Historique his = new Historique("test");
-		try
-		{
-			his.ecrireLigne(0,0,"gold",0);
-			his.ecrireLigne(0,1,"gold",5);
-			his.ecrireLigne(0,2,"gold",10);
-			his.ecrireLigne(0,3,"gold",15);
-			his.fermerFichier();
 		} catch (IOException ioe) { ioe.printStackTrace(); }
 	}
 }

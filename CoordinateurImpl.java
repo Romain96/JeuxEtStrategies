@@ -34,11 +34,14 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	// indique l'indice du prochain agent à faire démarer (dans l'ordre d'enregistrement pas d'indice des agents)
 	int prochainAgentAJouer;
 	
+	// fichier de log (voir classe Historique)
+	private Historique historique;
+	
 	//----------------------------------------------------------------------
 	//				cosntructeur
 	//----------------------------------------------------------------------
 	
-	public CoordinateurImpl(int nbAgents, int nbProducteurs, boolean finPremierAgent) throws RemoteException
+	public CoordinateurImpl(int nbAgents, int nbProducteurs, boolean finPremierAgent, String fichierLog) throws RemoteException
 	{
 		// initialisation du tableau d'agents
 		this.agents = new Agent[nbAgents];	// les agents s'identifiront au coordinateur à l'initialisation
@@ -66,6 +69,9 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		
 		// il n'y a pas d'agent à faire jouer pour l'instant donc le prochain sera le 1er enregistré
 		prochainAgentAJouer = 0;
+		
+		// création de l'historique
+		this.historique = new Historique(fichierLog);
 	}
 	
 	//----------------------------------------------------------------------
@@ -183,15 +189,17 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		System.out.println("Coordinateur : le jeu se termine");
 		this.jeuEnCours = false;
-		for (int i = 0; i < this.nbAgentsEnregistres; i++)
-		{
-			System.out.println("Coordinateur : ordonne à l'agent d'indice " + i + " dasns le tableau de s'arrêter");
-			this.agents[i].terminerJeu();	// les agents se terminent
-		}
+		// fin des producteurs
 		for (int i = 0; i < this.nbProducteursEnregistres; i++)
 		{
 			System.out.println("Coordinateur : ordonne au producteur d'indice " + i + " dasns le tableau de s'arrêter");
 			this.producteurs[i].terminerJeu();	// les producteurs se terminent
+		}
+		// fin des agents
+		for (int i = 0; i < this.nbAgentsEnregistres; i++)
+		{
+			System.out.println("Coordinateur : ordonne à l'agent d'indice " + i + " dasns le tableau de s'arrêter");
+			this.agents[i].terminerJeu();	// les agents se terminent
 		}
 		
 		try
@@ -203,6 +211,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			UnicastRemoteObject.unexportObject(this, true);
 			
 			System.out.println("Coordinateur se termine");
+			this.historique.fermerFichier();
 		} catch(Exception e){System.out.println(e);}
 		System.exit(0);	// le coordinateur se termine
 	}
@@ -275,9 +284,10 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Résultat(s)	: /
 	 * Commentaires	: lance le tour de l'agent suivant
 	 */
-	public void signalerFinTour(int idAgent) throws RemoteException
+	public void signalerFinTour(int idAgent, String log) throws RemoteException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
+		this.historique.ecrireLigne(log);
 		
 		this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
 		lancementProchainAgent();
@@ -319,9 +329,10 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Commentaires	: termine le jeu si la politique est que le premier agent 
 	 * ayant terminé marque la fin et sinon attends qua tous les agents aient terminés
 	 */
-	public void signalerObjectifAtteint(int idAgent) throws RemoteException
+	public void signalerObjectifAtteint(int idAgent, String log) throws RemoteException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
+		this.historique.ecrireLigne(log);
 		
 		// vérification de la fin
 		if (this.finPremierAgent)
@@ -379,9 +390,9 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 
 	 public static void main(String [] args)
 	{
-		if (args.length != 4)
+		if (args.length != 5)
 		{
-			System.out.println("Usage : java objetCoordinateur <port du rmiregistry> <nbAgents> <nbProducteurs> <finPremierAgent>");
+			System.out.println("Usage : java objetCoordinateur <port du rmiregistry> <nbAgents> <nbProducteurs> <finPremierAgent> <fichierLog>");
 			System.exit(0) ;
 		}
 		try
@@ -389,7 +400,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			int nbAgents = Integer.parseInt(args[1]);
 			int nbProducteurs = Integer.parseInt(args[2]);
 			boolean finPremierAgent = Boolean.parseBoolean(args[3]);
-			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs, finPremierAgent);
+			CoordinateurImpl objLocal = new CoordinateurImpl(nbAgents, nbProducteurs, finPremierAgent, args[4]);
 			Naming.rebind( "rmi://localhost:" + args[0] + "/coordinateur" ,objLocal) ;
 			System.out.println("Coordinateur pret") ;
 		}
