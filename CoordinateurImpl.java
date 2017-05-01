@@ -2,6 +2,7 @@ import java.rmi.server.UnicastRemoteObject ;
 import java.rmi.RemoteException ;
 import java.rmi.* ; 
 import java.net.MalformedURLException ; 
+import java.io.IOException;
 
 public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateur
 {
@@ -290,10 +291,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Résultat(s)	: /
 	 * Commentaires	: lance le tour de l'agent suivant
 	 */
-	public void signalerFinTour(int idAgent, String log) throws RemoteException
+	public void signalerFinTour(int idAgent, String log) throws RemoteException, IOException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
-		this.historique.ecrireLigne(log);
+		try
+		{
+			this.historique.ecrireLigne(log);
+		} catch (IOException ioe) { ioe.printStackTrace(); }
 		this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
 		
 		this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
@@ -338,10 +342,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	 * Commentaires	: termine le jeu si la politique est que le premier agent 
 	 * ayant terminé marque la fin et sinon attends qua tous les agents aient terminés
 	 */
-	public void signalerObjectifAtteint(int idAgent, String log) throws RemoteException
+	public void signalerObjectifAtteint(int idAgent, String log) throws RemoteException, IOException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
-		this.historique.ecrireLigne(log);
+		try
+		{
+			this.historique.ecrireLigne(log);
+		} catch (IOException ioe) { ioe.printStackTrace(); }
 		this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
 		
 		// vérification de la fin
