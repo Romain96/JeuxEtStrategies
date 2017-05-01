@@ -53,12 +53,12 @@ public class Historique
 		this.fout = fout;
 	}
 	
-	public setFileOutputStream(FileOutputStream fos)
+	public void setFileOutputStream(FileOutputStream fos)
 	{
 		this.fos = fos;
 	}
 	
-	public setBufferedWriter(BufferedWriter bw)
+	public void setBufferedWriter(BufferedWriter bw)
 	{
 		this.bw = bw;
 	}
