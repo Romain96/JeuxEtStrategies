@@ -464,5 +464,6 @@ public abstract class AgentImpl
 		UnicastRemoteObject.unexportObject(this, true);
 		System.out.println("Agent " + getIdAgent() + " se termine" );
 		//System.exit(0);
+		return;
 	}
 }

@@ -208,6 +208,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			System.out.println("Coordinateur : ordonne à l'agent d'indice " + i + " dasns le tableau de s'arrêter");
 			this.agents[i].terminerJeu();	// les agents se terminent
 		}	
+		// fin di coordinateur
 		try
 		{
 			// unbind avant la suppression
@@ -219,7 +220,9 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		// supprime du runtime RMI
 		UnicastRemoteObject.unexportObject(this, true);
 		System.out.println("Coordinateur se termine" );
+		this.historique.fermerFichier();
 		//System.exit(0);
+		return;
 	}
 	
 	/*
