@@ -84,7 +84,10 @@ public class Historique
 	
 	public void fermerFichier()
 	{
-		this.bw.close();
+		try
+		{
+			this.bw.close();
+		} catch (IOException ioe) { ioe.printStackTrace(); }
 	}
 	
 	// pour les tests
