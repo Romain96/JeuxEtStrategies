@@ -474,5 +474,6 @@ public abstract class AgentImpl
 				System.exit(0);
 			}
 		});
+		return;
 	}
 }
