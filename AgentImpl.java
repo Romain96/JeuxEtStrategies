@@ -463,7 +463,7 @@ public abstract class AgentImpl
 				Naming.unbind("rmi://localhost:9000/agent" + getIdAgent());
 				
 				// supprime du runtime RMI
-				UnicastRemoteObject.unexportObject(this, true);
+				//UnicastRemoteObject.unexportObject(this, true);
 				System.out.println("Agent " + getIdAgent() + " se termine" );
 				System.exit(0);
 			}
