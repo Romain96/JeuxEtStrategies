@@ -37,6 +37,9 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	// fichier de log (voir classe Historique)
 	private Historique historique;
 	
+	// numéro du tour
+	private int numeroTour;
+	
 	//----------------------------------------------------------------------
 	//				cosntructeur
 	//----------------------------------------------------------------------
@@ -72,6 +75,9 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		
 		// création de l'historique
 		this.historique = new Historique(fichierLog);
+		
+		// tour numéro 1
+		this.numeroTour = 1;
 	}
 	
 	//----------------------------------------------------------------------
@@ -288,9 +294,10 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
 		this.historique.ecrireLigne(log);
+		this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
 		
 		this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-		lancementProchainAgent();
+		lancementProchainAgent(this.numeroTour);
 	}
 	
 	/*
@@ -307,18 +314,20 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " est puni pour " + this.punitionsAgents[this.prochainAgentAJouer] + " tours :(" );
 			 this.punitionsAgents[this.prochainAgentAJouer]--;	// un tour de passé
 			 this.prochainAgentAJouer++;	// on lance l'agent suivant
+			 this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
 			 lancementProchainAgent();
 		 }
 		 else if (this.terminaisonsAgents[this.prochainAgentAJouer])
 		 {
 			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " a déjà terminé" );
 			 this.prochainAgentAJouer++;	// on lance l'agent suivant
+			 this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
 			 lancementProchainAgent();
 		 }
 		 else
 		 {
 			 System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
-			 this.agents[this.prochainAgentAJouer].demarrerTour();
+			 this.agents[this.prochainAgentAJouer].demarrerTour(this.numeroTour);
 		 }
 	 }
 	
@@ -333,6 +342,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
 		this.historique.ecrireLigne(log);
+		this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
 		
 		// vérification de la fin
 		if (this.finPremierAgent)

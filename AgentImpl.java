@@ -198,21 +198,32 @@ public abstract class AgentImpl
 	 * de l'agent, appelle la fonction choixAction qui est différente selon
 	 * la personnalité de l'agent
 	 */
-	public void demarrerTour() throws RemoteException
+	public void demarrerTour(int numeroTour) throws RemoteException
 	{
 		System.out.println("Agent " + idAgent + " : je commence mon tour");
 		choixAction();
 		boolean fin = this.verifierObjectifAtteint();
 		System.out.println("fin = " + fin);
+		
+		// encodage du log
+		String log = "" + numeroTour + ";" + getIdAgent() + ";";
+		ArrayList<Ressource> copie = getRessources()
+		for (int i = 0; i < copie.size(); i++)
+		{
+			log = log + copie.get(i).getTypeRessource() + ";" + copie.get(i).getQuantiteRessource();
+		}
+		System.out.println("Agent " + getIdAgent() + " : mon log est : " + log);
+		
+		// signalement de la fin du tour / de l'objectif atteint
 		if (fin)
 		{
 			System.out.println("Agent " + getIdAgent() + " : objectif atteint !");
-			getCoordinateur().signalerObjectifAtteint(getIdAgent());
+			getCoordinateur().signalerObjectifAtteint(getIdAgent(), log);
 		}
 		else
 		{
 			System.out.println("Agent " + getIdAgent() + " : objectif non atteint");
-			getCoordinateur().signalerFinTour(getIdAgent());
+			getCoordinateur().signalerFinTour(getIdAgent(), log);
 		}
 	}
 	
