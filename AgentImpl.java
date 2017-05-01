@@ -208,11 +208,11 @@ public abstract class AgentImpl
 		System.out.println("fin = " + fin);
 		
 		// encodage du log
-		String log = "" + numeroTour + ";" + getIdAgent() + ";";
+		String log = "" + numeroTour + ";" + getIdAgent();
 		ArrayList<Ressource> copie = getRessources();
 		for (int i = 0; i < copie.size(); i++)
 		{
-			log = log + copie.get(i).getTypeRessource() + ";" + copie.get(i).getQuantiteRessource();
+			log = log + ";" +copie.get(i).getTypeRessource() + ";" + copie.get(i).getQuantiteRessource();
 		}
 		System.out.println("Agent " + getIdAgent() + " : mon log est : " + log);
 		
