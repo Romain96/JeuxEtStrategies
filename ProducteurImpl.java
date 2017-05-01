@@ -14,16 +14,18 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	private int idProducteur;		// identifiant unique d'un producteur
 	private String typeRessource;	// pour l'instant un seule ressource
 	private int quantiteRessource;	// idem
+	private int quantiteMax;		// le maximum qu'un agent peut obtenir
 	
 	//==================================================================
 	//							Constructeur
 	//==================================================================
 	
-	public ProducteurImpl(int idProducteur, String typeRessource, int quantiteRessource) throws RemoteException
+	public ProducteurImpl(int idProducteur, String typeRessource, int quantiteRessource, int quantiteMax) throws RemoteException
 	{
 		this.idProducteur = idProducteur;
 		this.typeRessource = typeRessource;
 		this.quantiteRessource = quantiteRessource;
+		this.quantiteMax = quantiteMax;
 		// DEBUG
 		System.out.println("Producteur init : " + idProducteur  + " " + typeRessource + " " + quantiteRessource );
 	}
@@ -50,6 +52,12 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		return quantiteRessource;
 	}
 	
+	// retourne la quantité max
+	public int getQuantiteMax()
+	{
+		return this.quantiteMax;
+	}
+	
 	//==================================================================
 	//							Setters
 	//==================================================================
@@ -70,6 +78,12 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 	public void setQuantiteRessource(int quantiteRessource)
 	{
 		this.quantiteRessource = quantiteRessource;
+	}
+	
+	// positionne la quatité max
+	public void setQuantiteMax(int quantiteMax)
+	{
+		this.quantiteMax = quantiteMax;
 	}
 	
 	//==================================================================
@@ -101,7 +115,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		}
 		else
 		{
-			quantiteAttribuee = quantiteDemandee;
+			quantiteAttribuee = Math.max(quantiteDemandee, this.quantiteMax);
 			this.quantiteRessource -= quantiteDemandee;
 			return quantiteAttribuee;
 		}
