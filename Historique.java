@@ -10,7 +10,7 @@ public class Historique
 	//				attributs
 	//----------------------------------------------------------------------
 	
-	private final String nom = "historique.csv";	// nom du fichier à écrire
+	private String nom = "historique.csv";	// nom du fichier à écrire
 	private FileOutputStream fos;
 	private BufferedWriter bw;
 	
@@ -30,7 +30,7 @@ public class Historique
 	//				getters
 	//----------------------------------------------------------------------
 	
-	public File getFile()
+	public File getNom()
 	{
 		return this.nom;
 	}
@@ -49,9 +49,9 @@ public class Historique
 	//				setters
 	//----------------------------------------------------------------------
 	
-	public void setFile(File fout)
+	public void setNom(String nom)
 	{
-		this.nom = fout;
+		this.nom = nom;
 	}
 	
 	public void setFileOutputStream(FileOutputStream fos)
