@@ -110,7 +110,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 		// l'agent ne reçoit que le maximum disponible
 		if (this.quantiteRessource <= quantiteDemandee)
 		{
-			quantiteAttribuee = Math.min(this.quantiteDemandee, this.quantiteMax);
+			quantiteAttribuee = Math.min(quantiteDemandee, this.quantiteMax);
 			this.quantiteRessource = 0;
 			return quantiteAttribuee;
 		}
