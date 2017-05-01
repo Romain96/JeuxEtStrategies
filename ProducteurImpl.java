@@ -226,6 +226,7 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 			int quantiteMax = Integer.parseInt(args[4]);
 			
 			Timer timer = new Timer();
+			final ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource, quantiteMax, timer);
 			timer.schedule(new TimerTask() 
 			{
 				public void run() 
@@ -233,8 +234,6 @@ public class ProducteurImpl extends UnicastRemoteObject implements Producteur
 					objLocal.genererRessources();
 				}
 			}, 0, 1000);
-			
-			final ProducteurImpl objLocal = new ProducteurImpl(idProducteur, args[2], quantiteRessource, quantiteMax, timer);
 			Naming.rebind( "rmi://localhost:" + args[0] + "/producteur" + args[1] ,objLocal) ;
 			System.out.println("Producteur " + objLocal.getIdProducteur() + " pret") ;
 			
