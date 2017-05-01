@@ -4,6 +4,7 @@ import java.rmi.* ;
 import java.net.MalformedURLException ; 
 import java.util.Scanner; 
 import java.util.*;
+import java.io.IOException;
 
 public class AgentHumain extends AgentImpl
 {
@@ -312,7 +313,7 @@ public class AgentHumain extends AgentImpl
 	}
 	
 	// tests
-	public static void main(String[] args) throws RemoteException
+	public static void main(String[] args) throws RemoteException, IOException
 	{	
 		// au moins un triplet type quantite objectif en plus des deux arguments obligatoires
 		if (args.length >= 5 && args.length%3 == 0)
