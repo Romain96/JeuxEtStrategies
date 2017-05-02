@@ -209,11 +209,13 @@ public abstract class AgentImpl
 		
 		// encodage du log
 		String log = "" + numeroTour + ";" + getIdAgent();
+		int totalRessources = 0;
 		ArrayList<Ressource> copie = getRessources();
 		for (int i = 0; i < copie.size(); i++)
 		{
-			log = log + ";" +copie.get(i).getTypeRessource() + ";" + copie.get(i).getQuantiteRessource();
+			totalRessources += copie.get(i).getQuantiteRessource();
 		}
+		log = log + ";" + totalRessources;
 		System.out.println("Agent " + getIdAgent() + " : mon log est : " + log);
 		
 		// signalement de la fin du tour / de l'objectif atteint
