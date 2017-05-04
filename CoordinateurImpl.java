@@ -49,7 +49,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	//				cosntructeur
 	//----------------------------------------------------------------------
 	
-	public CoordinateurImpl(int nbAgents, int nbProducteurs, boolean finPremierAgent, String fichierLog) throws RemoteException
+	public CoordinateurImpl(int nbAgents, int nbProducteurs, boolean finPremierAgent, String fichierLog) throws RemoteException, IOException
 	{
 		// initialisation du tableau d'agents
 		this.agents = new Agent[nbAgents];	// les agents s'identifiront au coordinateur à l'initialisation
@@ -87,12 +87,16 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		// tour numéro 1
 		this.numeroTour = 1;
 		
+		
 		// écrire que tous les agents commencent à 0
-		for (int i = 0; i < this.nbAgents; i++)
+		try
 		{
-			// le tour est 0, l'id est i et les ressources sont à 0
-			this.historique.ecrireLigne("0;" + i + ";0"); 
-		}
+			for (int i = 0; i < this.nbAgents; i++)
+			{
+				// le tour est 0, l'id est i et les ressources sont à 0
+				this.historique.ecrireLigne("0;" + i + ";0"); 
+			}
+		} catch (IOException ioe) { ioe.printStackTrace(); }
 	}
 	
 	//----------------------------------------------------------------------
