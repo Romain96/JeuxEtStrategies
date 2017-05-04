@@ -71,7 +71,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			this.punitionsAgents[i] = 0;	// pas de punition au départ
 			this.terminaisonsAgents[i] = false;	// aucun agent n'a terminé
-			this.classementsAgents[i] = -1;	// personne
 		}
 		
 		this.finPremierAgent = finPremierAgent;
@@ -251,7 +250,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		if(this.finPremierAgent)
 		{
 			// affichage de l'agent ayant terminé
-			System.out.println("La victoire revient à l'agent " + this.classementsAgents[0] + " en " + this.numeroTour + " tours");
+			System.out.println("La victoire revient à l'agent " + this.classementsAgents.get(0) + " en " + this.numeroTour + " tours");
 		}
 		else
 		{
