@@ -410,23 +410,41 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		}
 		else
 		{
-			// si tous les agents ont fini on stoppe le jeu
-			for (int i = 0; i < this.nbAgents; i++)
+			if(verifierTerminaisonTousLesAgents())
 			{
-				if (!terminaisonsAgents[i])
-				{
-					// au moins un agent n'a pas fini
-					this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-					lancementProchainAgent();
-				}
+				// sinon tous les agents ont fini
+				terminerJeu();
 			}
-			// sinon tous les agents ont fini
-			terminerJeu();
+			else
+			{
+				lancementProchainAgent();
+			}
 		}
 		
 	}
 	
-	// 
+	/*
+	 * Fonction 	: verifierTerminaisonTousLesAgents
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: retourne vrai si tous les agents ont fini faux sinon
+	 */
+	public boolean verifierTerminaisonTousLesAgents()
+	{
+		// si tous les agents ont fini on stoppe le jeu
+		for (int i = 0; i < this.nbAgents; i++)
+		{
+			if (!terminaisonsAgents[i])
+			{
+				// au moins un agent n'a pas fini
+				this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	 
 	/*
 	 * Fonction 	: reporterTentativeVol
 	 * Argument(s)	: l'id de l'agent voleur
