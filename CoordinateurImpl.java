@@ -334,8 +334,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public void signalerFinTour(int idAgent, String log) throws RemoteException, IOException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
-		// classement de l'agent à mettre à jour
-		this.classementsAgents.add(idAgent);
 		try
 		{
 			this.historique.ecrireLigne(log);
