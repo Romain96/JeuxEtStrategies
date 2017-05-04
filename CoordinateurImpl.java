@@ -86,6 +86,13 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		
 		// tour numéro 1
 		this.numeroTour = 1;
+		
+		// écrire que tous les agents commencent à 0
+		for (int i = 0; i < this.nbAgents; i++)
+		{
+			// le tour est 0, l'id est i et les ressources sont à 0
+			this.historique.ecrireLigne("0;" + i + ";0"); 
+		}
 	}
 	
 	//----------------------------------------------------------------------
