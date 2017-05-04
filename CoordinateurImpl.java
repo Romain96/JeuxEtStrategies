@@ -338,7 +338,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			this.historique.ecrireLigne(log);
 		} catch (IOException ioe) { ioe.printStackTrace(); }
-		this.numeroTour = (this.numeroTour + 1)%this.nbAgentsEnregistres;
 		
 		this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
 		lancementProchainAgent();
@@ -357,20 +356,30 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		 {
 			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " est puni pour " + this.punitionsAgents[this.prochainAgentAJouer] + " tours :(" );
 			 this.punitionsAgents[this.prochainAgentAJouer]--;	// un tour de passé
+			 if(this.prochainAgentAJouer == 0)
+			 {
+				 this.numeroTour++;
+			 }
 			 this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-			 this.numeroTour = (this.numeroTour + 1)%this.nbAgentsEnregistres;
 			 lancementProchainAgent();
 		 }
 		 else if (this.terminaisonsAgents[this.prochainAgentAJouer])
 		 {
 			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " a déjà terminé" );
+			 if(this.prochainAgentAJouer == 0)
+			 {
+				 this.numeroTour++;
+			 }
 			 this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-			 this.numeroTour = (this.numeroTour + 1)%this.nbAgentsEnregistres;
 			 lancementProchainAgent();
 		 }
 		 else
 		 {
 			 System.out.println("Coordinateur : lancement de l'agent d'indice " + this.prochainAgentAJouer);
+			 if(this.prochainAgentAJouer == 0)
+			 {
+				 this.numeroTour++;
+			 }
 			 this.agents[this.prochainAgentAJouer].demarrerTour(this.numeroTour);
 		 }
 	 }
@@ -392,7 +401,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			this.historique.ecrireLigne(log);
 		} catch (IOException ioe) { ioe.printStackTrace(); }
-		this.numeroTour = (this.numeroTour + 1)%this.nbAgentsEnregistres;
 		
 		// vérification de la fin
 		if (this.finPremierAgent)
