@@ -387,6 +387,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
 		// classement de l'agent à mettre à jour
 		this.classementsAgents.add(idAgent);
+		this.terminaisonsAgents[idAgent] = true;
 		try
 		{
 			this.historique.ecrireLigne(log);
@@ -401,9 +402,6 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		}
 		else
 		{
-			// fin seulement quand le dernier agent a terminé
-			this.terminaisonsAgents[idAgent] = true;	// cet agent a terminé
-			
 			// si tous les agents ont fini on stoppe le jeu
 			for (int i = 0; i < this.nbAgents; i++)
 			{
