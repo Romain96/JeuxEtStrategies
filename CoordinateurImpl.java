@@ -26,6 +26,9 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	// liste des agents ayant terminé (si le politique de fin est que tout le monde doit finir)
 	boolean terminaisonsAgents[];
 	
+	// classement des agents à la fin de la partie (si les agents doivent tous finir)
+	ArrayList<int> classementsAgents;	// contient les id des agents
+	
 	// vrai si le jeu se finit quand le premier agent termine, faux si tous les agents doivent terminer
 	boolean finPremierAgent;
 	
@@ -59,11 +62,15 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		
 		// on initialise les punitions
 		this.punitionsAgents = new int[nbAgents];
+		// les terminaisons
 		this.terminaisonsAgents = new boolean[nbAgents];
+		// et le classement
+		this.classementsAgents = new ArrayList<int>();
 		for (int i = 0; i < nbAgents; i++)
 		{
 			this.punitionsAgents[i] = 0;	// pas de punition au départ
 			this.terminaisonsAgents[i] = false;	// aucun agent n'a terminé
+			this.classementsAgents[i] = -1;	// personne
 		}
 		
 		this.finPremierAgent = finPremierAgent;
@@ -196,6 +203,10 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	{
 		System.out.println("Coordinateur : le jeu se termine");
 		this.jeuEnCours = false;
+		
+		// affichage du tableau des scores
+		afficherTableauScores();
+		
 		// fin des producteurs
 		for (int i = 0; i < this.nbProducteursEnregistres; i++)
 		{
@@ -223,6 +234,33 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		this.historique.fermerFichier();
 		//System.exit(0);
 		return;
+	}
+	
+	/*
+	 * Fonction 	: afficherTableauScores
+	 * Argument(s)	: /
+	 * Résultat(s)	: /
+	 * Commentaires	: affiche le tableau des scores (ou l'agent ayant gagné)
+	 */
+	public void afficherTableauScores()
+	{
+		System.out.println("================================================================");
+		System.out.println("                      La partie est terminée");
+		System.out.println("================================================================");
+		if(this.finPremierAgent)
+		{
+			// affichage de l'agent ayant terminé
+			System.out.println("La victoire revient à l'agent " + this.classementsAgents[0] + " en " + this.numeroTour + " tours");
+		}
+		else
+		{
+			// affichage du classement des agents
+			System.out.println("Classement des agents au bout du tour " + this.numeroTour + ": ");
+			for (int i = 0; i < this.classementsAgents.size(); i++)
+			{
+				System.out.println("#" + i + " : agent " + this.classementsAgents.get(i) );
+			}
+		}
 	}
 	
 	/*
@@ -296,6 +334,8 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public void signalerFinTour(int idAgent, String log) throws RemoteException, IOException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale la fin de son tour" );
+		// classement de l'agent à mettre à jour
+		this.classementsAgents.add(idAgent);
 		try
 		{
 			this.historique.ecrireLigne(log);
@@ -347,6 +387,8 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	public void signalerObjectifAtteint(int idAgent, String log) throws RemoteException, IOException
 	{
 		System.out.println("Coordinateur : agent " + idAgent + " signale l'objectif atteint :)");
+		// classement de l'agent à mettre à jour
+		this.classementsAgents.add(idAgent);
 		try
 		{
 			this.historique.ecrireLigne(log);
