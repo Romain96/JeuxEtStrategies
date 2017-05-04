@@ -3,6 +3,7 @@ import java.rmi.RemoteException ;
 import java.rmi.* ; 
 import java.net.MalformedURLException ; 
 import java.io.IOException;
+import java.util.*;
 
 public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateur
 {
