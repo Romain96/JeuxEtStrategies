@@ -210,7 +210,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		// fin des producteurs
 		for (int i = 0; i < this.nbProducteursEnregistres; i++)
 		{
-			System.out.println("Coordinateur : ordonne au producteur d'indice " + i + " dasns le tableau de s'arrêter");
+			System.out.println("Coordinateur : ordonne au producteur d'indice " + i + " dans le tableau de s'arrêter");
 			this.producteurs[i].terminerJeu();	// les producteurs se terminent
 		}
 		// fin des agents
