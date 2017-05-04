@@ -338,7 +338,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			this.historique.ecrireLigne(log);
 		} catch (IOException ioe) { ioe.printStackTrace(); }
-		this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
+		this.numeroTour = (this.numeroTour + 1)%this.nbAgentsEnregistres;
 		
 		this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
 		lancementProchainAgent();
@@ -358,14 +358,14 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " est puni pour " + this.punitionsAgents[this.prochainAgentAJouer] + " tours :(" );
 			 this.punitionsAgents[this.prochainAgentAJouer]--;	// un tour de passé
 			 this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-			 this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
+			 this.numeroTour = (this.numeroTour + 1)%this.nbAgentsEnregistres;
 			 lancementProchainAgent();
 		 }
 		 else if (this.terminaisonsAgents[this.prochainAgentAJouer])
 		 {
 			 System.out.println("Coordinateur : agent " + this.prochainAgentAJouer + " a déjà terminé" );
 			 this.prochainAgentAJouer = (this.prochainAgentAJouer + 1)%this.nbAgents;
-			 this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
+			 this.numeroTour = (this.numeroTour + 1)%this.nbAgentsEnregistres;
 			 lancementProchainAgent();
 		 }
 		 else
@@ -392,7 +392,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		{
 			this.historique.ecrireLigne(log);
 		} catch (IOException ioe) { ioe.printStackTrace(); }
-		this.numeroTour = this.numeroTour/this.nbAgentsEnregistres + 1;
+		this.numeroTour = (this.numeroTour + 1)%this.nbAgentsEnregistres;
 		
 		// vérification de la fin
 		if (this.finPremierAgent)
