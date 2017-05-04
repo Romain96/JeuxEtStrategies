@@ -482,7 +482,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		 System.out.println("Coordinateur : agent d'indice " + idAgent + " passe son tour pour les " + this.punitionsAgents[idAgent] + " prochain(s) tour(s)");
 	 }
 	 
-	 public static void main(String [] args)
+	 public static void main(String [] args) throws IOException
 	{
 		if (args.length != 5)
 		{
