@@ -28,7 +28,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 	boolean terminaisonsAgents[];
 	
 	// classement des agents à la fin de la partie (si les agents doivent tous finir)
-	ArrayList<int> classementsAgents;	// contient les id des agents
+	ArrayList<Integer> classementsAgents;	// contient les id des agents
 	
 	// vrai si le jeu se finit quand le premier agent termine, faux si tous les agents doivent terminer
 	boolean finPremierAgent;
@@ -66,7 +66,7 @@ public class CoordinateurImpl extends UnicastRemoteObject implements Coordinateu
 		// les terminaisons
 		this.terminaisonsAgents = new boolean[nbAgents];
 		// et le classement
-		this.classementsAgents = new ArrayList<int>();
+		this.classementsAgents = new ArrayList<Integer>();
 		for (int i = 0; i < nbAgents; i++)
 		{
 			this.punitionsAgents[i] = 0;	// pas de punition au départ
