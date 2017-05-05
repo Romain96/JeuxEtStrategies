@@ -1,6 +1,5 @@
 
-/* 
-//Utilisation de gnuplot pour tracer les résultat du jeu.
+/* Utilisation de gnuplot pour tracer les resultat du jeu.
 
 public void plot2d() 
 {
@@ -8,7 +7,7 @@ public void plot2d()
     Plot plot = new Plot("") {
         {
             xlabel = "x";	// abscisse = nb de tours
-            ylabel = "y";	// ordonnÃƒÂ© = taux de complétion	
+            ylabel = "y";	// ordonnÃƒÂ© = taux de completion	
         }
     };
 
@@ -27,7 +26,7 @@ public void plot2d()
     for (int j = 0; j < nb_Joueurs; )  	  	// pour chaque joueur
     {
 	TauxCompletion = getRessoursesJoueur( TauxCompletion, j );	
-	// fonction qui ajoute les taux de complétion dans l'ordre du joueur j dans le tableau ressoursesAquisses	
+	// fonction qui ajoute les taux de completion dans l'ordre du joueur j dans le tableau ressoursesAquisses	
 	// doit commencer par 0 car au tour 0 ils on 0 ressourses (a initialiser?)
 	
     	dts.addNewDataTable("y=0", x, TauxCompletion);		
