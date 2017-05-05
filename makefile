@@ -27,14 +27,20 @@ reg:
 # <port rmiregistry> <nbAgents> <nbProducteurs> <FinPremierAgent> <FichierLog>
 # arguments utilisés : 9000 3 1 gold 100
 coord:
-	java CoordinateurImpl 9000 2 1 false log
+	java CoordinateurImpl 9000 2 2 false log
 
 # lance un producteur
 # format des arguments de ProducteurImpl :
 # <port rmiregistry> <idProducteur> <typeRessource> <quantiteRessource> <quantiteMax>
 # arguments utilisés : 9000 0 gold 200 10 silver 200 10
-prod:
-	java ProducteurImpl 9000 0 gold 200 10 silver 200 10
+prod1:
+	java ProducteurImpl 9000 0 gold 200 25
+	
+	
+prod2:
+	java ProducteurImpl 9000 1 silver 200 25
+	
+	
 
 # lance un agent (trois versions un coop, un indiv et un humain)
 # format des arguments de Agentxxx :
