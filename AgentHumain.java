@@ -77,7 +77,7 @@ public class AgentHumain extends AgentImpl
 			System.out.println("Choisir une action\n" + "Commandes :\n" + 
 			"a [idProducteur] [typeRessource] [quantiteRessource] : acquérir quantiteRessource ressources de la ressource typeRessource chez le producteur idProducteur\n" + 
 			"v [idAgent] [typeRessource] [quantiteRessource] : voler quantiteRessource ressources de la ressource typeRessource à l'agent idAgent\n" +
-			"o a [idAgent] : observer l'agent idAgent\n" +
+			"o a [idAgent] [typeRessource]: observer la ressource typeRessource de l'agent idAgent\n" +
 			"o p [idProducteur] : observer le producteur idProducteur\n" +
 			"s se mettre en surveillance jusqu'au tour suivant\n");
 			input = this.scanner.nextLine();	// ligne de commande
